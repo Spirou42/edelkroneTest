@@ -13,6 +13,8 @@
 		9359C2A427D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
 		9359C2A527D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
 		9359C2A627D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
+		9359C2B027D0056300743008 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9359C2AF27D0056300743008 /* Main.storyboard */; };
+		9359C2B227D005A100743008 /* macAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C2B127D005A100743008 /* macAppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		9359C29827D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C29E27D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C2A027D0014700743008 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		9359C2AF27D0056300743008 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9359C2B127D005A100743008 /* macAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macAppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				9359C2A027D0014700743008 /* macOS.entitlements */,
+				9359C2AF27D0056300743008 /* Main.storyboard */,
+				9359C2B127D005A100743008 /* macAppDelegate.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -166,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9359C2A627D0014700743008 /* Assets.xcassets in Resources */,
+				9359C2B027D0056300743008 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9359C2B227D005A100743008 /* macAppDelegate.swift in Sources */,
 				9359C2A427D0014700743008 /* ContentView.swift in Sources */,
 				9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */,
 			);
