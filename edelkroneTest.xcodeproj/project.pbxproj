@@ -13,8 +13,11 @@
 		9359C2A427D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
 		9359C2A527D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
 		9359C2A627D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
-		9359C2B027D0056300743008 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9359C2AF27D0056300743008 /* Main.storyboard */; };
-		9359C2B227D005A100743008 /* macAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C2B127D005A100743008 /* macAppDelegate.swift */; };
+		93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701227D235D4000F8F63 /* SettingsView.swift */; };
+		93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */; };
+		93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */; };
+		93D1701927D2461C000F8F63 /* edelkroneAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701827D2461C000F8F63 /* edelkroneAPI.swift */; };
+		93D1701B27D250B2000F8F63 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701A27D250B2000F8F63 /* DataTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +27,11 @@
 		9359C29827D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C29E27D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C2A027D0014700743008 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		9359C2AF27D0056300743008 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		9359C2B127D005A100743008 /* macAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macAppDelegate.swift; sourceTree = "<group>"; };
+		93D1701227D235D4000F8F63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
+		93D1701827D2461C000F8F63 /* edelkroneAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneAPI.swift; sourceTree = "<group>"; };
+		93D1701A27D250B2000F8F63 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,8 @@
 				9359C29127D0014500743008 /* edelkroneTestApp.swift */,
 				9359C29227D0014500743008 /* ContentView.swift */,
 				9359C29327D0014700743008 /* Assets.xcassets */,
+				93D1701827D2461C000F8F63 /* edelkroneAPI.swift */,
+				93D1701A27D250B2000F8F63 /* DataTypes.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -78,8 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				9359C2A027D0014700743008 /* macOS.entitlements */,
-				9359C2AF27D0056300743008 /* Main.storyboard */,
-				9359C2B127D005A100743008 /* macAppDelegate.swift */,
+				93D1701227D235D4000F8F63 /* SettingsView.swift */,
+				93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */,
+				93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -172,7 +181,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9359C2A627D0014700743008 /* Assets.xcassets in Resources */,
-				9359C2B027D0056300743008 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,9 +200,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9359C2B227D005A100743008 /* macAppDelegate.swift in Sources */,
+				93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */,
+				93D1701927D2461C000F8F63 /* edelkroneAPI.swift in Sources */,
 				9359C2A427D0014700743008 /* ContentView.swift in Sources */,
+				93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */,
 				9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */,
+				93D1701B27D250B2000F8F63 /* DataTypes.swift in Sources */,
+				93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

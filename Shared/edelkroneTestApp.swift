@@ -9,9 +9,29 @@ import SwiftUI
 
 @main
 struct edelkroneTestApp: App {
-    var body: some Scene {
+#if os(macOS)
+	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+#endif
+//  @StateObject var edelkroneAPI = edelkroneModel.shared
+	
+	var body: some Scene {
         WindowGroup {
             ContentView()
         }
+				#if os(macOS)
+				Settings {
+						SettingsView()
+				}
+				#endif
     }
 }
+
+#if os(macOS)
+class AppDelegate: NSObject, NSApplicationDelegate {
+		func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+				return true
+		}
+}
+#endif
+
+
