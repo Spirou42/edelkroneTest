@@ -11,16 +11,4 @@ enum Preferences : String {
   case Hostname, Port, LinkAdapter
 }
 
-struct edelkroneCommands {
 
-  enum pairing : String {
-    case wirelessPairingScanStart,
-         wirelessPairingScanResults,
-         wirelessPairingCreateBundle,
-         wirelessPairingAttachToBundle,
-         wirelessPairingStatus,
-         disconnect
-  }
-
-  
-}

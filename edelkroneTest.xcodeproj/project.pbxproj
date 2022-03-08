@@ -7,12 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
+		934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
+		934143F127D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */; };
+		934143F227D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */; };
+		934143F427D7ABB000CDC4D3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F327D7ABB000CDC4D3 /* ViewExtensions.swift */; };
+		934143F527D7ABB000CDC4D3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F327D7ABB000CDC4D3 /* ViewExtensions.swift */; };
+		934AD1CB27D5F67100E995E9 /* edelkroneTest.docc in Sources */ = {isa = PBXBuildFile; fileRef = 934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */; };
+		9354591927D62E32001D67FF /* ModelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354591827D62E32001D67FF /* ModelTypes.swift */; };
+		9354591A27D62E32001D67FF /* ModelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354591827D62E32001D67FF /* ModelTypes.swift */; };
 		9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A327D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
 		9359C2A427D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
 		9359C2A527D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
 		9359C2A627D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
+		93CF78B027D4DC7B000335A7 /* Symbols-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */; };
 		93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701227D235D4000F8F63 /* SettingsView.swift */; };
 		93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */; };
 		93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */; };
@@ -21,12 +31,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAdapterView.swift; sourceTree = "<group>"; };
+		934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeShape.swift; sourceTree = "<group>"; };
+		934143F327D7ABB000CDC4D3 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = edelkroneTest.docc; sourceTree = "<group>"; };
+		9354591827D62E32001D67FF /* ModelTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTypes.swift; sourceTree = "<group>"; };
 		9359C29127D0014500743008 /* edelkroneTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneTestApp.swift; sourceTree = "<group>"; };
-		9359C29227D0014500743008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9359C29227D0014500743008 /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 1; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9359C29327D0014700743008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9359C29827D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C29E27D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C2A027D0014700743008 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		93628F4127D3BCE700F93F02 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "edelkroneTest--macOS--Info.plist"; sourceTree = "<group>"; };
+		93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Symbols-Regular.otf"; path = "Assets/Production/Symbols-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		93D1701227D235D4000F8F63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
@@ -52,9 +70,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		934143EE27D7964C00CDC4D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9359C29227D0014500743008 /* ContentView.swift */,
+				934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */,
+				934143F327D7ABB000CDC4D3 /* ViewExtensions.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		934143EF27D7AB1500CDC4D3 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		9359C28B27D0014500743008 = {
 			isa = PBXGroup;
 			children = (
+				934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */,
+				93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */,
 				9359C29027D0014500743008 /* Shared */,
 				9359C29F27D0014700743008 /* macOS */,
 				9359C29927D0014700743008 /* Products */,
@@ -64,11 +102,14 @@
 		9359C29027D0014500743008 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				934143EF27D7AB1500CDC4D3 /* Shapes */,
+				93628F4427D3BFB400F93F02 /* Assets */,
+				934143EE27D7964C00CDC4D3 /* Views */,
+				93628F4127D3BCE700F93F02 /* Fonts.swift */,
 				9359C29127D0014500743008 /* edelkroneTestApp.swift */,
-				9359C29227D0014500743008 /* ContentView.swift */,
-				9359C29327D0014700743008 /* Assets.xcassets */,
 				93D1701827D2461C000F8F63 /* edelkroneAPI.swift */,
 				93D1701A27D250B2000F8F63 /* DataTypes.swift */,
+				9354591827D62E32001D67FF /* ModelTypes.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -91,6 +132,15 @@
 				93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		93628F4427D3BFB400F93F02 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9359C29327D0014700743008 /* Assets.xcassets */,
+				93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9359C2A627D0014700743008 /* Assets.xcassets in Resources */,
+				93CF78B027D4DC7B000335A7 /* Symbols-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +244,10 @@
 			files = (
 				9359C2A327D0014700743008 /* ContentView.swift in Sources */,
 				9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */,
+				934143F127D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */,
+				934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
+				934143F427D7ABB000CDC4D3 /* ViewExtensions.swift in Sources */,
+				9354591927D62E32001D67FF /* ModelTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,10 +258,15 @@
 				93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */,
 				93D1701927D2461C000F8F63 /* edelkroneAPI.swift in Sources */,
 				9359C2A427D0014700743008 /* ContentView.swift in Sources */,
+				934AD1CB27D5F67100E995E9 /* edelkroneTest.docc in Sources */,
 				93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */,
 				9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */,
 				93D1701B27D250B2000F8F63 /* DataTypes.swift in Sources */,
 				93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */,
+				934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
+				9354591A27D62E32001D67FF /* ModelTypes.swift in Sources */,
+				934143F527D7ABB000CDC4D3 /* ViewExtensions.swift in Sources */,
+				934143F227D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +327,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -319,6 +380,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -398,6 +460,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "edelkroneTest--macOS--Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -407,6 +470,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.camue.edelkroneTest;
 				PRODUCT_NAME = edelkroneTest;
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -426,6 +490,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "edelkroneTest--macOS--Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -435,6 +500,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.camue.edelkroneTest;
 				PRODUCT_NAME = edelkroneTest;
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
