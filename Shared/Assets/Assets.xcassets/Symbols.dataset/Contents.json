@@ -1,0 +1,13 @@
+{
+  "data" : [
+    {
+      "filename" : "Symbols.ttf",
+      "idiom" : "universal",
+      "universal-type-identifier" : "TTF"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
