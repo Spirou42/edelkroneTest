@@ -42,3 +42,101 @@ extension View {
         return self.font(.custom(name, size: category.size))
     }
 }
+
+
+
+struct FontDefinition : Decodable {
+  let face: String
+  let size: Double
+}
+
+struct FontContainer : Decodable{
+  var fonts: [String:FontDefinition]
+}
+
+extension String {
+  init(_ style: Font.TextStyle){
+    var result = ""
+    switch(style){
+    case .largeTitle:
+      result="largeTitle"
+    case .title:
+      result = "title"
+    case .title2:
+      result = "title2"
+    case .title3:
+      result = "title3"
+    case .headline:
+      result = "headline"
+    case .subheadline:
+      result = "subheadline"
+    case .body:
+      result = "body"
+    case .callout:
+      result = "callout"
+    case .caption:
+      result = "caption"
+    case .caption2:
+      result = "caption2"
+    case .footnote:
+      result = "footnote"
+    default:
+      result = "body"
+    }
+    self.init(result)
+  }
+}
+
+extension Font {
+  static var definitions:[String:FontDefinition]?
+  
+  static func loadDefinitions(){
+    let dataAsset = NSDataAsset(name: "VisualData")
+    let decoder = PropertyListDecoder()
+    let wrapper = try? decoder.decode(FontContainer.self, from: dataAsset!.data)
+    if(wrapper != nil){
+      print("got a decode")
+      definitions = wrapper!.fonts
+    }
+  }
+  static func applicationFont(_ style: Font.TextStyle)->Font{
+    if(definitions == nil){
+      loadDefinitions()
+    }
+    let styleKey = String(style)
+    if(definitions!.keys.contains(styleKey)){
+      let fontName = definitions![styleKey]!.face
+      let fontSize = definitions![styleKey]!.size
+      return Font.custom(fontName, size: fontSize)
+    }
+    return self.body
+  }
+  
+  static func applicationFontName(_ style: Font.TextStyle)->String{
+    if(definitions == nil){
+      loadDefinitions()
+    }
+    let styleKey = String(style)
+    if(definitions!.keys.contains(styleKey)){
+      let fontName = definitions![styleKey]!.face
+      return fontName
+    }
+    return "System"
+  }
+
+  static func applicationFontSize(_ style: Font.TextStyle)->Double{
+    if(definitions == nil){
+      loadDefinitions()
+    }
+    let styleKey = String(style)
+    if(definitions!.keys.contains(styleKey)){
+      let fontSize = definitions![styleKey]!.size
+      return fontSize
+    }
+    return Double(13.0)
+  }
+
+  
+  
+  
+}

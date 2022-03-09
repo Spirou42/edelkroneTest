@@ -71,7 +71,7 @@ class edelkroneModel : ObservableObject{
   // flag to determine if the link to the edelkrone API is established
   @Published var isConnected : Bool = false
   @Published var isPaired : Bool = false
-  
+  @Published var hasAdapters : Bool = false
   
   // Variables from Preferences
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""
@@ -79,10 +79,10 @@ class edelkroneModel : ObservableObject{
   @AppStorage(Preferences.LinkAdapter.rawValue) private var linkID = ""
   
   
-  func findLinkAdapters() -> Bool{
+  func findLinkAdapters() -> Void{
     print("Initiate Scan for LinkAdapters on" + hostname + ":"+String(port) )
     let requestDict = getCommand(commands.link.status.rawValue)
-    if var requestURL = getRequestURL(.device){
+    if let requestURL = getRequestURL(.device){
       let requestData = commandToJSON(_commandDict: requestDict)
       var request = URLRequest(url: requestURL)
       request.httpMethod="POST"
@@ -92,6 +92,7 @@ class edelkroneModel : ObservableObject{
       let task = URLSession.shared.uploadTask(with: request, from: requestData, completionHandler:{ (data, response, error)->Void in
         guard let data = data else{
           print("No Data")
+          self.hasAdapters = false
           return
         }
         print("Data: " + (String(data: data, encoding: .utf8) ?? "convert Failed") )
@@ -100,14 +101,13 @@ class edelkroneModel : ObservableObject{
         let wrapper = try? decoder.decode(arrayWrapper<LinkAdapter>.self, from: data)
         print ("Decoded"+(wrapper?.data.description ?? "nothing"))
         if(wrapper != nil){
+          self.hasAdapters = true
           self.adapters = wrapper!.data
         }
       }
       )
       task.resume()
     }
-    
-    return false
   }
   
   func dummyDumm(){
@@ -116,7 +116,7 @@ class edelkroneModel : ObservableObject{
   
   func connect() -> Void{
     print ("Initiate Scan on" + hostname+":"+String(port)+"/v1/link/"+linkID)
-    var requestStruct = getCommand(commands.pairing.wireless.scanStart.rawValue)
+    let requestStruct = getCommand(commands.pairing.wireless.scanStart.rawValue)
     //    requestStruct["index"] = 0
     //    requestStruct["acceleration"] = 0.0
     //    requestStruct["speed"] = 1.0
@@ -154,7 +154,7 @@ class edelkroneModel : ObservableObject{
         //mimeType == "application/json"
         let data = data ?? Data()
         let dataString = String(data: data, encoding: .utf8)
-        print ("got data: \(dataString)")
+        print ("got data: \(dataString!)")
       }
     }
     task.resume()

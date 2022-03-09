@@ -2,23 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Fonts</key>
+	<key>fonts</key>
 	<dict>
 		<key>largeTitle</key>
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>26</integer>
 		</dict>
-		<key>title1</key>
+		<key>title</key>
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>22</integer>
 		</dict>
@@ -26,8 +22,6 @@
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>17</integer>
 		</dict>
@@ -35,17 +29,13 @@
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>15</integer>
 		</dict>
 		<key>headline</key>
 		<dict>
 			<key>face</key>
-			<string>System</string>
-			<key>weight</key>
-			<string>Bold</string>
+			<string>System Bold</string>
 			<key>size</key>
 			<integer>13</integer>
 		</dict>
@@ -53,8 +43,6 @@
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>11</integer>
 		</dict>
@@ -62,8 +50,6 @@
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>13</integer>
 		</dict>
@@ -71,26 +57,20 @@
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>12</integer>
 		</dict>
-		<key>caption1</key>
+		<key>caption</key>
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>10</integer>
 		</dict>
 		<key>caption2</key>
 		<dict>
 			<key>face</key>
-			<string>System</string>
-			<key>weight</key>
-			<string>Medium</string>
+			<string>System Medium</string>
 			<key>size</key>
 			<integer>10</integer>
 		</dict>
@@ -98,8 +78,6 @@
 		<dict>
 			<key>face</key>
 			<string>System</string>
-			<key>weight</key>
-			<string>Regular</string>
 			<key>size</key>
 			<integer>10</integer>
 		</dict>
