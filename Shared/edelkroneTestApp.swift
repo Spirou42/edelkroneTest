@@ -16,7 +16,7 @@ struct edelkroneTestApp: App {
 	
 	var body: some Scene {
         WindowGroup {
-            ContentView()
+          ContentView().frame(maxWidth: .infinity, maxHeight: .infinity)
         }
 				#if os(macOS)
 				Settings {

@@ -11,7 +11,7 @@ struct edelkroneStatus: View {
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""
   @AppStorage(Preferences.Port.rawValue) private var port = 8080
   
-  var edelkrone: edelkroneModel
+  @StateObject var edelkrone: edelkroneModel
   
   var body: some View {
     HStack{
@@ -35,6 +35,14 @@ struct edelkroneStatus: View {
           .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
           .inset()
         //.background(.white)
+      }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+      HStack(alignment: .firstTextBaseline, spacing: 3){
+        Text("Link:")
+          .font(.applicationFont(.body))
+        Text(edelkrone.connectedAdapterID).monospacedDigit().frame(width:92)
+          .font(.applicationFont(.body))
+          .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
+          .inset()
       }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
     }
   }

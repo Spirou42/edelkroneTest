@@ -2,6 +2,8 @@
  ViewExtensions.swift
   edelkroneTest
 
+ 	extensions to SwiftUI Views
+ 
   Created by Carsten Müller on 08.03.22.
  */
 

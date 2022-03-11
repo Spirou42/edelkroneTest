@@ -68,21 +68,26 @@ class edelkroneModel : ObservableObject{
   
   var adapters: [LinkAdapter] = []		// list of deteced LinkAdapters
   
+  @Published  var adaptertDict:[String:LinkAdapter] = [:]
+  
   // flag to determine if the link to the edelkrone API is established
   @Published var isConnected : Bool = false
   @Published var isPaired : Bool = false
   @Published var hasAdapters : Bool = false
+  @Published var connectedAdapterID: String = ""
   
   // Variables from Preferences
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""
   @AppStorage(Preferences.Port.rawValue) private var port = 8080
   @AppStorage(Preferences.LinkAdapter.rawValue) private var linkID = ""
   
-  
+  /**
+   find connected edelkrone link adapters
+   */
   func findLinkAdapters() -> Void{
     print("Initiate Scan for LinkAdapters on" + hostname + ":"+String(port) )
     let requestDict = getCommand(commands.link.status.rawValue)
-    if let requestURL = getRequestURL(.device){
+    if let requestURL = getURL(.device){
       let requestData = commandToJSON(_commandDict: requestDict)
       var request = URLRequest(url: requestURL)
       request.httpMethod="POST"
@@ -98,11 +103,18 @@ class edelkroneModel : ObservableObject{
         print("Data: " + (String(data: data, encoding: .utf8) ?? "convert Failed") )
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
-        let wrapper = try? decoder.decode(arrayWrapper<LinkAdapter>.self, from: data)
+        let wrapper = try? decoder.decode(resultArrayWrapper<LinkAdapter>.self, from: data)
         print ("Decoded"+(wrapper?.data.description ?? "nothing"))
         if(wrapper != nil){
-          self.hasAdapters = true
+          DispatchQueue.main.async{
+            self.hasAdapters = true
+          }
           self.adapters = wrapper!.data
+          DispatchQueue.main.async{
+            for adapter in self.adapters{
+              self.adaptertDict[adapter.id] = adapter
+            }
+          }
         }
       }
       )
@@ -110,19 +122,27 @@ class edelkroneModel : ObservableObject{
     }
   }
   
-  func dummyDumm(){
-    print("DummyDummDumm")
+  
+  
+  func detect(adapter: LinkAdapter){
+    print("Stry to detect a given link adapter")
+    var url = getURL(adapter: adapter, type: .link)
+    url?.appendPathComponent("detect")
+    print("Got a URL: "+(url?.description ?? "failed"))
+    let task = URLSession.shared.downloadTask(with: url!)
+    task.resume()
+    
   }
   
-  func connect() -> Void{
-    print ("Initiate Scan on" + hostname+":"+String(port)+"/v1/link/"+linkID)
+  func connect( adapter:  LinkAdapter) -> Void{
+    print ("Initiate Scan on" + hostname+":"+String(port)+"/v1/link/"+adapter.id)
     let requestStruct = getCommand(commands.pairing.wireless.scanStart.rawValue)
     //    requestStruct["index"] = 0
     //    requestStruct["acceleration"] = 0.0
     //    requestStruct["speed"] = 1.0
     
     let data: Data =  commandToJSON(_commandDict: requestStruct) ?? Data()
-    if let requestURL = getRequestURL(.link){
+    if let requestURL = getURL(adapter: adapter,type: .link){
       var request = URLRequest(url: requestURL)
       request.httpMethod = "POST"
       request.httpBody=data
@@ -133,8 +153,12 @@ class edelkroneModel : ObservableObject{
       print("Request from " + description )
       createSession(request: request, uploadData: data)
       isConnected = true
+      adapter.isConnected = true
+      connectedAdapterID = adapter.id
     }else{
       isConnected = false
+      connectedAdapterID = ""
+      adapter.isConnected = false
     }
   }
   
@@ -161,12 +185,20 @@ class edelkroneModel : ObservableObject{
   }
   
   func disconnect() -> Void{
+    if(connectedAdapterID != ""){
+      adaptertDict[connectedAdapterID]?.isConnected = false
+      connectedAdapterID = ""
+    }
     isConnected = false
   }
   
   func linkStatus() -> Void{
     
   }
+  
+  
+  
+  // MARK: - Privates
   
   
   private func getCommand(_ command :String ) -> Dictionary<String, Any>{
@@ -184,19 +216,28 @@ class edelkroneModel : ObservableObject{
     return result
   }
   
-  private func getRequestURL(_ type: requestType ) -> URL?{
+  private func getURL(adapterID:String, type:requestType)->URL?{
     @AppStorage(Preferences.Hostname.rawValue)   var hostname = ""
     @AppStorage(Preferences.Port.rawValue)  var port = 8080
-    @AppStorage(Preferences.LinkAdapter.rawValue)  var linkID = ""
     
     let base = "http://"+hostname+":"+String(port)+"/v1/"
+    
     var variant  = type.rawValue
     if (type != requestType.device){
-      variant += linkID
+      variant += "/"+adapterID
     }
     
     let p = URL(string: base+variant)
     return p
+  }
+  
+  private func getURL(adapter:LinkAdapter,  type:requestType)->URL?{
+    return getURL(adapterID: adapter.id, type: type)
+  }
+  
+  private func getURL(_ type: requestType ) -> URL?{
+    @AppStorage(Preferences.LinkAdapter.rawValue)  var linkID = ""
+    return getURL(adapterID: linkID, type: type)
   }
   
 }

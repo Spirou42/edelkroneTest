@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		933FE5CC27DA1769007F118E /* MotionControlSystemsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FE5CB27DA1769007F118E /* MotionControlSystemsViews.swift */; };
+		933FE5CD27DA1769007F118E /* MotionControlSystemsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FE5CB27DA1769007F118E /* MotionControlSystemsViews.swift */; };
 		934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
 		934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
 		934143F127D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */; };
@@ -18,7 +20,7 @@
 		9345BAB127D8FD940099FC90 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93628F4127D3BCE700F93F02 /* Fonts.swift */; };
 		9345BAB227D8FD940099FC90 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93628F4127D3BCE700F93F02 /* Fonts.swift */; };
 		934AD1CB27D5F67100E995E9 /* edelkroneTest.docc in Sources */ = {isa = PBXBuildFile; fileRef = 934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */; };
-		9354591A27D62E32001D67FF /* ModelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354591827D62E32001D67FF /* ModelTypes.swift */; };
+		9354591A27D62E32001D67FF /* edelkroneModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354591827D62E32001D67FF /* edelkroneModels.swift */; };
 		9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A327D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
@@ -34,12 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		933FE5CB27DA1769007F118E /* MotionControlSystemsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlSystemsViews.swift; sourceTree = "<group>"; };
 		934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAdapterView.swift; sourceTree = "<group>"; };
 		934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeShape.swift; sourceTree = "<group>"; };
 		934143F327D7ABB000CDC4D3 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		9345BAAD27D89C540099FC90 /* edelkroneStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneStatus.swift; sourceTree = "<group>"; };
 		934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = edelkroneTest.docc; sourceTree = "<group>"; };
-		9354591827D62E32001D67FF /* ModelTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTypes.swift; sourceTree = "<group>"; };
+		9354591827D62E32001D67FF /* edelkroneModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneModels.swift; sourceTree = "<group>"; };
 		9359C29127D0014500743008 /* edelkroneTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneTestApp.swift; sourceTree = "<group>"; };
 		9359C29227D0014500743008 /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9359C29327D0014700743008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		932F718727DB59E400A91E40 /* Edelkrone */ = {
+			isa = PBXGroup;
+			children = (
+				9354591827D62E32001D67FF /* edelkroneModels.swift */,
+				93D1701827D2461C000F8F63 /* edelkroneModel.swift */,
+			);
+			path = Edelkrone;
+			sourceTree = "<group>";
+		};
 		934143EE27D7964C00CDC4D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +93,7 @@
 				934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */,
 				934143F327D7ABB000CDC4D3 /* ViewExtensions.swift */,
 				9345BAAD27D89C540099FC90 /* edelkroneStatus.swift */,
+				933FE5CB27DA1769007F118E /* MotionControlSystemsViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -96,9 +109,8 @@
 		9345BAB027D8B1750099FC90 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9354591827D62E32001D67FF /* ModelTypes.swift */,
+				932F718727DB59E400A91E40 /* Edelkrone */,
 				93D1701A27D250B2000F8F63 /* DataTypes.swift */,
-				93D1701827D2461C000F8F63 /* edelkroneModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -262,6 +274,7 @@
 				934143F127D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */,
 				934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
 				934143F427D7ABB000CDC4D3 /* ViewExtensions.swift in Sources */,
+				933FE5CC27DA1769007F118E /* MotionControlSystemsViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,9 +291,10 @@
 				9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */,
 				93D1701B27D250B2000F8F63 /* DataTypes.swift in Sources */,
 				93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */,
+				933FE5CD27DA1769007F118E /* MotionControlSystemsViews.swift in Sources */,
 				9345BAAF27D89C540099FC90 /* edelkroneStatus.swift in Sources */,
 				934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
-				9354591A27D62E32001D67FF /* ModelTypes.swift in Sources */,
+				9354591A27D62E32001D67FF /* edelkroneModels.swift in Sources */,
 				934143F527D7ABB000CDC4D3 /* ViewExtensions.swift in Sources */,
 				934143F227D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */,
 			);
