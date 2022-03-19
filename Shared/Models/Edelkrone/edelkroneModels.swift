@@ -4,13 +4,14 @@
 	
  Containing basic models for api results
  
-  Created by Carsten Müller on 07.03.22.
+  Created by Carsten Müller on 07.03.2022.
  */
 
 import Foundation
+import SwiftUI
 
 // MARK: - LinkAdapter
-class LinkAdapter: Identifiable,Decodable, ObservableObject{
+class LinkAdapter: Identifiable, Decodable, ObservableObject, Hashable{
   /// some informations about the firmware status if this link adapter
   enum connectionTypes : String, Decodable{
     case none, canbus, wireless
@@ -36,6 +37,17 @@ class LinkAdapter: Identifiable,Decodable, ObservableObject{
   @Published var id: String
   var linkType : String
   var portName: String
+  
+  
+  // MARK: Hashable
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+  
+  // MARK: Equatable
+  static func == (lhs: LinkAdapter, rhs: LinkAdapter) -> Bool {
+    return lhs.id == rhs.id
+  }
   
   
   init(){
@@ -92,7 +104,7 @@ class LinkAdapter: Identifiable,Decodable, ObservableObject{
 
 // MARK: - MotionControlSystem
 
-class MotionControlSystem: Decodable, Identifiable, ObservableObject{
+class MotionControlSystem: Decodable, Identifiable, ObservableObject, Hashable{
   /// ID of the associated Group if any. Value contains 65535 if not assigned
   @Published var groupID: Int
   
@@ -101,6 +113,8 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject{
   
   /// is true if a HeadOne axis is tilted
   @Published var isTilted: Bool
+  /// fix for bug in AIP
+  let k:Int
   
   /// the mac-address of the device
   @Published var macAddress: String
@@ -114,8 +128,32 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject{
   /// is true if a radio firmware update is available
   @Published var isRadioUpdateAvailable: Bool
   
-
+  @Published var useInPairing: Bool
   
+  // MARK: - Identifiable
+  var id:String{
+     get {
+       return macAddress
+     }
+  }
+  
+  // MARK: Hashable
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(macAddress)
+  }
+  
+  // MARK: Equatable
+  static func == (lhs: MotionControlSystem, rhs: MotionControlSystem) -> Bool {
+    return lhs.macAddress == rhs.macAddress
+  }
+  // List of String indication the MCS is a Group Master
+  static let masterIndicator = ["panOnly", "tiltOnly", "panTilt", "slideOnly", "dollyOnly", "panAndSlide", "tiltAndSlide", "panAndDolly",
+                         "tiltAndDolly", "panTiltAndSlide", "panTiltAndDolly", "panAndJib", "tiltAndJib", "panTiltAndJib",
+                         "jibOnly", "panAndJibPlus", "tiltAndJibPlus", "panTiltAndJibPlus", "jibPlusOnly", "followFocusOnly"]
+  
+  static let memberIndicatores = ["groupMember"]
+  
+  static let unpaierdIndicators = ["none", "possibleCanbusMaster"]
   /** if the device is a group master this variable contains the capabilities of the group encodeed as a string
    The data combines the possibilites of
    pan, tilt, slide, dolly, jib, jibPlus and followFocus
@@ -180,7 +218,26 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject{
    - focusPlusPro			FocusPLUS PRO
    - jibOne			JibONE
    */
-   let deviceType: String
+  
+  enum edelkroneDevices : String, Decodable{
+    case slideModule
+    case slideModuleV3
+    case sliderOnePro
+    case sliderOne
+    case dollyPlus
+    case dollyOne
+    case dollyPlusPro
+    case panPro
+    case headOne
+    case headPlus
+    case headPlusPro
+    case headPlusV2
+    case headPlusProV2
+    case focusPlusPro
+    case jibOne					
+  }
+   
+  @Published var deviceType: edelkroneDevices
   
   init(){
     groupID = 65535
@@ -191,26 +248,33 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject{
     isFirmewareAvailabe = false
     isRadioUpdateAvailable = false
     setup="none"
-    deviceType = "sliderOne"
+    deviceType = .headOne
+    isTilted = false
+    k=0
+    useInPairing = false
   }
   
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     groupID = try container.decode(Int.self, forKey: .groupID)
-    linkPairigingActive = try container.decode(Bool.self, forKey: .linkPairigingActive)
-    isTilted = try container.decode(Bool.self, forKey: .isTilted)
+    linkPairigingActive = ((try? container.decode(Bool.self, forKey: .linkPairigingActive)) != nil)
+
+    k = (try? container.decode(Int.self, forKey: .k)) ?? 0
+    isTilted = k==1
+
     macAddress = try container.decode(String.self, forKey: .macAddress)
     rssi = try container.decode(Int.self, forKey: .rssi)
     isFirmewareAvailabe = try container.decode(Bool.self, forKey: .isFirmewareAvailabe)
     isRadioUpdateAvailable = try container.decode(Bool.self, forKey: .isRadioUpdateAvailable)
     setup = try container.decode(String.self, forKey: .setup)
-    deviceType = try container.decode(String.self, forKey: .deviceType)
+    deviceType = try container.decode(edelkroneDevices.self, forKey: .deviceType)
+    useInPairing = false
   }
   
   enum CodingKeys: String, CodingKey{
     case groupID = "groupId"
     case linkPairigingActive = "linkPairigingActive"
-    case isTilted = "isTilted"
+    case k = "isTilted"
     case macAddress = "mac"
     case rssi = "rssi"
     case isFirmewareAvailabe = "isDeviceFirmwareUpdateAvailable"
@@ -221,9 +285,221 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject{
   
 }
 
+protocol ApiResult: Decodable{
+  var result: String{get}
+  var message:String?{get}
+}
+
+struct ResultArrayWrapper<T: Decodable>: Decodable,ApiResult{
+  let data: [T]?
+  let result: String
+  let message: String?
+}
+
+// MARK: - PairingGroup
+class PairingGroup: Identifiable,ObservableObject, Hashable{
+
+  @Published var groupedControlSystems:[MotionControlSystem] = []
+  @Published var groupID : Int = .noGroup // the default nogroup marker
+
+  @Published var groupMaster: MotionControlSystem?
+  
+  init(groupID: Int){
+    self.groupID = groupID
+  }
+  
+  init(){
+    self.groupID = Int.random(in: 1000...10000)
+    var mcs = MotionControlSystem()
+    mcs.groupID = self.groupID
+    mcs.setup = "panTilt"
+    mcs.deviceType = .headOne
+    mcs.macAddress = "24:0A:C4:F2:9F:D2"
+    self.groupedControlSystems.append(mcs)
+    self.groupMaster = mcs
+    
+    
+    mcs = MotionControlSystem()
+    mcs.groupID = self.groupID
+    mcs.setup = "groupMember"
+    mcs.deviceType = .headOne
+    mcs.isTilted = true
+    mcs.macAddress = "24:0A:C4:F1:3B:AA"
+    self.groupedControlSystems.append(mcs)
+    
+    
+  }
+  
+  static func == (lhs: PairingGroup, rhs: PairingGroup) -> Bool {
+    lhs.groupID == rhs.groupID
+  }
+  
+  var id:Int {
+    return groupID
+  }
+  
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(groupID)
+    for mcs in groupedControlSystems {
+      hasher.combine(mcs)
+    }
+  }
+  
+  func addMotionControlSystem(_ mcs: MotionControlSystem){
+    if (mcs.groupID == self.groupID) && ( !groupedControlSystems.contains(mcs))  {
+      groupedControlSystems.append(mcs)
+      if MotionControlSystem.masterIndicator.contains(mcs.setup)  {
+        groupMaster = mcs
+      }
+    }
+  }
+  
+  func removeMotionControlSystem(_ mcs:MotionControlSystem){
+    if (mcs.groupID == self.groupID) || (mcs.groupID == .noGroup){
+      groupedControlSystems.removeAll(where: {$0.macAddress == mcs.macAddress})
+      if mcs == groupMaster {
+        groupMaster = nil
+      }
+    }
+  }
+  var isEmpty:Bool {
+    get{
+      return groupedControlSystems.isEmpty
+    }
+  }
+}
 
 
-struct resultArrayWrapper<T: Decodable>: Decodable{
-  let data: [T]
-  //  let result: String
+// MARK: - Return Results
+// MARK: Default Returns
+struct DefaultReturns: Decodable,ApiResult{
+  var result:String
+  var message:String?
+  
+  enum CodingKeys: String, CodingKey{
+    case result, message
+  }
+}
+
+// MARK: PairingStatus
+struct PairingStatus:Decodable{
+  enum pairingState:String,Decodable{
+    case idle,connecting,connectionOk,problem
+  }
+	var lastPairError: String
+  var pairState: pairingState
+}
+
+// MARK: PairingStatusReturn
+struct PairingStatusReturn:Decodable, ApiResult{
+  var result: String
+  var message: String?
+  let status: PairingStatus?
+
+  enum CodingKeys:String, CodingKey{
+    case result, message,status="data"
+  }
+}
+
+struct AxisDescription:Decodable, Hashable, Equatable{
+  enum axisName:String, Decodable{
+    case headPan, headTilt, slide, focus, jibPlusPan, jibPlusTilt
+  }
+  let axis: axisName
+  let device: MotionControlSystem.edelkroneDevices
+  enum CodingKeys: String, CodingKey{
+    case axis,device
+  }
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(axis)
+  }
+  
+  static func == (lhs: AxisDescription, rhs: AxisDescription) -> Bool {
+    return lhs.axis == rhs.axis
+  }
+}
+
+struct BundledDeviceInfo:Decodable{
+  let batteryLevel:Double
+  let isTilted:Bool
+  let device:MotionControlSystem.edelkroneDevices
+  enum CodingKeys:String,CodingKey{
+    case batteryLevel, isTilted, device="type"
+  }
+}
+
+struct PeriodicStatus: Decodable{
+  enum motionState:String, Decodable{
+    case idle, keyposeMove, realTimeMove, focusCalibration, sliderCalibration, joystickMove, unsupportedActivity
+  }
+  var calibratedAxes:[AxisDescription]
+  let deviceInfo:[BundledDeviceInfo]
+  let deviceInfoReady:Bool
+  
+  let keyposeLoopActive:Bool
+  let keyposeMotionAimIndex: Int
+  let keyposeMotionStartIndex: Int
+  let keyposeSlotsFilled:[Bool]
+  //
+  let plannedMotionProgress: Double
+  let plannedMotionDuration: Double
+  let readings:[AxisDescription.axisName:Double]
+  //
+  let realTimeSupportedAxes: [AxisDescription]
+  let state:motionState
+  let supportedAxes:[AxisDescription]
+  //
+  let timestampDevice: Int64
+  let timestampEpoch: Int64
+  //
+  enum CodingKeys:String, CodingKey{
+    case calibratedAxes
+    case deviceInfo
+    case deviceInfoReady = "deviceInfoEverythingReady"
+    case keyposeLoopActive, keyposeMotionAimIndex, keyposeMotionStartIndex, keyposeSlotsFilled
+    case plannedMotionProgress, plannedMotionDuration, readings
+    case realTimeSupportedAxes, state, supportedAxes
+        case timestampDevice, timestampEpoch
+    
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    calibratedAxes = try container.decode([AxisDescription].self, forKey: .calibratedAxes)
+    deviceInfo = try container.decode([BundledDeviceInfo].self, forKey: .deviceInfo)
+    deviceInfoReady = try container.decode(Bool.self, forKey: .deviceInfoReady)
+    
+    keyposeLoopActive = try container.decode(Bool.self, forKey: .keyposeLoopActive)
+    keyposeMotionAimIndex = try container.decode(Int.self, forKey: .keyposeMotionAimIndex)
+    keyposeMotionStartIndex = try container.decode(Int.self, forKey: .keyposeMotionStartIndex)
+    keyposeSlotsFilled = try container.decode([Bool].self, forKey: .keyposeSlotsFilled)
+    
+    plannedMotionDuration = try container.decode(Double.self, forKey: .plannedMotionDuration)
+    plannedMotionProgress = try container.decode(Double.self, forKey: .plannedMotionProgress)
+    
+    let tempReadings = try container.decode([String:Double].self, forKey: .readings)
+    var qreadings:[AxisDescription.axisName:Double] = [:]
+    for k in tempReadings.keys{
+      let q:AxisDescription.axisName = AxisDescription.axisName(rawValue:k) ?? .headPan
+      qreadings[q] = tempReadings[k]
+    }
+    readings = qreadings
+    
+    realTimeSupportedAxes = try container.decode([AxisDescription].self, forKey: .realTimeSupportedAxes)
+    
+    state = try container.decode(motionState.self, forKey: .state)
+    
+    supportedAxes = try container.decode([AxisDescription].self, forKey: .supportedAxes)
+    timestampEpoch = try container.decode(Int64.self, forKey: .timestampEpoch)
+    timestampDevice = try container.decode(Int64.self, forKey: .timestampDevice)
+  }
+}
+
+struct PeriodicStatusReturn: Decodable, ApiResult{
+  var result: String
+  var message: String?
+  let status: PeriodicStatus
+  enum CodingKeys:String, CodingKey{
+    case result, message, status = "data"
+  }
 }

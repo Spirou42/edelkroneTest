@@ -10,13 +10,18 @@ import SwiftUI
 struct ContentView: View {
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""
   @AppStorage(Preferences.Port.rawValue) private var port = 8080
-  @StateObject var edelkroneAPI = edelkroneModel.shared
+  @ObservedObject var edelkrone = edelkroneAPI.shared
+
   
   var body: some View {
     VStack(alignment: .leading, spacing: 2){
-      LinkAdapterList(linkAdapters:edelkroneAPI.adapters)
-      edelkroneStatus(edelkrone: edelkroneAPI)
-    }.frame(maxWidth: .infinity, maxHeight:.infinity)
+      if !edelkrone.hasScannedMCS{
+      	LinkAdapterList(linkAdapters:edelkrone.scannedLinkAdapters)
+      }else{
+        MotionControlSystemScan_List(ungroupedMotionSystems: edelkrone.ungroupedMotionControlSystems)
+      }
+      edelkroneStatus_View(edelkrone: edelkrone)
+    }.frame(minWidth: 200,idealWidth: 800 ,maxWidth: .infinity, minHeight:150,maxHeight:.infinity)
   }
   
 }

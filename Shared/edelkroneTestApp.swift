@@ -17,6 +17,10 @@ struct edelkroneTestApp: App {
 	var body: some Scene {
         WindowGroup {
           ContentView().frame(maxWidth: .infinity, maxHeight: .infinity)
+          Joystick(colorStyle: ColorStyle()){joyStickState,stickPosition in
+            
+          }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
 				#if os(macOS)
 				Settings {
@@ -34,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
   
   func applicationDidFinishLaunching(_ notification: Notification) {
-    edelkroneModel.shared.findLinkAdapters()
+    edelkroneAPI.shared.scanLinkAdapters()
   }
 }
 #endif
