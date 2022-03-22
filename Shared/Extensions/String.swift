@@ -45,4 +45,9 @@ extension String{
     }
     self.init(result)
   }
+  
+  init(_ point: CGPoint){
+    let result = "(" + String(format:"%1.03f",point.x ) + "," + String(format:"%1.03f",point.y )+")"
+    self.init(result)
+  }
 }

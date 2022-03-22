@@ -10,6 +10,6 @@ import SwiftUI
 
 extension CGFloat {
     func text() -> String {
-        return String(format: "%.00f", Float(self))
+        return String(format: "%0.02f", Float(self))
     }
 }

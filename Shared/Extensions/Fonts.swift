@@ -107,7 +107,41 @@ extension Font {
     if(definitions!.keys.contains(styleKey)){
       let fontName = definitions![styleKey]!.face
       let fontSize = definitions![styleKey]!.size
-      return Font.custom(fontName, size: fontSize)
+      if fontName.starts(with: "System"){
+        // extract
+        guard var  index = fontName.firstIndex(of: " ") else { return Font.system(size: fontSize) }
+        index = fontName.index(after:index)
+        let weigthName = fontName[index...fontName.index(before: fontName.endIndex)]
+        let lowerWeightName = weigthName.lowercased()
+        var resultFontWeight:Font.Weight = .regular
+        switch lowerWeightName{
+        case "regular":
+          resultFontWeight = .regular
+        case "black":
+          resultFontWeight = .black
+        case "bold":
+          resultFontWeight = .bold
+        case "heavy":
+          resultFontWeight = .heavy
+        case "light":
+          resultFontWeight = .light
+        case "medium":
+          resultFontWeight = .medium
+        case "semibold":
+          resultFontWeight = .semibold
+        case "thin":
+          resultFontWeight = .thin
+        case "ultraLight":
+          resultFontWeight = .ultraLight
+        default:
+          resultFontWeight = .regular
+        }
+        var returnFont = Font.system(size: fontSize)
+        returnFont = returnFont.weight(resultFontWeight)
+        return returnFont
+      }else{
+      	return Font.custom(fontName, size: fontSize)
+      }
     }
     return self.body
   }

@@ -15,13 +15,17 @@ struct ContentView: View {
   
   var body: some View {
     VStack(alignment: .leading, spacing: 2){
-      if !edelkrone.hasScannedMCS{
-      	LinkAdapterList(linkAdapters:edelkrone.scannedLinkAdapters)
-      }else{
+      switch edelkrone.apiState{
+      case .presentLinkAdapters:
+        LinkAdapterList(linkAdapters:edelkrone.scannedLinkAdapters)
+      case .pairMotionControlSystems:
         MotionControlSystemScan_List(ungroupedMotionSystems: edelkrone.ungroupedMotionControlSystems)
+      case .showMotionControlInterface:
+        Text("Not implemented yet")
       }
+      Spacer()
       edelkroneStatus_View(edelkrone: edelkrone)
-    }.frame(minWidth: 200,idealWidth: 800 ,maxWidth: .infinity, minHeight:150,maxHeight:.infinity)
+    }.frame(minWidth: 680,idealWidth: 900 ,maxWidth: .infinity, minHeight:150,maxHeight:.infinity)
   }
   
 }

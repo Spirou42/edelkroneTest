@@ -75,6 +75,12 @@ class edelkroneAPI : ObservableObject{
   enum requestType : String {
     case link, bundle, device
   }
+  
+  enum ConnectionState : String {
+    case presentLinkAdapters
+    case pairMotionControlSystems
+    case showMotionControlInterface
+  }
   /// Array, containing all found LinkAdapters
   @Published var scannedLinkAdapters:[LinkAdapter] = []		// list of deteced LinkAdapters
   
@@ -102,6 +108,8 @@ class edelkroneAPI : ObservableObject{
   @Published var hasAdapters : Bool = false
   @Published var connectedAdapterID: String = ""
   @Published var hasScannedMCS = false
+  
+  @Published var apiState:ConnectionState = .presentLinkAdapters
   
   // Variables from Preferences to indicate what was used in the last run
   @AppStorage(Preferences.Hostname.rawValue) fileprivate  var hostname = ""
@@ -295,6 +303,7 @@ extension edelkroneAPI {
     stopPairingStatusThread()
   	stopPeriodicStatusThread()
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(200)), execute: scanLinkAdapters)
+    apiState = .presentLinkAdapters
   }
   
   func disconnect() -> Void{
@@ -325,9 +334,12 @@ extension edelkroneAPI {
         DispatchQueue.main.async {
           self.hasAdapters = true
           for k in result!.data!{
-            self.scannedLinkAdapters.append(k)
-            self.adaptertDict[k.id] = k
+            if k.isValid{
+	            self.scannedLinkAdapters.append(k)
+  	          self.adaptertDict[k.id] = k
+            }
           }
+          self.hasAdapters =  (self.scannedLinkAdapters.count > 0)
         }
       }
     }
@@ -415,6 +427,7 @@ extension edelkroneAPI {
       return l
     }
   }
+  
   func removeElementFromPairingGroup(_ mcs:MotionControlSystem){
     guard let group = getPairingGroupFor(id: mcs.groupID) else {
       return
@@ -481,6 +494,7 @@ extension edelkroneAPI {
         }
       }
       self.hasScannedMCS = true
+      self.apiState = .pairMotionControlSystems
     }
   }
   
@@ -537,6 +551,7 @@ extension edelkroneAPI {
       stopPairingStatusThread()
       startPeriodicStatusThread()
       // this could only mean, that we got a message and the pairing is done
+      apiState = .showMotionControlInterface
     }
   }
   

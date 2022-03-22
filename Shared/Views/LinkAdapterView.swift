@@ -129,6 +129,7 @@ struct LinkAdapterList: View {
     }.padding([.top,.bottom],12)
       .padding([.trailing,.leading],8)
       .border(Color("Outline"), width: 2)
+      .frame(minWidth: 680, idealWidth: 700, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
   }
 }
 

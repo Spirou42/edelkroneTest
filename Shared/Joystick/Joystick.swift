@@ -8,10 +8,14 @@
 
 import SwiftUI
 
-struct JoystickThumb: View {
+/**
+ The JoystickThumb is the smal circle moved by the user
+ */
+struct JoystickThumb<Label>: View where Label : View{
   var diameter: CGFloat
   var outerRing: CGFloat = 15
   var thumbInnerGradient: Gradient
+  let label:Label
   
   var body: some View {
     ZStack{
@@ -24,10 +28,21 @@ struct JoystickThumb: View {
         LinearGradient(gradient: thumbInnerGradient, startPoint: UnitPoint(x: 0.0, y: 0.0), endPoint: UnitPoint(x: 0.0, y: 0.7))
       )
       .frame(width: diameter-outerRing, height: diameter-outerRing)
+      label
     }
   }
-}
 
+  init(diameter: CGFloat, outerRing: CGFloat = 15, thumbInnerGradient: Gradient, @ViewBuilder _ label: () ->Label){
+    self.diameter = diameter
+    self.outerRing = outerRing
+    self.thumbInnerGradient = thumbInnerGradient
+    self.label = label()
+  }
+  
+}
+/**
+ The JoystickPad is the large pad, the thumb can move in.
+ */
 struct JoystickPad: View {
   @Environment(\.colorScheme) var colorScheme
   
@@ -58,6 +73,9 @@ struct JoystickPad: View {
   }
 }
 
+/**
+ The "direction" the thumb is moved. also known as the dominat axis
+ */
 public enum JoystickDirection: String {
   case up
   case down
@@ -66,10 +84,20 @@ public enum JoystickDirection: String {
   case center
 }
 
+/**
+ The color style used by the joystick
+ */
 public struct ColorStyle {
+  /// the gradient used by the thumb
   var thumbGradient: Gradient
+  
+  /// the gradient used by the pad
   var backgroundGradient: Gradient
+  
+  /// the accent color used to draw a strok around the pad
   var strokeColor: Color
+  
+  /// an unused iconColor. Currently no icons ar suported
   var iconColor: Color
   
   public init(thumbGradient: Gradient = Gradient(colors: 	[.darkGray, .lightGray]),
@@ -84,22 +112,133 @@ public struct ColorStyle {
   }
 }
 
-public struct Joystick: View {
-  var colorStyle: ColorStyle = ColorStyle()
+/**
+ a simple arow shape used to draw the axel arrows inside the pad
+ */
+struct AxisArrow: Shape {
+  func path(in rect: CGRect) -> Path {
+    Path { path in
+      let width = rect.width
+      let height = rect.height
+      
+      path.addLines( [
+        CGPoint(x: width * 0.3, y: height),
+        CGPoint(x: width * 0.3, y: height * 0.4),
+        CGPoint(x: width * 0.0, y: height * 0.4),
+        CGPoint(x: width * 0.5, y: height * 0.1),
+        CGPoint(x: width * 1.0, y: height * 0.4),
+        CGPoint(x: width * 0.7, y: height * 0.4),
+        CGPoint(x: width * 0.7, y: height)
+        
+      ])
+      path.closeSubpath()
+    }
+  }
+}
+
+/**
+ an collection of two arrow indicating  the axis movment
+ */
+struct AxisArrows : View {
+  enum axisDirection {
+    case horizontal,vertical,diagonalLeft,diagonalRight
+  }
+  let direction:axisDirection
+  var outerRadius:Double
+  var innerRadius:Double
+  var colorStyle:ColorStyle
   
+  var axisAngle:Angle{
+    get{
+      switch direction {
+      case .vertical:
+        return Angle(degrees:0)
+      case .horizontal:
+        return Angle(degrees:90)
+      case .diagonalLeft:
+        return Angle(degrees: -45)
+      case .diagonalRight:
+        return Angle(degrees: 45)
+      }
+    }
+  }
+  /// positioning the arrow around a circle. beware of the diagonals as they are multiplied by sin 45 deg
+  var offset:CGPoint {
+    get{
+      switch direction {
+      case .horizontal:
+        return CGPoint(x: (innerRadius+(outerRadius-innerRadius)/2), y: 0)
+      case .vertical:
+        return CGPoint(x: 0, y: (innerRadius+(outerRadius-innerRadius)/2))
+      case .diagonalLeft:
+        return CGPoint(x: -(innerRadius+(outerRadius-innerRadius)/2) * 0.707 , y: (innerRadius+(outerRadius-innerRadius)/2) * 0.707)
+      case .diagonalRight:
+        return CGPoint(x: (innerRadius+(outerRadius-innerRadius)/2) * 0.707, y: (innerRadius+(outerRadius-innerRadius)/2) * 0.707)
+      }
+    }
+  }
+  
+  var body: some View {
+    Group{
+      RotatedShape(shape: AxisArrow(), angle: axisAngle)
+        .fill(LinearGradient(gradient: colorStyle.backgroundGradient, startPoint: UnitPoint(x: 0.0, y: 1.0), endPoint: UnitPoint(x: 0.0, y: 0.0)))
+        .frame(width: (outerRadius-innerRadius)/3.236, height: (outerRadius-innerRadius)/1.618)
+        .offset(x:offset.x, y:-offset.y)
+      RotatedShape(shape: AxisArrow(), angle: axisAngle)
+        .stroke()
+        .frame(width: (outerRadius-innerRadius)/3.236, height: (outerRadius-innerRadius)/1.618)
+        .offset(x:offset.x, y:-offset.y)
+      
+      RotatedShape(shape: AxisArrow(), angle: axisAngle+Angle(degrees: 180))
+        .fill(LinearGradient(gradient: colorStyle.backgroundGradient, startPoint: UnitPoint(x: 0.0, y: 0.0), endPoint: UnitPoint(x: 0.0, y: 1.0)))
+        .frame(width: (outerRadius-innerRadius)/3.236, height: (outerRadius-innerRadius)/1.618)
+        .offset(x:-offset.x, y: offset.y)
+      
+      RotatedShape(shape: AxisArrow(), angle: axisAngle+Angle(degrees: 180))
+        .stroke()
+        .frame(width: (outerRadius-innerRadius)/3.236, height: (outerRadius-innerRadius)/1.618)
+        .offset(x:-offset.x, y: offset.y)
+      
+    }
+  }
+}
+
+
+public struct DegreeOfFreedom:OptionSet {
+  public let rawValue: Int
+  public static let none:DegreeOfFreedom = []
+  public static let horizontal = DegreeOfFreedom(rawValue: 1)
+  public static let vertical = DegreeOfFreedom(rawValue: 2)
+  public static let all:DegreeOfFreedom = [.horizontal, .vertical]
+  public init(rawValue:Int){
+    self.rawValue = rawValue
+  }
+}
+
+/**
+ The joystick view together with a simple gesture handler for drag gestures.
+ Putting all the foremter component together into one view
+ */
+public struct Joystick<Label>: View where Label : View{
+  var colorStyle: ColorStyle = ColorStyle()
   var isDebug = false
+  let label:Label
+
+  @State private var joystickDirection: JoystickDirection = .center
+  
+  
+  public var action: ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)
+  
+  var freedoms: DegreeOfFreedom = .none
   
   var stickPosition: CGPoint {
-    let stickPositionX = floor(locationX - padRadius)
+    let stickPositionX = (locationX - padRadius) / (padRadius - thumbRadius) // floor(
     
-    let stickPositionY = floor((locationY - padRadius) < 0 ? -1 * (locationY - padRadius) : locationY - padRadius)
+    let stickPositionY = (padRadius - locationY) / (padRadius - thumbRadius) // < 0 ? -1 * (locationY - padRadius) : locationY - padRadius)
     
     return CGPoint(x: stickPositionX, y: stickPositionY)
   }
   
-  @State private var joystickDirection: JoystickDirection = .center
-  
-  public var completionHandler: ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)
   
   var origin: CGPoint {
     return CGPoint(x: self.padRadius, y: self.padRadius)
@@ -152,18 +291,25 @@ public struct Joystick: View {
         let smallRingLimitCenter: CGFloat = self.padRadius - self.thumbRadius
         
         if (distance <= smallRingLimitCenter) {
-          self.locationX = value.location.x
-          self.locationY = value.location.y
+          if freedoms.contains(.horizontal){
+            self.locationX = value.location.x
+          }
+          if freedoms.contains(.vertical){
+            self.locationY = value.location.y
+          }
         } else {
           let radian = self.origin.getRadian(pointOnCircle: value.location)
           let pointOnCircle = self.origin.getPointOnCircle(radius: smallRingLimitCenter, radian: radian)
-          
-          self.locationX = pointOnCircle.x
-          self.locationY = pointOnCircle.y
+          if freedoms.contains(.horizontal){
+            self.locationX = pointOnCircle.x
+          }
+          if freedoms.contains(.vertical){
+            self.locationY = pointOnCircle.y
+          }
         }
         
         self.joystickDirection = self.calcJoystickState()
-        self.completionHandler(self.joystickDirection,  self.stickPosition)
+        self.action(self.joystickDirection,  self.stickPosition)
       }
       .onEnded{ value in
         self.locationX = self.padDiameter/2
@@ -174,13 +320,19 @@ public struct Joystick: View {
         
         self.joystickDirection = .center
         
-        self.completionHandler(self.joystickDirection,  self.stickPosition)
+        self.action(self.joystickDirection,  self.stickPosition)
       }
   }
   
   
-  public init(isDebug: Bool = false, colorStyle: ColorStyle, thumbRadius: CGFloat = 50, padRadius: CGFloat = 140,
-              completionHandler: @escaping ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)) {
+  public init( isDebug: Bool = false,
+               freedoms: DegreeOfFreedom = .all,
+               colorStyle: ColorStyle,
+               thumbRadius: CGFloat = 50,
+               padRadius: CGFloat = 140,
+               action: @escaping ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void),
+               @ViewBuilder label:() -> Label)
+  {
     
     self.isDebug = isDebug
     self.colorStyle = colorStyle
@@ -188,7 +340,9 @@ public struct Joystick: View {
     self.thumbRadius = thumbRadius
     self.padRadius = padRadius
     
-    self.completionHandler = completionHandler
+    self.action = action
+    self.freedoms = freedoms
+    self.label = label()
   }
   
   public var body: some View {
@@ -196,14 +350,13 @@ public struct Joystick: View {
     VStack {
       if isDebug {
         VStack {
-          HStack(spacing: 15) {
-            Text(stickPosition.x.text()).font(.body)
+          HStack(spacing: 3) {
+            Text(stickPosition.x.text()).font(.body).monospacedDigit()
             Text(":").font(.body)
-            
-            Text(stickPosition.y.text()).font(.body)
+            Text(stickPosition.y.text()).font(.body).monospacedDigit()
           }
           
-        }.padding(10)
+        }.padding(5)
       }
       
       HStack() {
@@ -212,16 +365,26 @@ public struct Joystick: View {
             backgroundGradient: self.colorStyle.backgroundGradient,
             strokeColor: self.colorStyle.strokeColor,
             diameter: padDiameter)
-          .gesture(dragGesture)
           
+          .overlay(
+            ZStack{
+              if freedoms.contains(.vertical) {
+              	AxisArrows(direction: .vertical, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
+              }
+              if freedoms.contains(.horizontal){
+              	AxisArrows(direction: .horizontal, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
+              }
+            }
+          ).gesture(dragGesture)
           JoystickThumb(diameter: self.thumbDiameter,
-                        thumbInnerGradient: self.colorStyle.thumbGradient)
+                        thumbInnerGradient: self.colorStyle.thumbGradient){
+            self.label
+          }
           .offset(x: thumbLocationX, y: thumbLocationY)
           .allowsHitTesting(false)
         }
         
       }
-      
       
       if isDebug {
         HStack(spacing: 15) {
@@ -238,29 +401,30 @@ public struct Joystick: View {
 
 
 struct Joystick_Previews: PreviewProvider {
-  static var colorized = ColorStyle(thumbGradient: Gradient(colors:[Color("JoystickThumbDark"),
-                                                                      Color("JoystickThumbLight")]
-                                                             ),
-                                      backgroundGradient: Gradient(colors:[Color("JoystickBackgroundDark"),
-                                                                           Color("JoystickBackgroundLight")]
-                                                                  ),
-                                      strokeColor: Color("JoystickRing"),
-                                      iconColor: .pink)
+  static var colorized = ColorStyle(thumbGradient: Gradient(whithDark: Color("JoystickThumbDark")),
+                                    backgroundGradient: Gradient(whithDark: Color("JoystickBackgroundDark")),
+                                    strokeColor: Color("JoystickRing"),
+                                    iconColor: .pink)
   
   static var previews: some View {
     GeometryReader { geometry in
       HStack(alignment: .center, spacing: 0) {
-        Joystick(colorStyle: colorized )
-        { (joyStickState, stickPosition) in
-          
+        Joystick(isDebug: true, freedoms: [.horizontal], colorStyle: colorized, action: { (joyStickState, stickPosition) in})
+        {
+          Text("Pan")
         }
+        
         //.frame(width: geometry.size.width-40, height: geometry.size.width-40)
         
         Joystick(colorStyle: ColorStyle(iconColor: .orange),
-                 thumbRadius: 70, padRadius: 120
-        ) { (joyStickState, stickPosition)  in
+                 thumbRadius: 70, padRadius: 120, action: { (joyStickState, stickPosition)  in }){
+          VStack{
+          	Text("Dummy")
+            Text("Dump")
+          }.font(.applicationFont(.caption2).weight(.medium)).foregroundColor(.white)
           
         }
+      
         //.frame(width: geometry.size.width-40, height: geometry.size.width-40)
       }
     }

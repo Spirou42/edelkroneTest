@@ -28,7 +28,7 @@ struct PairingGroupView: View {
             HStack{
               Text( (mcs == pairingGroup.groupMaster) ? "Master" : "Member")
                 .font(.applicationFont(.body))
-
+              
               Text(mcs.macAddress)
                 .font(.applicationFont(.body))
             }
@@ -39,8 +39,21 @@ struct PairingGroupView: View {
   }
 }
 
+struct PairingGroupList:View{
+  var body: some View{
+    Text("BuBu")
+  }
+}
+
 struct PairingGroupView_Previews: PreviewProvider {
   static var previews: some View {
     PairingGroupView(pairingGroup: PairingGroup())
   }
+}
+
+struct PairingGroupList_Previews: PreviewProvider{
+  static var previews: some View {
+    PairingGroupList()
+  }
+  
 }
