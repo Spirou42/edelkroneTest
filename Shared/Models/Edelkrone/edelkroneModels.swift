@@ -388,6 +388,11 @@ struct PairingStatus:Decodable{
   }
 	var lastPairError: String
   var pairState: pairingState
+  
+  enum CodingKeys:String, CodingKey{
+    case lastPairError
+    case pairState = "wirelessPairState"
+  }
 }
 
 // MARK: PairingStatusReturn
@@ -401,7 +406,9 @@ struct PairingStatusReturn:Decodable, ApiResult{
   }
 }
 
-struct AxisDescription:Decodable, Hashable, Equatable{
+struct AxisDescription:Decodable, Hashable, Equatable, Identifiable{
+  var id: ObjectIdentifier = ObjectIdentifier(AxisDescription.self)
+  
   enum axisName:String, Decodable{
     case headPan, headTilt, slide, focus, jibPlusPan, jibPlusTilt
   }
@@ -419,38 +426,41 @@ struct AxisDescription:Decodable, Hashable, Equatable{
   }
 }
 
-struct BundledDeviceInfo:Decodable{
+struct BundledDeviceInfo:Decodable, Equatable{
   let batteryLevel:Double
-  let isTilted:Bool
+  let isTilted:Bool?
   let device:MotionControlSystem.edelkroneDevices
   enum CodingKeys:String,CodingKey{
     case batteryLevel, isTilted, device="type"
   }
+  static func == (lhs: BundledDeviceInfo, rhs:BundledDeviceInfo) -> Bool{
+    return (lhs.batteryLevel == rhs.batteryLevel) && (lhs.device == rhs.device) && (lhs.isTilted == rhs.isTilted)
+  }
 }
 
-struct PeriodicStatus: Decodable{
+class PeriodicStatus: Decodable, ObservableObject{
   enum motionState:String, Decodable{
     case idle, keyposeMove, realTimeMove, focusCalibration, sliderCalibration, joystickMove, unsupportedActivity
   }
-  var calibratedAxes:[AxisDescription]
-  let deviceInfo:[BundledDeviceInfo]
-  let deviceInfoReady:Bool
+  @Published var calibratedAxes:[AxisDescription] = []
+  @Published var deviceInfo:[BundledDeviceInfo] = []
+  @Published var deviceInfoReady:Bool = false
   
-  let keyposeLoopActive:Bool
-  let keyposeMotionAimIndex: Int
-  let keyposeMotionStartIndex: Int
-  let keyposeSlotsFilled:[Bool]
+  @Published var keyposeLoopActive:Bool = false
+  @Published var keyposeMotionAimIndex: Int = -1
+  @Published var keyposeMotionStartIndex: Int = -1
+  @Published var keyposeSlotsFilled:[Bool] = []
   //
-  let plannedMotionProgress: Double
-  let plannedMotionDuration: Double
-  let readings:[AxisDescription.axisName:Double]
+  @Published var plannedMotionProgress: Double = 0.0
+  @Published var plannedMotionDuration: Double = 0.0
+  @Published var readings:[AxisDescription.axisName:Double] = [:]
   //
-  let realTimeSupportedAxes: [AxisDescription]
-  let state:motionState
-  let supportedAxes:[AxisDescription]
+  @Published var realTimeSupportedAxes: [AxisDescription] = []
+  @Published var state:motionState = .idle
+  @Published var supportedAxes:[AxisDescription] = []
   //
-  let timestampDevice: Int64
-  let timestampEpoch: Int64
+  var timestampDevice: Int64
+  var timestampEpoch: Int64
   //
   enum CodingKeys:String, CodingKey{
     case calibratedAxes
@@ -463,7 +473,12 @@ struct PeriodicStatus: Decodable{
     
   }
   
-  init(from decoder: Decoder) throws {
+  init(){
+    timestampDevice = 0
+    timestampEpoch = 0
+  }
+  
+  required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     calibratedAxes = try container.decode([AxisDescription].self, forKey: .calibratedAxes)
     deviceInfo = try container.decode([BundledDeviceInfo].self, forKey: .deviceInfo)
@@ -492,6 +507,64 @@ struct PeriodicStatus: Decodable{
     supportedAxes = try container.decode([AxisDescription].self, forKey: .supportedAxes)
     timestampEpoch = try container.decode(Int64.self, forKey: .timestampEpoch)
     timestampDevice = try container.decode(Int64.self, forKey: .timestampDevice)
+  }
+  
+  static func &= (lhs:PeriodicStatus,rhs:PeriodicStatus){
+    if lhs.calibratedAxes != rhs.calibratedAxes{
+      lhs.calibratedAxes = rhs.calibratedAxes
+    }
+    if lhs.deviceInfo != rhs.deviceInfo{
+      lhs.deviceInfo = rhs.deviceInfo
+    }
+    
+    if lhs.deviceInfoReady != rhs.deviceInfoReady{
+      lhs.deviceInfoReady = rhs.deviceInfoReady
+    }
+    
+    if lhs.keyposeLoopActive != rhs.keyposeLoopActive{
+      lhs.keyposeLoopActive = rhs.keyposeLoopActive
+    }
+    
+    if lhs.keyposeMotionAimIndex != rhs.keyposeMotionAimIndex{
+      lhs.keyposeMotionAimIndex = rhs.keyposeMotionAimIndex
+    }
+    
+    if lhs.keyposeMotionStartIndex != rhs.keyposeMotionStartIndex{
+      lhs.keyposeMotionStartIndex = rhs.keyposeMotionStartIndex
+    }
+    
+    if lhs.keyposeSlotsFilled != rhs.keyposeSlotsFilled{
+      lhs.keyposeSlotsFilled = rhs.keyposeSlotsFilled
+    }
+    
+    if lhs.plannedMotionProgress != rhs.plannedMotionProgress{
+      lhs.plannedMotionProgress = rhs.plannedMotionProgress
+    }
+    
+    if lhs.plannedMotionDuration != rhs.plannedMotionDuration{
+      lhs.plannedMotionDuration = rhs.plannedMotionDuration
+    }
+    
+    if lhs.readings != rhs.readings {
+      lhs.readings = rhs.readings
+    }
+    
+    if lhs.realTimeSupportedAxes != rhs.realTimeSupportedAxes{
+      lhs.realTimeSupportedAxes = rhs.realTimeSupportedAxes
+    }
+    if lhs.state != rhs.state{
+      lhs.state = rhs.state
+    }
+    if lhs.supportedAxes != rhs.supportedAxes{
+      lhs.supportedAxes = rhs.supportedAxes
+    }
+    
+//    if lhs.timestampEpoch != rhs.timestampEpoch{
+//      lhs.timestampEpoch = rhs.timestampEpoch
+//    }
+//    if lhs.timestampDevice != rhs.timestampDevice{
+//      lhs.timestampDevice = rhs.timestampDevice
+//    }
   }
 }
 

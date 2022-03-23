@@ -21,7 +21,7 @@ struct ContentView: View {
       case .pairMotionControlSystems:
         MotionControlSystemScan_List(ungroupedMotionSystems: edelkrone.ungroupedMotionControlSystems)
       case .showMotionControlInterface:
-        Text("Not implemented yet")
+        MotionControlView()
       }
       Spacer()
       edelkroneStatus_View(edelkrone: edelkrone)

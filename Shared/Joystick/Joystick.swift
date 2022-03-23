@@ -222,9 +222,12 @@ public struct DegreeOfFreedom:OptionSet {
 public struct Joystick<Label>: View where Label : View{
   var colorStyle: ColorStyle = ColorStyle()
   var isDebug = false
-  let label:Label
+  var label:Label
 
+  var enabled:Bool = true
   @State private var joystickDirection: JoystickDirection = .center
+  @State private var locationX: CGFloat = 0
+  @State private var locationY: CGFloat = 0
   
   
   public var action: ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)
@@ -244,8 +247,6 @@ public struct Joystick<Label>: View where Label : View{
     return CGPoint(x: self.padRadius, y: self.padRadius)
   }
   
-  @State var locationX: CGFloat = 0
-  @State var locationY: CGFloat = 0
   
   let iconPadding: CGFloat = 10
   
@@ -283,7 +284,9 @@ public struct Joystick<Label>: View where Label : View{
     return state
   }
   
+  
   var dragGesture: some Gesture {
+    
     DragGesture(minimumDistance: 0)
       .onChanged{ value in
         let distance = self.origin.getDistance(otherPoint: value.location)
@@ -326,13 +329,13 @@ public struct Joystick<Label>: View where Label : View{
   
   
   public init( isDebug: Bool = false,
+               enabled:Bool = true,
                freedoms: DegreeOfFreedom = .all,
                colorStyle: ColorStyle,
                thumbRadius: CGFloat = 50,
                padRadius: CGFloat = 140,
                action: @escaping ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void),
-               @ViewBuilder label:() -> Label)
-  {
+               @ViewBuilder label:() -> Label) {
     
     self.isDebug = isDebug
     self.colorStyle = colorStyle
@@ -343,7 +346,9 @@ public struct Joystick<Label>: View where Label : View{
     self.action = action
     self.freedoms = freedoms
     self.label = label()
+    self.enabled = enabled
   }
+  
   
   public var body: some View {
     
@@ -375,7 +380,9 @@ public struct Joystick<Label>: View where Label : View{
               	AxisArrows(direction: .horizontal, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
               }
             }
-          ).gesture(dragGesture)
+          ).gesture(dragGesture, including: self.enabled ? .all : .none)
+          
+
           JoystickThumb(diameter: self.thumbDiameter,
                         thumbInnerGradient: self.colorStyle.thumbGradient){
             self.label
@@ -384,7 +391,7 @@ public struct Joystick<Label>: View where Label : View{
           .allowsHitTesting(false)
         }
         
-      }
+      }.opacity(self.enabled ? 1.0 : 0.5)
       
       if isDebug {
         HStack(spacing: 15) {
@@ -416,7 +423,7 @@ struct Joystick_Previews: PreviewProvider {
         
         //.frame(width: geometry.size.width-40, height: geometry.size.width-40)
         
-        Joystick(colorStyle: ColorStyle(iconColor: .orange),
+        Joystick(enabled:false, colorStyle: ColorStyle(iconColor: .orange),
                  thumbRadius: 70, padRadius: 120, action: { (joyStickState, stickPosition)  in }){
           VStack{
           	Text("Dummy")

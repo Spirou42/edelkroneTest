@@ -111,6 +111,8 @@ class edelkroneAPI : ObservableObject{
   
   @Published var apiState:ConnectionState = .presentLinkAdapters
   
+  @Published var pairedMotionControlSystemStatus:PeriodicStatus = PeriodicStatus()
+  
   // Variables from Preferences to indicate what was used in the last run
   @AppStorage(Preferences.Hostname.rawValue) fileprivate  var hostname = ""
   @AppStorage(Preferences.Port.rawValue) fileprivate var port = 8080
@@ -547,6 +549,22 @@ extension edelkroneAPI {
   func wirelessPairingStatus_Result(_ success:Bool, result:PairingStatusReturn?,context:Any?) -> Void {
     if success {
       print("got a pairing status " )
+      guard let k = result else { return }
+      switch k.status?.pairState {
+      case .none:
+				fallthrough
+      case .idle:
+        fallthrough
+      case .connecting:
+        break
+      case .connectionOk:
+        stopPairingStatusThread()
+        startPeriodicStatusThread()
+        apiState = .showMotionControlInterface
+      case .problem:
+        stopPairingStatusThread()
+        apiState = .presentLinkAdapters
+      }
     }else{
       stopPairingStatusThread()
       startPeriodicStatusThread()
@@ -591,7 +609,8 @@ extension edelkroneAPI {
   func getPeriodicStatus_Result(_ success:Bool, result:PeriodicStatusReturn?, context:Any?) -> Void{
 //    var requestStruct = getCommand(commands.status.rawValue)
     print("Periodic Status: " + (result?.status.state.rawValue ?? "Failed"))
-
+    guard let k = result?.status else { return }
+    self.pairedMotionControlSystemStatus &= k
   }
   
   @objc func requestPeriodicStatus(_ object: Any) -> Void{

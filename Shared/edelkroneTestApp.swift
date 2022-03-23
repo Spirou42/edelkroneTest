@@ -10,7 +10,7 @@ import SwiftUI
 
 
 @main
-struct edelkroneTestApp: App {
+class edelkroneTestApp: App {
 #if os(macOS)
   @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 #endif
@@ -23,24 +23,25 @@ struct edelkroneTestApp: App {
                                                                 ),
                                     strokeColor: Color("JoystickRing"),
                                     iconColor: .pink)
+  
+  
+  
   var body: some Scene {
     WindowGroup {
       ContentView()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-      Joystick(isDebug: true,
-               freedoms: .all,
-               colorStyle: edelkroneTestApp.colorized ,
-               action: { (joyStickState, stickPosition) in
-       // print("Some action for " + joyStickState.rawValue + " with value "+String(stickPosition))
-      }
-      )
-      {
-        VStack{
-          Text("Tilt")
-          Text("Pan")
-        }.font(.applicationFont(.title).weight(.semibold)).foregroundColor(.white)
-
-      }
+      
+//      Joystick(isDebug: true,
+//               enabled: false,
+//               freedoms: .all,
+//               colorStyle: edelkroneTestApp.colorized ,
+//               action: { (joyStickState, stickPosition) in  }){
+//        VStack{
+//          Text("Pan")
+//          Text("Tilt")
+//        }.font(.applicationFont(.title).weight(.heavy)).foregroundColor(.white)
+//      }
+      
       
     }
     
@@ -50,6 +51,10 @@ struct edelkroneTestApp: App {
       SettingsView()
     }
 #endif
+  }
+  
+  required init(){
+    
   }
 }
 
