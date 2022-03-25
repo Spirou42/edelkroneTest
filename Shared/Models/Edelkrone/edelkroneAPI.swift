@@ -111,7 +111,9 @@ class edelkroneAPI : ObservableObject{
   
   @Published var apiState:ConnectionState = .presentLinkAdapters
   
-  @Published var pairedMotionControlSystemStatus:PeriodicStatus = PeriodicStatus()
+  @Published var periodicMCSStatus :PeriodicStatus = PeriodicStatus()
+  
+  @Published var motionControlStatus: MotionControlStatus = MotionControlStatus()
   
   // Variables from Preferences to indicate what was used in the last run
   @AppStorage(Preferences.Hostname.rawValue) fileprivate  var hostname = ""
@@ -309,11 +311,23 @@ extension edelkroneAPI {
   }
   
   func disconnect() -> Void{
-    if(connectedAdapterID != ""){
-      adaptertDict[connectedAdapterID]?.isConnected = false
-      connectedAdapterID = ""
+    let requestDict = getCommand(commands.pairing.wireless.disconnect.rawValue)
+    if let requestURL = getURL(.link){
+      let request = getRequestFor(url: requestURL, command: requestDict)
+      executeSession(request: request, uploadData: request.httpBody!, with: disconnectResult, context: nil)
     }
-    isConnected = false
+  }
+  
+  func disconnectResult(_ success:Bool, result:DefaultReturns?,context: Any) -> Void{
+    if(success){
+      stopScanResultsThread()
+      stopPairingStatusThread()
+    	if(connectedAdapterID != ""){
+      	adaptertDict[connectedAdapterID]?.isConnected = false
+      	connectedAdapterID = ""
+    	}
+    	isConnected = false
+    }
   }
   
   
@@ -447,7 +461,10 @@ extension edelkroneAPI {
   {
     if  motionControlSystemsDict.keys.contains(mcs.macAddress) {
       let orginol = motionControlSystemsDict[mcs.macAddress]!
-      
+      if mcs.groupID != .noGroup{
+        let group = getPairingGroupFor(id: mcs.groupID)!
+        group.addMotionControlSystem(mcs)
+      }
       if orginol.groupID != mcs.groupID{
         if(orginol.groupID != .noGroup){
           removeElementFromPairingGroup(orginol)
@@ -571,6 +588,9 @@ extension edelkroneAPI {
       // this could only mean, that we got a message and the pairing is done
       apiState = .showMotionControlInterface
     }
+    if apiState == .showMotionControlInterface{
+      self.motionControlStatus.axelStatus = [:]
+    }
   }
   
   
@@ -598,6 +618,13 @@ extension edelkroneAPI {
 
   // MARK: - Periodic Status
 
+  func attachConnectedAdapter(adapterID:String ) -> Void {
+    apiState = .showMotionControlInterface
+    self.connectedAdapterID = adapterID
+    self.motionControlStatus.axelStatus = [:]
+    startPeriodicStatusThread()
+  }
+  
   func getPeriodicStatus() -> Void{
     if var requestURL = getURL(adapterID: connectedAdapterID, type: .bundle){
       requestURL.appendPathComponent("status")
@@ -610,7 +637,8 @@ extension edelkroneAPI {
 //    var requestStruct = getCommand(commands.status.rawValue)
     print("Periodic Status: " + (result?.status.state.rawValue ?? "Failed"))
     guard let k = result?.status else { return }
-    self.pairedMotionControlSystemStatus &= k
+    self.periodicMCSStatus &= k
+    self.motionControlStatus &= k
   }
   
   @objc func requestPeriodicStatus(_ object: Any) -> Void{

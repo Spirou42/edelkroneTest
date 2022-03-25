@@ -99,16 +99,19 @@ public struct ColorStyle {
   
   /// an unused iconColor. Currently no icons ar suported
   var iconColor: Color
+  var labelColor: Color
   
   public init(thumbGradient: Gradient = Gradient(colors: 	[.darkGray, .lightGray]),
               backgroundGradient: Gradient = Gradient(colors:[.gray, .gray]),
               strokeColor: Color = .accentColor,
-              iconColor: Color = .primary) {
+              iconColor: Color = .primary,
+              labelColor:Color = .orange) {
     
     self.thumbGradient = thumbGradient
     self.backgroundGradient = backgroundGradient
     self.strokeColor = strokeColor
     self.iconColor = iconColor
+    self.labelColor = labelColor
   }
 }
 
@@ -331,9 +334,9 @@ public struct Joystick<Label>: View where Label : View{
   public init( isDebug: Bool = false,
                enabled:Bool = true,
                freedoms: DegreeOfFreedom = .all,
-               colorStyle: ColorStyle,
-               thumbRadius: CGFloat = 50,
-               padRadius: CGFloat = 140,
+               colorStyle: ColorStyle = ColorStyle(),
+               thumbRadius: CGFloat = 42,
+               padRadius: CGFloat = 100,
                action: @escaping ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void),
                @ViewBuilder label:() -> Label) {
     
@@ -385,7 +388,7 @@ public struct Joystick<Label>: View where Label : View{
 
           JoystickThumb(diameter: self.thumbDiameter,
                         thumbInnerGradient: self.colorStyle.thumbGradient){
-            self.label
+            self.label.foregroundColor(colorStyle.labelColor)
           }
           .offset(x: thumbLocationX, y: thumbLocationY)
           .allowsHitTesting(false)
@@ -411,7 +414,8 @@ struct Joystick_Previews: PreviewProvider {
   static var colorized = ColorStyle(thumbGradient: Gradient(whithDark: Color("JoystickThumbDark")),
                                     backgroundGradient: Gradient(whithDark: Color("JoystickBackgroundDark")),
                                     strokeColor: Color("JoystickRing"),
-                                    iconColor: .pink)
+                                    labelColor: .white
+                                    )
   
   static var previews: some View {
     GeometryReader { geometry in
@@ -423,7 +427,7 @@ struct Joystick_Previews: PreviewProvider {
         
         //.frame(width: geometry.size.width-40, height: geometry.size.width-40)
         
-        Joystick(enabled:false, colorStyle: ColorStyle(iconColor: .orange),
+        Joystick(enabled:false, colorStyle: ColorStyle(),
                  thumbRadius: 70, padRadius: 120, action: { (joyStickState, stickPosition)  in }){
           VStack{
           	Text("Dummy")

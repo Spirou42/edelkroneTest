@@ -64,12 +64,15 @@ struct ColoredGlyphButtonStyle: ButtonStyle {
   var cornerRadius: Double = 5
   var shadowRadius:Double = 3
   var glyph: Text = Text("")
+  var glyphPadding:Double = 8
+  var width:Double = 140
+  var height:Double = 41
   
   public func makeBody(configuration: ColoredGlyphButtonStyle.Configuration) -> some View {
     HStack(spacing:0) {
       glyph
         .foregroundColor(labelColor)
-        .padding([.leading],8)
+        .padding([.leading],glyphPadding)
       
       configuration.label
       
@@ -86,7 +89,7 @@ struct ColoredGlyphButtonStyle: ButtonStyle {
        .scaleEffect(configuration.isPressed ? 0.8 : 1.0)
        */
     }
-    .frame(width: 140, height:41)
+    .frame(width: width, height:height)
     .background(RoundedRectangle(cornerRadius: 5).fill(buttonColor))
   }
 }

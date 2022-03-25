@@ -19,9 +19,10 @@ struct ContentView: View {
       case .presentLinkAdapters:
         LinkAdapterList(linkAdapters:edelkrone.scannedLinkAdapters)
       case .pairMotionControlSystems:
-        MotionControlSystemScan_List(ungroupedMotionSystems: edelkrone.ungroupedMotionControlSystems)
+        ScannedMotionControlSystem_List(ungroupedMotionSystems: edelkrone.ungroupedMotionControlSystems)
+        PairingGroupList(pairedGroups: edelkrone.motionControlGroups)
       case .showMotionControlInterface:
-        MotionControlView()
+        MotionControlInterface()
       }
       Spacer()
       edelkroneStatus_View(edelkrone: edelkrone)

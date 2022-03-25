@@ -19,6 +19,9 @@ extension Color {
   public static var lightGray:Color {
     get { return Color(white: 0.85) }
   }
+  public static var lightLightGray:Color{
+    get{ return Color(white: 0.92)}
+  }
   /// a dark gray color ( 85% black)
   public static var darkGray:Color {
     return Color(white: 0.25)

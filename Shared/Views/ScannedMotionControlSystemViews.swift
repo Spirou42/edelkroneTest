@@ -13,7 +13,7 @@ import SwiftUI
  Used in a list to display the detected motion control systems
  
  */
-struct MotionControlSystemScan_View: View, Identifiable {
+struct ScannedMotionControlSystem_View: View, Identifiable {
   @ObservedObject var mcs:MotionControlSystem
   
   // this UUID stops the reuse of Views in the List
@@ -59,7 +59,7 @@ struct MotionControlSystemScan_View: View, Identifiable {
   }
 }
 
-struct MotionControlSystemScan_List:View{
+struct ScannedMotionControlSystem_List:View{
   var ungroupedMotionSystems: [MotionControlSystem]
   
   var body: some View {
@@ -71,7 +71,7 @@ struct MotionControlSystemScan_List:View{
       VStack(alignment: .leading, spacing: 3){
         List{
           ForEach(ungroupedMotionSystems){ mcs in
-            MotionControlSystemScan_View(mcs: mcs)
+            ScannedMotionControlSystem_View(mcs: mcs)
           }
           
         }.border(Color("Outline"))
@@ -99,13 +99,13 @@ struct MotionControlSystemScan_List:View{
 
 struct MCSScanView_Previews: PreviewProvider {
   static var previews: some View {
-    MotionControlSystemScan_View(mcs:MotionControlSystem())
+    ScannedMotionControlSystem_View(mcs:MotionControlSystem())
   }
 }
 
 struct MCSScanListView_Previews: PreviewProvider {
   static var previews: some View{
-    MotionControlSystemScan_List(ungroupedMotionSystems:[MotionControlSystem()])
+    ScannedMotionControlSystem_List(ungroupedMotionSystems:[MotionControlSystem()])
   }
 }
 

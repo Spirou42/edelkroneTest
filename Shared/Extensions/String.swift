@@ -9,7 +9,7 @@
 import Foundation
 
 extension String{
-  init(_ device:MotionControlSystem.edelkroneDevices){
+  init(_ device:EdelkroneDevice){
     var result = "unknown device"
     switch(device){
     case .slideModule:
@@ -42,6 +42,8 @@ extension String{
       result = "FocusPLUS PRO"
     case .jibOne:
       result = "JibONE"
+    case .unknown:
+      result = "Unknown"
     }
     self.init(result)
   }
@@ -50,4 +52,5 @@ extension String{
     let result = "(" + String(format:"%1.03f",point.x ) + "," + String(format:"%1.03f",point.y )+")"
     self.init(result)
   }
+  
 }

@@ -1,10 +1,10 @@
 /**
-  edelkroneModels.swift
-  edelkroneTest
-	
+ edelkroneModels.swift
+ edelkroneTest
+ 
  Containing basic models for api results
  
-  Created by Carsten Müller on 07.03.2022.
+ Created by Carsten Müller on 07.03.2022.
  */
 
 import Foundation
@@ -100,6 +100,65 @@ class LinkAdapter: Identifiable, Decodable, ObservableObject, Hashable{
   
 }
 
+/// Devices of edelkrone
+enum EdelkroneDevice : String, Decodable{
+  case slideModule
+  case slideModuleV3
+  case sliderOnePro
+  case sliderOne
+  case dollyPlus
+  case dollyOne
+  case dollyPlusPro
+  case panPro
+  case headOne
+  case headPlus
+  case headPlusPro
+  case headPlusV2
+  case headPlusProV2
+  case focusPlusPro
+  case jibOne
+  case unknown
+  
+  func toString() -> String {
+    switch self {
+    case .slideModule:
+      return "Slide Module v2"
+    case .slideModuleV3:
+      return "Slide Module v3"
+    case .sliderOnePro:
+      return "SliderONE PRO v2"
+    case .sliderOne:
+      return "SliderONE v2"
+    case .dollyPlus:
+      return "DollyPLUS"
+    case .dollyOne:
+      return "DollyONE"
+    case .dollyPlusPro:
+      return "DollyPLUS PRO"
+    case .panPro:
+      return "PanPRO"
+    case .headOne:
+      return "HeadONE"
+    case .headPlus:
+      return "HeadPLUS v1"
+    case .headPlusPro:
+      return "HeadPLUS v1 PRO"
+    case .headPlusV2:
+      return "HeadPLUS v2"
+    case .headPlusProV2:
+      return "HeadPLUS v2 PRO"
+    case .focusPlusPro:
+      return "FocusPLUS PRO"
+    case .jibOne:
+      return "JibONE"
+    case .unknown:
+      return "Unknown"
+      
+      
+    }
+    
+  }
+}
 
 
 // MARK: - MotionControlSystem
@@ -130,26 +189,24 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject, Hashable{
   
   @Published var useInPairing: Bool
   
-  // MARK: - Identifiable
   var id:String{
-     get {
-       return macAddress
-     }
+    get {
+      return macAddress
+    }
   }
   
-  // MARK: Hashable
+  
   func hash(into hasher: inout Hasher) {
     hasher.combine(macAddress)
   }
   
-  // MARK: Equatable
   static func == (lhs: MotionControlSystem, rhs: MotionControlSystem) -> Bool {
     return lhs.macAddress == rhs.macAddress
   }
   // List of String indication the MCS is a Group Master
   static let masterIndicator = ["panOnly", "tiltOnly", "panTilt", "slideOnly", "dollyOnly", "panAndSlide", "tiltAndSlide", "panAndDolly",
-                         "tiltAndDolly", "panTiltAndSlide", "panTiltAndDolly", "panAndJib", "tiltAndJib", "panTiltAndJib",
-                         "jibOnly", "panAndJibPlus", "tiltAndJibPlus", "panTiltAndJibPlus", "jibPlusOnly", "followFocusOnly"]
+                                "tiltAndDolly", "panTiltAndSlide", "panTiltAndDolly", "panAndJib", "tiltAndJib", "panTiltAndJib",
+                                "jibOnly", "panAndJibPlus", "tiltAndJibPlus", "panTiltAndJibPlus", "jibPlusOnly", "followFocusOnly"]
   
   static let memberIndicatores = ["groupMember"]
   
@@ -219,25 +276,8 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject, Hashable{
    - jibOne			JibONE
    */
   
-  enum edelkroneDevices : String, Decodable{
-    case slideModule
-    case slideModuleV3
-    case sliderOnePro
-    case sliderOne
-    case dollyPlus
-    case dollyOne
-    case dollyPlusPro
-    case panPro
-    case headOne
-    case headPlus
-    case headPlusPro
-    case headPlusV2
-    case headPlusProV2
-    case focusPlusPro
-    case jibOne					
-  }
-   
-  @Published var deviceType: edelkroneDevices
+  
+  @Published var deviceType: EdelkroneDevice
   
   init(){
     groupID = 65535
@@ -258,16 +298,16 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject, Hashable{
     let container = try decoder.container(keyedBy: CodingKeys.self)
     groupID = try container.decode(Int.self, forKey: .groupID)
     linkPairigingActive = ((try? container.decode(Bool.self, forKey: .linkPairigingActive)) != nil)
-
+    
     k = (try? container.decode(Int.self, forKey: .k)) ?? 0
     isTilted = k==1
-
+    
     macAddress = try container.decode(String.self, forKey: .macAddress)
     rssi = try container.decode(Int.self, forKey: .rssi)
     isFirmewareAvailabe = try container.decode(Bool.self, forKey: .isFirmewareAvailabe)
     isRadioUpdateAvailable = try container.decode(Bool.self, forKey: .isRadioUpdateAvailable)
     setup = try container.decode(String.self, forKey: .setup)
-    deviceType = try container.decode(edelkroneDevices.self, forKey: .deviceType)
+    deviceType = try container.decode(EdelkroneDevice.self, forKey: .deviceType)
     useInPairing = false
   }
   
@@ -285,23 +325,13 @@ class MotionControlSystem: Decodable, Identifiable, ObservableObject, Hashable{
   
 }
 
-protocol ApiResult: Decodable{
-  var result: String{get}
-  var message:String?{get}
-}
-
-struct ResultArrayWrapper<T: Decodable>: Decodable,ApiResult{
-  let data: [T]?
-  let result: String
-  let message: String?
-}
 
 // MARK: - PairingGroup
 class PairingGroup: Identifiable,ObservableObject, Hashable{
-
+  
   @Published var groupedControlSystems:[MotionControlSystem] = []
   @Published var groupID : Int = .noGroup // the default nogroup marker
-
+  
   @Published var groupMaster: MotionControlSystem?
   
   init(groupID: Int){
@@ -369,9 +399,156 @@ class PairingGroup: Identifiable,ObservableObject, Hashable{
   }
 }
 
+// MARK: - Paired MCS Descriptions
+
+enum AxelID:String, Decodable{
+  case headPan, headTilt, slide, focus, jibPlusPan, jibPlusTilt
+  
+  func toString() -> String{
+    switch self {
+    case .headPan:
+      return "Pan"
+    case .headTilt:
+      return "Tilt"
+    case .slide:
+      return "Slide"
+    case .focus:
+      return "Focus"
+    case .jibPlusPan:
+      return "JibPan"
+    case .jibPlusTilt:
+      return "JibTilt"
+    }
+  }
+}
+
+class AxelStatus : AxelDescription, Hashable, Equatable, Identifiable, ObservableObject {
+  var id: AxelID{
+    get{
+      return axelName
+    }
+  }
+  
+  @Published var axelName: AxelID
+  @Published var device:EdelkroneDevice
+  
+  @Published var calibrated:Bool
+  @Published var position: Double
+  @Published var batteryLevel: Double
+  
+  static func == (lhs:AxelStatus, rhs:AxelStatus) -> Bool{
+    return lhs.axelName == rhs.axelName
+  }
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(axelName)
+  }
+  init(from: PeriodicStatus, forName:AxelID){
+    axelName = forName
+    device = from.deviceFor(name:forName)
+    position = from.positionFor(name:forName)
+    calibrated = from.calibrationStateFor(name:forName)
+    batteryLevel = from.batteryLevelFor(name: forName)
+  }
+  
+  func update(from: PeriodicStatus){
+    device = from.deviceFor(name:axelName)
+    position = from.positionFor(name:axelName)
+    calibrated = from.calibrationStateFor(name: axelName)
+    batteryLevel = from.batteryLevelFor(name: axelName)
+  }
+}
+
+class MotionControlStatus: ObservableObject {
+  @Published var axelStatus:[AxelID : AxelStatus] = [:]
+  
+  @Published var keyposeLoopActive:Bool = false
+  @Published var keyposeTargetIndex: Int = 0
+  @Published var keyposeStartIndex: Int = -1
+  @Published var keyposeMotionProgress: Double = 1.0
+  @Published var keyposeMotionDuration: Double = 0.0
+  
+  static func &= (lhs:MotionControlStatus, rhs:PeriodicStatus){
+    lhs.objectWillChange.send()
+    if lhs.keyposeLoopActive != rhs.keyposeLoopActive{
+      lhs.keyposeLoopActive = rhs.keyposeLoopActive
+    }
+    if lhs.keyposeTargetIndex != rhs.keyposeMotionAimIndex {
+      lhs.keyposeTargetIndex = rhs.keyposeMotionAimIndex
+    }
+    if lhs.keyposeStartIndex != rhs.keyposeMotionStartIndex{
+      lhs.keyposeStartIndex = rhs.keyposeMotionStartIndex
+    }
+    if lhs.keyposeMotionProgress != rhs.plannedMotionProgress{
+      lhs.keyposeMotionProgress = rhs.plannedMotionProgress
+    }
+    if lhs.keyposeMotionDuration != rhs.plannedMotionDuration{
+      lhs.keyposeMotionDuration = rhs.plannedMotionDuration
+    }
+    
+    // now update or create entries into axelStatus
+    for index in 0..<rhs.supportedAxes.count {
+      let axel = rhs.supportedAxes[index]
+      let name = axel.axelName
+      var q:AxelStatus
+      if lhs.axelStatus.keys.contains(name) {
+        q = lhs.axelStatus[name]!
+        q.update(from: rhs)
+        
+      }else{
+        q = AxelStatus(from: rhs, forName: name)
+        lhs.axelStatus[name]  = q
+      }
+    }
+  }
+  
+  init(){
+    let t = PeriodicStatus()
+    self &= t
+  }
+  
+  var hasTilt:Bool {
+    get{
+      return axelStatus.keys.contains(.headTilt) || axelStatus.keys.contains(.jibPlusTilt)
+    }
+  }
+  
+  var hasPan:Bool {
+    get{
+      return  axelStatus.keys.contains(.headPan) || axelStatus.keys.contains(.jibPlusPan)
+    }
+  }
+  
+  var hasSlide:Bool {
+    get {
+      return axelStatus.keys.contains(.slide)
+    }
+  }
+  var hasFocus:Bool {
+    get {
+      return axelStatus.keys.contains(.focus)
+    }
+  }
+}
+
+
+
 
 // MARK: - Return Results
+
+protocol ApiResult: Decodable{
+  var result: String{get}
+  var message:String?{get}
+}
+
+struct ResultArrayWrapper<T: Decodable>: Decodable,ApiResult{
+  let data: [T]?
+  let result: String
+  let message: String?
+}
+
+
 // MARK: Default Returns
+
 struct DefaultReturns: Decodable,ApiResult{
   var result:String
   var message:String?
@@ -386,7 +563,7 @@ struct PairingStatus:Decodable{
   enum pairingState:String,Decodable{
     case idle,connecting,connectionOk,problem
   }
-	var lastPairError: String
+  var lastPairError: String
   var pairState: pairingState
   
   enum CodingKeys:String, CodingKey{
@@ -400,36 +577,40 @@ struct PairingStatusReturn:Decodable, ApiResult{
   var result: String
   var message: String?
   let status: PairingStatus?
-
+  
   enum CodingKeys:String, CodingKey{
     case result, message,status="data"
   }
 }
 
-struct AxisDescription:Decodable, Hashable, Equatable, Identifiable{
-  var id: ObjectIdentifier = ObjectIdentifier(AxisDescription.self)
+
+protocol AxelDescription {
+  var axelName: AxelID { get }
+  var device: EdelkroneDevice { get }
   
-  enum axisName:String, Decodable{
-    case headPan, headTilt, slide, focus, jibPlusPan, jibPlusTilt
-  }
-  let axis: axisName
-  let device: MotionControlSystem.edelkroneDevices
+}
+
+struct AxelIdentifier:AxelDescription, Decodable, Hashable, Equatable, Identifiable{
+  var id: ObjectIdentifier = ObjectIdentifier(AxelIdentifier.self)
+  
+  let axelName: AxelID
+  let device: EdelkroneDevice
   enum CodingKeys: String, CodingKey{
-    case axis,device
+    case axelName = "axis",device
   }
   func hash(into hasher: inout Hasher) {
-    hasher.combine(axis)
+    hasher.combine(axelName)
   }
   
-  static func == (lhs: AxisDescription, rhs: AxisDescription) -> Bool {
-    return lhs.axis == rhs.axis
+  static func == (lhs: AxelIdentifier, rhs: AxelIdentifier) -> Bool {
+    return lhs.axelName == rhs.axelName
   }
 }
 
 struct BundledDeviceInfo:Decodable, Equatable{
   let batteryLevel:Double
   let isTilted:Bool?
-  let device:MotionControlSystem.edelkroneDevices
+  let device:EdelkroneDevice
   enum CodingKeys:String,CodingKey{
     case batteryLevel, isTilted, device="type"
   }
@@ -438,26 +619,28 @@ struct BundledDeviceInfo:Decodable, Equatable{
   }
 }
 
-class PeriodicStatus: Decodable, ObservableObject{
-  enum motionState:String, Decodable{
-    case idle, keyposeMove, realTimeMove, focusCalibration, sliderCalibration, joystickMove, unsupportedActivity
-  }
-  @Published var calibratedAxes:[AxisDescription] = []
-  @Published var deviceInfo:[BundledDeviceInfo] = []
-  @Published var deviceInfoReady:Bool = false
+enum MotionState:String, Decodable{
+  case idle, keyposeMove, realTimeMove, focusCalibration, sliderCalibration, joystickMove, unsupportedActivity
+}
+
+
+class PeriodicStatus: Decodable{
+  var calibratedAxes:[AxelIdentifier] = []
+  var deviceInfo:[BundledDeviceInfo] = []
+  var deviceInfoReady:Bool = false
   
-  @Published var keyposeLoopActive:Bool = false
-  @Published var keyposeMotionAimIndex: Int = -1
-  @Published var keyposeMotionStartIndex: Int = -1
-  @Published var keyposeSlotsFilled:[Bool] = []
+  var keyposeLoopActive:Bool = false
+  var keyposeMotionAimIndex: Int = -1
+  var keyposeMotionStartIndex: Int = -1
+  var keyposeSlotsFilled:[Bool] = []
   //
-  @Published var plannedMotionProgress: Double = 0.0
-  @Published var plannedMotionDuration: Double = 0.0
-  @Published var readings:[AxisDescription.axisName:Double] = [:]
+  var plannedMotionProgress: Double = 0.0
+  var plannedMotionDuration: Double = 0.0
+  var readings:[AxelID:Double] = [:]
   //
-  @Published var realTimeSupportedAxes: [AxisDescription] = []
-  @Published var state:motionState = .idle
-  @Published var supportedAxes:[AxisDescription] = []
+  var realTimeSupportedAxes: [AxelIdentifier] = []
+  var state:MotionState = .idle
+  var supportedAxes:[AxelIdentifier] = []
   //
   var timestampDevice: Int64
   var timestampEpoch: Int64
@@ -469,18 +652,95 @@ class PeriodicStatus: Decodable, ObservableObject{
     case keyposeLoopActive, keyposeMotionAimIndex, keyposeMotionStartIndex, keyposeSlotsFilled
     case plannedMotionProgress, plannedMotionDuration, readings
     case realTimeSupportedAxes, state, supportedAxes
-        case timestampDevice, timestampEpoch
+    case timestampDevice, timestampEpoch
     
   }
   
   init(){
+    let json="""
+    {
+      "data": {
+        "calibratedAxes": [
+          {
+            "axis": "slide",
+            "device": "sliderOne"
+          }
+        ],
+        "deviceInfo": [
+          {
+            "batteryLevel": 0.1,
+            "isTilted": false,
+            "type": "headOne"
+          },
+          {
+            "batteryLevel": 0.2,
+            "isTilted": true,
+            "type": "headOne"
+          },
+          {
+            "batteryLevel": 0.5,
+            "type": "sliderOne"
+          }
+        ],
+        "deviceInfoEverythingReady": true,
+        "keyposeLoopActive": false,
+        "keyposeMotionAimIndex": 0,
+        "keyposeMotionStartIndex": 0,
+        "keyposeSlotsFilled": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "plannedMotionDuration": 0.0,
+        "plannedMotionProgress": 1.0,
+        "readings": {
+          "headPan": 90.01300048828125,
+          "headTilt": 89.98899841308594,
+          "slide": 0.0
+        },
+        "realTimeSupportedAxes": [
+
+        ],
+        "state": "idle",
+        "supportedAxes": [
+          {
+            "axis": "headPan",
+            "device": "headOne"
+          },
+          {
+            "axis": "headTilt",
+            "device": "headOne"
+          },
+          {
+            "axis": "slide",
+            "device": "sliderOne"
+          }
+        ],
+        "timestampDevice": 3631580,
+        "timestampEpoch": 1648073281431
+      },
+      "result": "ok"
+    }
+    """
+    let data = json.data(using: .utf8) ?? Data()
+    
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .secondsSince1970
+    
+    
+    let returns = try? decoder.decode(PeriodicStatusReturn.self, from: data)
     timestampDevice = 0
     timestampEpoch = 0
+    
+    self &= returns!.status
   }
   
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    calibratedAxes = try container.decode([AxisDescription].self, forKey: .calibratedAxes)
+    calibratedAxes = try container.decode([AxelIdentifier].self, forKey: .calibratedAxes)
     deviceInfo = try container.decode([BundledDeviceInfo].self, forKey: .deviceInfo)
     deviceInfoReady = try container.decode(Bool.self, forKey: .deviceInfoReady)
     
@@ -493,21 +753,60 @@ class PeriodicStatus: Decodable, ObservableObject{
     plannedMotionProgress = try container.decode(Double.self, forKey: .plannedMotionProgress)
     
     let tempReadings = try container.decode([String:Double].self, forKey: .readings)
-    var qreadings:[AxisDescription.axisName:Double] = [:]
+    var qreadings:[AxelID:Double] = [:]
     for k in tempReadings.keys{
-      let q:AxisDescription.axisName = AxisDescription.axisName(rawValue:k) ?? .headPan
+      let q:AxelID = AxelID(rawValue:k) ?? .headPan
       qreadings[q] = tempReadings[k]
     }
     readings = qreadings
     
-    realTimeSupportedAxes = try container.decode([AxisDescription].self, forKey: .realTimeSupportedAxes)
+    realTimeSupportedAxes = try container.decode([AxelIdentifier].self, forKey: .realTimeSupportedAxes)
     
-    state = try container.decode(motionState.self, forKey: .state)
+    state = try container.decode(MotionState.self, forKey: .state)
     
-    supportedAxes = try container.decode([AxisDescription].self, forKey: .supportedAxes)
+    supportedAxes = try container.decode([AxelIdentifier].self, forKey: .supportedAxes)
     timestampEpoch = try container.decode(Int64.self, forKey: .timestampEpoch)
     timestampDevice = try container.decode(Int64.self, forKey: .timestampDevice)
   }
+  
+  /// some access methods
+  func deviceFor(name: AxelID) -> EdelkroneDevice{
+    for axel in supportedAxes {
+      if axel.axelName == name{
+        return axel.device
+      }
+    }
+    return .unknown
+  }
+  
+  func positionFor(name: AxelID) -> Double{
+    if readings.keys.contains(name) {
+      return readings[name]!
+    }
+    return 0.0
+  }
+  func calibrationStateFor(name:AxelID) -> Bool {
+    if deviceInfoReady {
+      for axel in calibratedAxes {
+        if axel.axelName == name {
+          return true
+        }
+      }
+    }
+    return false
+  }
+  
+  func batteryLevelFor(name: AxelID) -> Double {
+    if deviceInfoReady {
+      for k in 0..<supportedAxes.count {
+        if supportedAxes[k].axelName == name {
+          return deviceInfo[k].batteryLevel
+        }
+      }
+    }
+    return 0.0
+  }
+  
   
   static func &= (lhs:PeriodicStatus,rhs:PeriodicStatus){
     if lhs.calibratedAxes != rhs.calibratedAxes{
@@ -559,12 +858,12 @@ class PeriodicStatus: Decodable, ObservableObject{
       lhs.supportedAxes = rhs.supportedAxes
     }
     
-//    if lhs.timestampEpoch != rhs.timestampEpoch{
-//      lhs.timestampEpoch = rhs.timestampEpoch
-//    }
-//    if lhs.timestampDevice != rhs.timestampDevice{
-//      lhs.timestampDevice = rhs.timestampDevice
-//    }
+    //    if lhs.timestampEpoch != rhs.timestampEpoch{
+    //      lhs.timestampEpoch = rhs.timestampEpoch
+    //    }
+    //    if lhs.timestampDevice != rhs.timestampDevice{
+    //      lhs.timestampDevice = rhs.timestampDevice
+    //    }
   }
 }
 

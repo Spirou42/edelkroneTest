@@ -66,7 +66,14 @@ struct LinkAdapterView: View{
       .fixedSize(horizontal: true, vertical: true)
       
       HStack(alignment: .center, spacing: 8){
-        Button( action: adapter.isConnected ? {edelkroneAPI.shared.disconnect()} : {edelkroneAPI.shared.wirelessPairingScanStart(adapter: adapter)}){
+        Button( action: adapter.isConnected ? {edelkroneAPI.shared.disconnect()} : {
+          if adapter.isPaired {
+            edelkroneAPI.shared.attachConnectedAdapter(adapterID: adapter.id)
+          }else{
+            edelkroneAPI.shared.wirelessPairingScanStart(adapter: adapter)
+          }
+          
+        }){
           
           Text(adapter.isConnected ? "Disconnect":"Connect")
             .font(.applicationFont(.title2))
