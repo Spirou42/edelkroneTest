@@ -1,9 +1,10 @@
-//
-//  MotionControlView.swift
-//  edelkroneTest
-//
-//  Created by Carsten Müller on 23.03.22.
-//
+/**
+ MotionControlView.swift
+ edelkroneTest
+ 
+ Created by Carsten Müller on 23.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
+ */
 
 import SwiftUI
 
@@ -21,15 +22,15 @@ struct MCSStatus:View{
   var body: some View {
     LazyVGrid(columns: columns, alignment:.trailing, spacing:0.5) {
       ZStack(alignment: .center){
-      	Rectangle().fill(Color.lightGray)
+        Rectangle().fill(Color.lightGray)
         Text("Axis").font(.applicationFont(.body).weight(.bold)).padding(2)
       }
       ZStack{
-      	Rectangle().fill(Color.lightGray)
-        Text("Device").font(.applicationFont(.body).weight(.bold)).padding(2)
+        Rectangle().fill(Color.lightGray)
+        Text("Position").font(.applicationFont(.body).weight(.bold)).padding(2)
       }
       ZStack{
-      	Rectangle().fill(Color.lightGray)
+        Rectangle().fill(Color.lightGray)
         Text("Battery").font(.applicationFont(.body).weight(.bold)).padding(2)
       }
       
@@ -40,7 +41,8 @@ struct MCSStatus:View{
         }
         ZStack(alignment: .center){
           Rectangle().fill(Color.lightLightGray)
-          Text(mcsState.axelStatus[c]!.device.rawValue).padding(2)
+          Text(String(format:"%03.03f",mcsState.axelStatus[c]!.position)).monospacedDigit()
+            .padding(2)
         }
         ZStack(alignment: .center){
           Rectangle().fill(Color.lightLightGray)
@@ -48,10 +50,10 @@ struct MCSStatus:View{
         }
       }
     }.frame(minWidth:200,idealWidth:240, maxWidth:300, maxHeight:.infinity)
-    .fixedSize(horizontal: true, vertical: true)
-    .border(.orange, width: 2, edges: Edge.allCases)
-    .background(.gray)
-
+      .fixedSize(horizontal: true, vertical: true)
+      .border(.orange, width: 2, edges: Edge.allCases)
+      .background(.gray)
+    
   }
   
 }
@@ -64,15 +66,18 @@ struct MotionControlInterface: View {
                              labelColor: .white)
   
   
+  
+  
   var body: some View {
     HStack(alignment:.top){
       HStack{
         if motionControlStatus.hasPan || motionControlStatus.hasTilt{
-          Joystick(freedoms:[ motionControlStatus.hasPan ? .horizontal : .none , motionControlStatus.hasTilt ? .vertical : .none],
+          Joystick(axelObjects: motionControlStatus.panTiltObjects(),
+                   freedoms:[ motionControlStatus.hasPan ? .horizontal : .none , motionControlStatus.hasTilt ? .vertical : .none,],
                    colorStyle:colorized,
                    thumbRadius:  42,
                    padRadius: 100,
-                   action:{(joyStickState, stickPosition) in}){
+                   action: nil){
             VStack{
               if motionControlStatus.hasPan{
                 Text("Pan").font(.applicationFont(.title2)).foregroundColor(.white)
@@ -84,11 +89,12 @@ struct MotionControlInterface: View {
           }
         }
         if motionControlStatus.hasSlide {
-          Joystick(freedoms:[.horizontal],
+          Joystick(axelObjects: motionControlStatus.slideObjects(),
+                   freedoms:[.horizontal],
                    colorStyle:colorized,
                    thumbRadius:42,
                    padRadius: 100,
-                   action:{(joyStickState, stickPosition) in}){
+                   action: nil){
             Text("Slide").font(.applicationFont(.title2)).foregroundColor(.white)
           }
         }

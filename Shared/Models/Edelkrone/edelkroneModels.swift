@@ -5,6 +5,7 @@
  Containing basic models for api results
  
  Created by Carsten Müller on 07.03.2022.
+ Copyright © 2022 Carsten Müller. All rights reserved.
  */
 
 import Foundation
@@ -118,6 +119,21 @@ enum EdelkroneDevice : String, Decodable{
   case focusPlusPro
   case jibOne
   case unknown
+  
+  var canCalibrate:Bool {
+    get {
+      var result:Bool = true
+      switch self {
+      case .sliderOne:     	fallthrough
+      case .sliderOnePro:  	fallthrough
+      case .dollyOne:				fallthrough
+      case .dollyPlus:			fallthrough
+      case .dollyPlusPro:		result = false
+      default:               result = true
+      }
+      return result
+    }
+  }
   
   func toString() -> String {
     switch self {
@@ -333,6 +349,7 @@ class PairingGroup: Identifiable,ObservableObject, Hashable{
   @Published var groupID : Int = .noGroup // the default nogroup marker
   
   @Published var groupMaster: MotionControlSystem?
+  @Published var isConnected:Bool = false
   
   init(groupID: Int){
     self.groupID = groupID
@@ -399,7 +416,7 @@ class PairingGroup: Identifiable,ObservableObject, Hashable{
   }
 }
 
-// MARK: - Paired MCS Descriptions
+// MARK: - Paired Motion Control System Descriptions
 
 enum AxelID:String, Decodable{
   case headPan, headTilt, slide, focus, jibPlusPan, jibPlusTilt
@@ -422,7 +439,10 @@ enum AxelID:String, Decodable{
   }
 }
 
-class AxelStatus : AxelDescription, Hashable, Equatable, Identifiable, ObservableObject {
+
+
+class AxelStatus : AxelDescription, Hashable, Equatable, Identifiable, ObservableObject, JoystickControlledAxel {
+  
   var id: AxelID{
     get{
       return axelName
@@ -433,15 +453,28 @@ class AxelStatus : AxelDescription, Hashable, Equatable, Identifiable, Observabl
   @Published var device:EdelkroneDevice
   
   @Published var calibrated:Bool
+  var needsCalibration:Bool {
+    get {
+      self.objectWillChange.send()
+      return  (self.calibrated == false) && device.canCalibrate
+    }
+  }
   @Published var position: Double
   @Published var batteryLevel: Double
+  
+  var shouldMove: Bool = false
+  var isLastMove: Bool = true
+  var moveValue: Double = 0.0
+  
   
   static func == (lhs:AxelStatus, rhs:AxelStatus) -> Bool{
     return lhs.axelName == rhs.axelName
   }
+  
   func hash(into hasher: inout Hasher) {
     hasher.combine(axelName)
   }
+  
   init(from: PeriodicStatus, forName:AxelID){
     axelName = forName
     device = from.deviceFor(name:forName)
@@ -457,7 +490,7 @@ class AxelStatus : AxelDescription, Hashable, Equatable, Identifiable, Observabl
     batteryLevel = from.batteryLevelFor(name: axelName)
   }
 }
-
+// MARK: - MotionControlStatus
 class MotionControlStatus: ObservableObject {
   @Published var axelStatus:[AxelID : AxelStatus] = [:]
   
@@ -527,6 +560,36 @@ class MotionControlStatus: ObservableObject {
     get {
       return axelStatus.keys.contains(.focus)
     }
+  }
+  func panTiltObjects() -> [DegreeOfFreedom:JoystickControlledAxel] {
+    var result:[DegreeOfFreedom:JoystickControlledAxel] = [:]
+    
+    if  hasPan {
+      result[.horizontal]=axelStatus[.headPan]
+    }
+    if hasTilt {
+      result[.vertical]=axelStatus[.headTilt]
+    }
+    return result
+  }
+  
+  func slideObjects() -> [DegreeOfFreedom:JoystickControlledAxel] {
+    var result:[DegreeOfFreedom:JoystickControlledAxel] = [:]
+    
+    if hasSlide {
+      result[.horizontal]=axelStatus[.slide]
+    }
+    return result
+  }
+  
+  func joystickControlled() -> [AxelStatus] {
+    var result:[AxelStatus] = []
+    for (_, value) in axelStatus {
+      if value.shouldMove{
+        result.append(value)
+      }
+    }
+    return result
   }
 }
 
@@ -622,7 +685,7 @@ struct BundledDeviceInfo:Decodable, Equatable{
 enum MotionState:String, Decodable{
   case idle, keyposeMove, realTimeMove, focusCalibration, sliderCalibration, joystickMove, unsupportedActivity
 }
-
+// MARK: - Periodic Status
 
 class PeriodicStatus: Decodable{
   var calibratedAxes:[AxelIdentifier] = []
@@ -702,7 +765,7 @@ class PeriodicStatus: Decodable{
           "slide": 0.0
         },
         "realTimeSupportedAxes": [
-
+    
         ],
         "state": "idle",
         "supportedAxes": [

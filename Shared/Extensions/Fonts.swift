@@ -140,7 +140,7 @@ extension Font {
         returnFont = returnFont.weight(resultFontWeight)
         return returnFont
       }else{
-      	return Font.custom(fontName, size: fontSize)
+        return Font.custom(fontName, size: fontSize)
       }
     }
     return self.body

@@ -1,9 +1,10 @@
-//
-//  SwiftUIView.swift
-//  edelkroneTest
-//
-//  Created by Carsten Müller on 15.03.22.
-//
+/**
+ SwiftUIView.swift
+ edelkroneTest
+ 
+ Created by Carsten Müller on 15.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
+ */
 
 import SwiftUI
 
@@ -11,7 +12,7 @@ struct PairingGroupView: View {
   @ObservedObject var pairingGroup: PairingGroup
   let buttonSize:CGFloat = Font.applicationFontSize(.title)
   let buttonPadding:CGFloat = 5.0
-
+  
   var body: some View {
     HStack(spacing:30){
       VStack(alignment: .leading, spacing: 8){
@@ -47,32 +48,35 @@ struct PairingGroupView: View {
           .font(.applicationFont(.title))
           .frame(maxWidth:.infinity, alignment: .center)
       }
-      .buttonStyle(ColoredGlyphButtonStyle(buttonColor:   Color.green,
-                                           cornerRadius: 10,
-                                           shadowRadius: 0,
-                                           glyph:Text("\u{22f2}")
-                                            .font(.custom("Symbols-Regular", size: buttonSize+10)),
-                                           glyphPadding: 25,
-                                           width: 200,
-                                           height: 60
-                                          ))
+      .buttonStyle(GradientGlyphButtonStyle(buttonColor:   Color.green,
+                                            cornerRadius: 10,
+                                            shadowRadius: 0,
+                                            glyph:Text("\u{22f2}")
+        .font(.custom("Symbols-Regular", size: buttonSize+10)),
+                                            glyphPadding: 25,
+                                            width: 200,
+                                            height: 60,
+                                            borderSize: 8.0
+                                           ))
       Button( action: {edelkroneAPI.shared.disconnect()}){
         Text("Unpair")
           .font(.applicationFont(.title))
           .frame(maxWidth:.infinity, alignment: .center)
       }
-      .buttonStyle(ColoredGlyphButtonStyle(buttonColor:   Color("ButtonRed"),
-                                           cornerRadius: 10,
-                                           shadowRadius: 0,
-                                           glyph:Text("\u{22f4}")
-                                            .font(.custom("Symbols-Regular", size: buttonSize+10)),
-                                           glyphPadding: 25,
-                                           width: 200,
-                                           height: 60
-                                          ))
-
-
+      .buttonStyle(GradientGlyphButtonStyle(buttonColor:   Color("ButtonRed"),
+                                            cornerRadius: 10,
+                                            shadowRadius: 0,
+                                            glyph:Text("\u{22f4}")
+        .font(.custom("Symbols-Regular", size: buttonSize+10)),
+                                            glyphPadding: 25,
+                                            width: 200,
+                                            height: 60,
+                                            borderSize: 8.0
+                                           ))
+      
+      
     }// HStack
+    .background(Rectangle().fill(Color.lightWhite))
   }
 }
 
@@ -82,7 +86,7 @@ struct PairingGroupList:View{
     VStack(alignment: .leading, spacing: 8){
       Text("Grouped Motion Control Systems:")
         .font(.applicationFont(.title2))
-        //.padding([.bottom],8)
+      //.padding([.bottom],8)
       if(pairedGroups.isEmpty){
         VStack{
           Text("No Groups found")
@@ -90,16 +94,17 @@ struct PairingGroupList:View{
         }
       }else{
         List{
-        	ForEach(pairedGroups) { group in
-          	PairingGroupView(pairingGroup: group)
-          	Divider()
-           }
+          ForEach(pairedGroups) { group in
+            PairingGroupView(pairingGroup: group)
+            Divider()
+          }
         }.listStyle(.bordered)
-        .frame(minWidth: 600, idealWidth:680, maxWidth:700)
-        .fixedSize(horizontal: true, vertical: false)
-
+          .frame(minWidth: 600, idealWidth:680, maxWidth:700)
+          .fixedSize(horizontal: true, vertical: false)
+          .colorMultiply(.darkWhite)
+        
       }
-    }
+    }.background(Rectangle().fill(Color.lightWhite))
   }
 }
 

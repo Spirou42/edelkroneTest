@@ -1,9 +1,10 @@
-//
-//  edelkroneStatus.swift
-//  edelkroneTest
-//
-//  Created by Carsten Müller on 09.03.22.
-//
+/**
+ edelkroneStatus.swift
+ edelkroneTest
+ 
+ Created by Carsten Müller on 09.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
+ */
 
 import SwiftUI
 
@@ -46,7 +47,7 @@ struct edelkroneStatus_View: View {
         Text("Link:")
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
-        Text(edelkrone.connectedAdapterID).monospacedDigit().frame(width:92.0)
+        Text(edelkrone.connectedAdapterID).monospacedDigit().frame(width:100.0)
           .font(.applicationFont(.body))
           .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
           .inset()
@@ -57,7 +58,7 @@ struct edelkroneStatus_View: View {
         Text("Reset").font(.applicationFont(.body))
       }.padding([.leading],50)
     }
-      
+    
     
     
   }

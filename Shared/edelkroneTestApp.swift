@@ -1,9 +1,10 @@
-//
-//  edelkroneTestApp.swift
-//  Shared
-//
-//  Created by Carsten Müller on 02.03.22.
-//
+/**
+ edelkroneTestApp.swift
+ Shared
+ 
+ Created by Carsten Müller on 02.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
+ */
 
 import SwiftUI
 
@@ -30,18 +31,7 @@ class edelkroneTestApp: App {
     WindowGroup {
       ContentView()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-      
-//      Joystick(isDebug: true,
-//               enabled: false,
-//               freedoms: .all,
-//               colorStyle: edelkroneTestApp.colorized ,
-//               action: { (joyStickState, stickPosition) in  }){
-//        VStack{
-//          Text("Pan")
-//          Text("Tilt")
-//        }.font(.applicationFont(.title).weight(.heavy)).foregroundColor(.white)
-//      }
-      
+          
       
     }
     

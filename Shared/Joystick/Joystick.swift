@@ -8,6 +8,14 @@
 
 import SwiftUI
 
+/// Simple protocol to connect a Joystick to an external object. A Single Object can be attached to each axis of a JoyStick
+
+public protocol JoystickControlledAxel {
+  var shouldMove:Bool { get set }
+  var moveValue:Double { get set}
+  var isLastMove:Bool {get set}
+}
+
 /**
  The JoystickThumb is the smal circle moved by the user
  */
@@ -31,7 +39,7 @@ struct JoystickThumb<Label>: View where Label : View{
       label
     }
   }
-
+  
   init(diameter: CGFloat, outerRing: CGFloat = 15, thumbInnerGradient: Gradient, @ViewBuilder _ label: () ->Label){
     self.diameter = diameter
     self.outerRing = outerRing
@@ -207,7 +215,7 @@ struct AxisArrows : View {
 }
 
 
-public struct DegreeOfFreedom:OptionSet {
+public struct DegreeOfFreedom:OptionSet, Hashable {
   public let rawValue: Int
   public static let none:DegreeOfFreedom = []
   public static let horizontal = DegreeOfFreedom(rawValue: 1)
@@ -216,24 +224,43 @@ public struct DegreeOfFreedom:OptionSet {
   public init(rawValue:Int){
     self.rawValue = rawValue
   }
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(self.rawValue)
+  }
+  public func numberOfFreedoms() -> Int{
+    var result:Int = 0
+    if self.contains(.horizontal) {
+      result+=1
+    }
+    if self.contains(.vertical) {
+      result+=1
+    }
+    return result
+  }
 }
 
 /**
  The joystick view together with a simple gesture handler for drag gestures.
  Putting all the foremter component together into one view
  */
-public struct Joystick<Label>: View where Label : View{
+public struct Joystick<Label>: View where Label : View {
   var colorStyle: ColorStyle = ColorStyle()
   var isDebug = false
   var label:Label
-
+  
+  var axelObjects:[DegreeOfFreedom:JoystickControlledAxel] = [:]
+  
   var enabled:Bool = true
   @State private var joystickDirection: JoystickDirection = .center
   @State private var locationX: CGFloat = 0
   @State private var locationY: CGFloat = 0
   
+  @State private var disableHorizontal:Bool = false
+  @State private var disableVertical:Bool = false
   
-  public var action: ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)
+  
+  
+  public var action: ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)? = nil
   
   var freedoms: DegreeOfFreedom = .none
   
@@ -297,25 +324,25 @@ public struct Joystick<Label>: View where Label : View{
         let smallRingLimitCenter: CGFloat = self.padRadius - self.thumbRadius
         
         if (distance <= smallRingLimitCenter) {
-          if freedoms.contains(.horizontal){
+          if freedoms.contains(.horizontal) && (disableHorizontal == false){
             self.locationX = value.location.x
           }
-          if freedoms.contains(.vertical){
+          if freedoms.contains(.vertical) && (disableVertical == false){
             self.locationY = value.location.y
           }
         } else {
           let radian = self.origin.getRadian(pointOnCircle: value.location)
           let pointOnCircle = self.origin.getPointOnCircle(radius: smallRingLimitCenter, radian: radian)
-          if freedoms.contains(.horizontal){
+          if freedoms.contains(.horizontal) && (disableHorizontal == false){
             self.locationX = pointOnCircle.x
           }
-          if freedoms.contains(.vertical){
+          if freedoms.contains(.vertical) && (disableVertical == false){
             self.locationY = pointOnCircle.y
           }
         }
         
         self.joystickDirection = self.calcJoystickState()
-        self.action(self.joystickDirection,  self.stickPosition)
+        (self.action ?? self.defaultAction)(self.joystickDirection,  self.stickPosition)
       }
       .onEnded{ value in
         self.locationX = self.padDiameter/2
@@ -326,82 +353,116 @@ public struct Joystick<Label>: View where Label : View{
         
         self.joystickDirection = .center
         
-        self.action(self.joystickDirection,  self.stickPosition)
+        (self.action ?? self.defaultAction)(self.joystickDirection,  self.stickPosition)
+        self.stopMovement()
       }
   }
   
+  public func stopMovement() {
+    var verticalObject = axelObjects[.vertical]
+    var horizontalObject = axelObjects[.horizontal]
+    verticalObject?.isLastMove = true
+    horizontalObject?.isLastMove = true
+    
+  }
+  public func defaultAction(_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void {
+    var verticalObject = axelObjects[.vertical]
+    verticalObject?.shouldMove = true
+    verticalObject?.moveValue = stickPosition.y
+    verticalObject?.isLastMove = false
+    
+    var horizontalObject = axelObjects[.horizontal]
+    horizontalObject?.shouldMove = true
+    horizontalObject?.moveValue = stickPosition.x
+    horizontalObject?.isLastMove = false
+  }
   
   public init( isDebug: Bool = false,
                enabled:Bool = true,
+               axelObjects:[DegreeOfFreedom:JoystickControlledAxel] = [:],
                freedoms: DegreeOfFreedom = .all,
                colorStyle: ColorStyle = ColorStyle(),
                thumbRadius: CGFloat = 42,
                padRadius: CGFloat = 100,
-               action: @escaping ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void),
+               action: ((_ joyStickState: JoystickDirection, _ stickPosition: CGPoint) -> Void)? = nil ,
                @ViewBuilder label:() -> Label) {
     
     self.isDebug = isDebug
+    self.enabled = enabled
+    
+    self.axelObjects = axelObjects
+    self.freedoms = freedoms
+    
     self.colorStyle = colorStyle
     
     self.thumbRadius = thumbRadius
     self.padRadius = padRadius
     
     self.action = action
-    self.freedoms = freedoms
     self.label = label()
-    self.enabled = enabled
+    
   }
   
   
   public var body: some View {
     
-    VStack {
-      if isDebug {
-        VStack {
-          HStack(spacing: 3) {
-            Text(stickPosition.x.text()).font(.body).monospacedDigit()
-            Text(":").font(.body)
-            Text(stickPosition.y.text()).font(.body).monospacedDigit()
+      VStack(){
+        HStack(alignment: .center) {
+          if freedoms.numberOfFreedoms() == 2 {
+          Toggle(isOn: $disableVertical){
+          }
+          .toggleStyle(ColoredGlyphToggleButton(cornerRadius: 3,
+                                                offGlyph:Text("\u{2196}").font(.custom("Symbols-Regular", size: 45) ),
+                                                onGlyph: Text("\u{2197}").font(.custom("Symbols-Regular", size: 45) ),
+                                                glyphLeadingPadding: 0,
+                                                glyphTopPadding: 4,
+                                                width: 24,
+                                                height: 80
+                                               ))
           }
           
-        }.padding(5)
-      }
-      
-      HStack() {
-        ZStack {
-          JoystickPad(
-            backgroundGradient: self.colorStyle.backgroundGradient,
-            strokeColor: self.colorStyle.strokeColor,
-            diameter: padDiameter)
-          
-          .overlay(
-            ZStack{
-              if freedoms.contains(.vertical) {
-              	AxisArrows(direction: .vertical, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
+          ZStack {
+            JoystickPad(
+              backgroundGradient: self.colorStyle.backgroundGradient,
+              strokeColor: self.colorStyle.strokeColor,
+              diameter: padDiameter)
+            
+            .overlay(
+              ZStack{
+                if freedoms.contains(.vertical) && (disableVertical == false) {
+                  AxisArrows(direction: .vertical, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
+                }
+                if freedoms.contains(.horizontal) && (disableHorizontal == false){
+                  AxisArrows(direction: .horizontal, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
+                }
               }
-              if freedoms.contains(.horizontal){
-              	AxisArrows(direction: .horizontal, outerRadius: self.padRadius, innerRadius: self.thumbRadius, colorStyle: self.colorStyle)
-              }
+            ).gesture(dragGesture, including: self.enabled ? .all : .none)
+            
+            
+            JoystickThumb(diameter: self.thumbDiameter,
+                          thumbInnerGradient: self.colorStyle.thumbGradient){
+              self.label.foregroundColor(colorStyle.labelColor)
             }
-          ).gesture(dragGesture, including: self.enabled ? .all : .none)
-          
-
-          JoystickThumb(diameter: self.thumbDiameter,
-                        thumbInnerGradient: self.colorStyle.thumbGradient){
-            self.label.foregroundColor(colorStyle.labelColor)
+                          .offset(x: thumbLocationX, y: thumbLocationY)
+                          .allowsHitTesting(false)
           }
-          .offset(x: thumbLocationX, y: thumbLocationY)
-          .allowsHitTesting(false)
+        }
+        if freedoms.numberOfFreedoms() == 2 {
+        Toggle(isOn: $disableHorizontal){
+        }.padding([.leading],34)
+        .toggleStyle(ColoredGlyphToggleButton(cornerRadius: 3,
+                                              offGlyph:Text("\u{290F}").font(.custom("Symbols-Regular", size: 45) ),
+                                              onGlyph: Text("\u{290E}").font(.custom("Symbols-Regular", size: 45) ),
+                                              glyphLeadingPadding: 0,
+                                              glyphTopPadding: 4,
+                                              width: 80,
+                                              height: 24
+                                             ))
         }
         
+        
       }.opacity(self.enabled ? 1.0 : 0.5)
-      
-      if isDebug {
-        HStack(spacing: 15) {
-          Text(joystickDirection.rawValue).font(.body)
-        }
-      }
-    }.onAppear(){
+      .onAppear(){
       self.locationX = self.padRadius
       self.locationY = self.padRadius
     }.padding(10)
@@ -415,27 +476,27 @@ struct Joystick_Previews: PreviewProvider {
                                     backgroundGradient: Gradient(whithDark: Color("JoystickBackgroundDark")),
                                     strokeColor: Color("JoystickRing"),
                                     labelColor: .white
-                                    )
+  )
   
   static var previews: some View {
     GeometryReader { geometry in
       HStack(alignment: .center, spacing: 0) {
-        Joystick(isDebug: true, freedoms: [.horizontal], colorStyle: colorized, action: { (joyStickState, stickPosition) in})
+        Joystick(isDebug: true, freedoms: [.all], colorStyle: colorized, action: { (joyStickState, stickPosition) in})
         {
           Text("Pan")
         }
         
         //.frame(width: geometry.size.width-40, height: geometry.size.width-40)
         
-        Joystick(enabled:false, colorStyle: ColorStyle(),
+        Joystick(enabled:false, freedoms: .horizontal, colorStyle: ColorStyle(),
                  thumbRadius: 70, padRadius: 120, action: { (joyStickState, stickPosition)  in }){
           VStack{
-          	Text("Dummy")
+            Text("Dummy")
             Text("Dump")
           }.font(.applicationFont(.caption2).weight(.medium)).foregroundColor(.white)
           
         }
-      
+        
         //.frame(width: geometry.size.width-40, height: geometry.size.width-40)
       }
     }

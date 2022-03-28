@@ -5,6 +5,7 @@
  Collection of views dealing with link adapters from edelkrone
  
  Created by Carsten Müller on 08.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
  */
 
 import SwiftUI
@@ -48,7 +49,7 @@ struct LinkAdapterView: View{
             .padding([.bottom],2)
           Text(adapter.id).monospacedDigit()
             .font(.applicationFont(.title))
-
+          
         }
         Text((!adapter.isPaired ? "not-":"")+"paired")
           .font(.applicationFont(.title2))
@@ -79,11 +80,11 @@ struct LinkAdapterView: View{
             .font(.applicationFont(.title2))
             .frame(maxWidth:.infinity, alignment: .center)
         }
-        .buttonStyle(ColoredGlyphButtonStyle(buttonColor:  adapter.isConnected ? Color.green : Color.red,
-                                             shadowRadius: 0,
-                                             glyph:Text(adapter.isConnected ? "\u{22f3}":"\u{22f2}")
-                                              .font(.custom("Symbols-Regular", size: buttonSize+10))
-                                            ))
+        .buttonStyle(GradientGlyphButtonStyle(buttonColor:  adapter.isConnected ? Color.green : Color.red,
+                                              shadowRadius: 0,
+                                              glyph:Text(adapter.isConnected ? "\u{22f3}":"\u{22f2}")
+          .font(.custom("Symbols-Regular", size: buttonSize+10))
+                                             ))
         
         
         Button( action: {edelkroneAPI.shared.detect(adapter: adapter)}){
@@ -91,11 +92,11 @@ struct LinkAdapterView: View{
             .font(.applicationFont(.title2))
             .frame(maxWidth:.infinity, alignment: .center)
           
-        }.buttonStyle(ColoredGlyphButtonStyle(buttonColor: .mint,
-                                              shadowRadius: 0,
-                                              glyph:Text("\u{22f4}")
-                                                .font(.custom("Symbols-Regular", size: buttonSize+10))
-                                             ))
+        }.buttonStyle(GradientGlyphButtonStyle(buttonColor: .mint,
+                                               shadowRadius: 0,
+                                               glyph:Text("\u{22f4}")
+          .font(.custom("Symbols-Regular", size: buttonSize+10))
+                                              ))
       }
       .padding([.leading, .trailing],10)
       
@@ -113,7 +114,7 @@ struct LinkAdapterList: View {
     VStack(alignment: .leading, spacing: 8){
       Text("Detected Adapters:")
         .font(.applicationFont(.title2))
-        //.padding([.bottom],8)
+      //.padding([.bottom],8)
       if(linkAdapters.isEmpty){
         VStack{
           Text("None")
@@ -125,18 +126,19 @@ struct LinkAdapterList: View {
         List{
           ForEach(linkAdapters) { linkAdapter in
             LinkAdapterView(adapter: linkAdapter)
-             }
-
+          }
+          
         }.frame(maxWidth:.infinity, maxHeight: .infinity)
           .listRowInsets(EdgeInsets())
           .listStyle(.bordered)
-          .background(.pink)
+          .colorMultiply(.darkWhite)
         
       }
     }.padding([.top,.bottom],12)
       .padding([.trailing,.leading],8)
       .border(Color("Outline"), width: 2)
       .frame(minWidth: 680, idealWidth: 700, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
+      .background(Rectangle().fill(Color.lightWhite))
   }
 }
 

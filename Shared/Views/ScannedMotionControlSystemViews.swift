@@ -2,7 +2,9 @@
  MotionControlSystemViews.swift
  edelkroneTest
  collection of view dealing with the display of edelkrone motion control systems
+ 
  Created by Carsten Müller on 11.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
  */
 
 import SwiftUI
@@ -45,13 +47,13 @@ struct ScannedMotionControlSystem_View: View, Identifiable {
       }.frame(maxWidth: .infinity, alignment: .leading)
       
       Toggle(isOn: $mcs.useInPairing){ }
-      .toggleStyle(ColoredToggleStyle(label: "",
-                                      onColor: .green,
-                                      offColor: .red,
-                                      thumbColor: .white))
-      .onChange(of: mcs.useInPairing, perform: { value in
-        edelkroneAPI.shared.motionControlSystemsDict[mcs.macAddress]?.useInPairing = value
-      })
+        .toggleStyle(ColoredToggleSwitch(label: "",
+                                         onColor: Color("JoystickThumbDark"),
+                                         offColor: Color("ButtonRed"),
+                                         thumbColor: .white))
+        .onChange(of: mcs.useInPairing, perform: { value in
+          edelkroneAPI.shared.motionControlSystemsDict[mcs.macAddress]?.useInPairing = value
+        })
       
       
     }.padding()
@@ -66,7 +68,7 @@ struct ScannedMotionControlSystem_List:View{
     VStack(alignment: .leading, spacing: 8){
       Text("Unpaired Motion Control Systems:")
         .font(.applicationFont(.title2))
-        //.padding([.bottom],8)
+      //.padding([.bottom],8)
       
       VStack(alignment: .leading, spacing: 3){
         List{
@@ -74,7 +76,11 @@ struct ScannedMotionControlSystem_List:View{
             ScannedMotionControlSystem_View(mcs: mcs)
           }
           
-        }.border(Color("Outline"))
+        }.background(Rectangle().fill(.red))
+          .border(Color("Outline"))
+          .listStyle(.plain)
+          .colorMultiply(.darkWhite)
+        
         HStack{
           Spacer()
           Button(action:{
@@ -93,6 +99,8 @@ struct ScannedMotionControlSystem_List:View{
     }.padding([.top,.bottom],12)
       .padding([.trailing,.leading],8)
       .border(Color("Outline"), width: 2)
+      .background(Rectangle().fill(Color.lightWhite))
+    
   }
   
 }

@@ -1,10 +1,11 @@
-//
-//  Color.swift
-//  edelkroneTest
-//
-//  Created by Carsten Müller on 19.03.22.
-//
-
+/**
+ Color.swift
+ edelkroneTest
+ 
+ Created by Carsten Müller on 19.03.22.
+ Copyright © 2022 Carsten Müller. All rights reserved.
+ 
+ */
 import SwiftUI
 
 #if canImport(UIKit)
@@ -15,7 +16,7 @@ import AppKit
 
 
 extension Color {
-	/// a light gray color (85% white)
+  /// a light gray color (85% white)
   public static var lightGray:Color {
     get { return Color(white: 0.85) }
   }
@@ -25,6 +26,14 @@ extension Color {
   /// a dark gray color ( 85% black)
   public static var darkGray:Color {
     return Color(white: 0.25)
+  }
+  
+  public static var lightWhite:Color{
+    return Color(white:0.97)
+  }
+  
+  public static var darkWhite:Color {
+    return Color(white:0.95)
   }
   
   /**

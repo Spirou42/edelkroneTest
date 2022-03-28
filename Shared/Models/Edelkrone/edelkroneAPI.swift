@@ -3,6 +3,7 @@
  edelkroneTest
  
  Created by Carsten Müller on 04.03.2022.
+ Copyright © 2022 Carsten Müller. All rights reserved.
  */
 
 import Foundation
@@ -19,7 +20,7 @@ protocol edelkroneNetwork{
   func getURL(_ type: edelkroneAPI.requestType ) -> URL?
 }
 
-// MARK: -- edelkroneAPI
+// MARK: - edelkroneAPI
 
 /**
  encapsulates the edelkrone API calls and is the single point of information for the application
@@ -130,8 +131,11 @@ class edelkroneAPI : ObservableObject{
   /// and a thread for retrieving pairing status
   fileprivate var pairingStatusThread: Thread? = nil
   
+  /// and for periodic updates
   fileprivate var periodicStatusThread: Thread? = nil
   
+  /// and the joystick update thread
+  fileprivate var joystickThread: Thread? = nil
   
   
   init(){
@@ -180,8 +184,8 @@ extension edelkroneAPI:edelkroneNetwork{
         return
       }
       let data = data ?? Data()
-      let dataString = String(data: data, encoding: .utf8)
-      print ("got data: \(dataString!)")
+      //      let dataString = String(data: data, encoding: .utf8)
+      //      print ("got data: \(dataString!)")
       let decoder = JSONDecoder()
       decoder.dateDecodingStrategy = .secondsSince1970
       let returns = try? decoder.decode(T.self, from: data)
@@ -216,8 +220,8 @@ extension edelkroneAPI:edelkroneNetwork{
         return
       }
       let data = data ?? Data()
-      let dataString = String(data: data, encoding: .utf8)
-      print ("got data: \(dataString!)")
+      //      let dataString = String(data: data, encoding: .utf8)
+      //      print ("got data: \(dataString!)")
       let decoder = JSONDecoder()
       decoder.dateDecodingStrategy = .secondsSince1970
       let returns = try? decoder.decode(T.self, from: data)
@@ -305,7 +309,7 @@ extension edelkroneAPI {
     motionControlGroupDict = [:]
     stopScanResultsThread()
     stopPairingStatusThread()
-  	stopPeriodicStatusThread()
+    stopPeriodicStatusThread()
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(200)), execute: scanLinkAdapters)
     apiState = .presentLinkAdapters
   }
@@ -322,11 +326,11 @@ extension edelkroneAPI {
     if(success){
       stopScanResultsThread()
       stopPairingStatusThread()
-    	if(connectedAdapterID != ""){
-      	adaptertDict[connectedAdapterID]?.isConnected = false
-      	connectedAdapterID = ""
-    	}
-    	isConnected = false
+      if(connectedAdapterID != ""){
+        adaptertDict[connectedAdapterID]?.isConnected = false
+        connectedAdapterID = ""
+      }
+      isConnected = false
     }
   }
   
@@ -351,8 +355,8 @@ extension edelkroneAPI {
           self.hasAdapters = true
           for k in result!.data!{
             if k.isValid{
-	            self.scannedLinkAdapters.append(k)
-  	          self.adaptertDict[k.id] = k
+              self.scannedLinkAdapters.append(k)
+              self.adaptertDict[k.id] = k
             }
           }
           self.hasAdapters =  (self.scannedLinkAdapters.count > 0)
@@ -569,7 +573,7 @@ extension edelkroneAPI {
       guard let k = result else { return }
       switch k.status?.pairState {
       case .none:
-				fallthrough
+        fallthrough
       case .idle:
         fallthrough
       case .connecting:
@@ -615,9 +619,9 @@ extension edelkroneAPI {
     self.pairingStatusThread = Thread(target: self, selector: #selector(requestPairingStatus), object: nil)
     self.pairingStatusThread?.start()
   }
-
+  
   // MARK: - Periodic Status
-
+  
   func attachConnectedAdapter(adapterID:String ) -> Void {
     apiState = .showMotionControlInterface
     self.connectedAdapterID = adapterID
@@ -634,8 +638,8 @@ extension edelkroneAPI {
   }
   
   func getPeriodicStatus_Result(_ success:Bool, result:PeriodicStatusReturn?, context:Any?) -> Void{
-//    var requestStruct = getCommand(commands.status.rawValue)
-    print("Periodic Status: " + (result?.status.state.rawValue ?? "Failed"))
+    //    var requestStruct = getCommand(commands.status.rawValue)
+    //    print("Periodic Status: " + (result?.status.state.rawValue ?? "Failed"))
     guard let k = result?.status else { return }
     self.periodicMCSStatus &= k
     self.motionControlStatus &= k
@@ -644,6 +648,7 @@ extension edelkroneAPI {
   @objc func requestPeriodicStatus(_ object: Any) -> Void{
     while(Thread.current.isCancelled == false){
       getPeriodicStatus()
+      sendJoystickMove()
       Thread.sleep(forTimeInterval: 0.5)
     }
     Thread.exit()
@@ -661,6 +666,33 @@ extension edelkroneAPI {
     self.periodicStatusThread = Thread(target: self, selector: #selector(requestPeriodicStatus(_:)), object: nil)
     self.periodicStatusThread?.start()
   }
-
+  
+  
+  // MARK: - Joystick Move
+  
+  func sendJoystickMove() -> Void {
+    // first we collect all axis and values that are currently manipulated by a joystick
+    let controlledAxels = motionControlStatus.joystickControlled()
+    if !controlledAxels.isEmpty {
+      var requestDict = getCommand(commands.joystickMove.rawValue)
+      for movingAxel in controlledAxels {
+        requestDict[movingAxel.axelName.rawValue] = movingAxel.moveValue
+        if movingAxel.isLastMove  {
+          movingAxel.shouldMove = false
+          movingAxel.isLastMove = false
+        }
+      }
+      if let requestURL = getURL(.bundle){
+        let request = getRequestFor(url: requestURL, command: requestDict)
+        executeSession(request: request, uploadData: request.httpBody!, with: sendJoystickMove_Result, context: nil)
+      }
+    }
+  }
+  
+  func sendJoystickMove_Result(_ success:Bool, result:DefaultReturns?, context:Any?) -> Void{
+    if success {
+      //      print("Moving")
+    }
+  }
   
 }
