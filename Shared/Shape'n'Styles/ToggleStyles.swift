@@ -51,7 +51,7 @@ struct ColoredGlyphToggleButton:ToggleStyle{
   var glyphTopPadding:Double = 3
   var width:Double = 140
   var height:Double = 41
-  var borderSize:Double = 5
+  var bevelSize:Double = 5
   var useFaceGradient:Bool = false
   
   public func makeBody(configuration: ColoredGlyphToggleButton.Configuration) -> some View {
@@ -77,11 +77,11 @@ struct ColoredGlyphToggleButton:ToggleStyle{
         ZStack{
           RoundedRectangle(cornerRadius: cornerRadius).fill(LinearGradient(gradient: Gradient(withMid: configuration.isOn ? onColor : offColor), startPoint: UnitPoint(x: 0.0, y: configuration.isOn ?0.0:1.0), endPoint: UnitPoint(x: 0.0, y: configuration.isOn ?1.0:0.0)))
           if useFaceGradient {
-            RoundedRectangle(cornerRadius: cornerRadius-borderSize/2.0).fill(LinearGradient(gradient: Gradient(withMid: configuration.isOn ? onColor : offColor,offset: 0.10), startPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 1.0:-0.20), endPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 10.2:1.0)))
-              .frame(width: width-borderSize, height: height-borderSize)
+            RoundedRectangle(cornerRadius: cornerRadius-bevelSize/2.0).fill(LinearGradient(gradient: Gradient(withMid: configuration.isOn ? onColor : offColor,offset: 0.10), startPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 1.0:-0.20), endPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 10.2:1.0)))
+              .frame(width: width-bevelSize, height: height-bevelSize)
           }else{
-            RoundedRectangle(cornerRadius: cornerRadius-borderSize/2.0).fill(configuration.isOn ? onColor : offColor)
-              .frame(width: width-borderSize, height: height-borderSize)
+            RoundedRectangle(cornerRadius: cornerRadius-bevelSize/2.0).fill(configuration.isOn ? onColor : offColor)
+              .frame(width: width-bevelSize, height: height-bevelSize)
             
           }
         }
@@ -99,7 +99,7 @@ struct ColoredCircleToggleButton:ToggleStyle{
   var onGlyph: Text? = nil
   var glyphPadding:Double = 0
   var radius:Double = 20
-  var borderSize:Double = 5
+  var bevelSize:Double = 5
   var useFaceGradient:Bool = false
   
   public func makeBody(configuration: ColoredCircleToggleButton.Configuration) -> some View {
@@ -121,11 +121,11 @@ struct ColoredCircleToggleButton:ToggleStyle{
         ZStack{
           RoundedRectangle(cornerRadius: radius).fill(LinearGradient(gradient: Gradient(withMid: configuration.isOn ? onColor : offColor), startPoint: UnitPoint(x: 0.0, y: configuration.isOn ?0.0:1.0), endPoint: UnitPoint(x: 0.0, y: configuration.isOn ?1.0:0.0)))
           if useFaceGradient {
-            RoundedRectangle(cornerRadius: radius-borderSize/2.0).fill(LinearGradient(gradient: Gradient(withMid: configuration.isOn ? onColor : offColor,offset: 0.10), startPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 1.0:-0.20), endPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 10.2:1.0)))
-              .frame(width: radius*2-borderSize, height: radius*2-borderSize)
+            RoundedRectangle(cornerRadius: radius-bevelSize/2.0).fill(LinearGradient(gradient: Gradient(withMid: configuration.isOn ? onColor : offColor,offset: 0.10), startPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 1.0:-0.20), endPoint: UnitPoint(x: 0.0, y: configuration.isOn ? 10.2:1.0)))
+              .frame(width: radius*2-bevelSize, height: radius*2-bevelSize)
           }else{
-            RoundedRectangle(cornerRadius: radius-borderSize/2.0).fill(configuration.isOn ? onColor : offColor)
-              .frame(width: radius*2-borderSize, height: radius*2-borderSize)
+            RoundedRectangle(cornerRadius: radius-bevelSize/2.0).fill(configuration.isOn ? onColor : offColor)
+              .frame(width: radius*2-bevelSize, height: radius*2-bevelSize)
             
           }
         }

@@ -59,4 +59,71 @@ extension Color {
     return t
   }
   
+  public struct Theme {
+    public static var Blue:Color {
+      return Color("Theme Blue")
+    }
+    public static var BlueDark:Color {
+      return Color("Theme BlueDark")
+    }
+    public static var BlueDarker:Color {
+      return Color("Theme BlueDarker")
+    }
+    public static var BlueLight:Color {
+      return Color("Theme BlueLight")
+    }
+    public static var BlueLighter:Color {
+      return Color("Theme BlueLighter")
+    }
+
+    public static var Red:Color {
+      return Color("Theme Red")
+    }
+    public static var RedDark:Color {
+      return Color("Theme RedDark")
+    }
+    public static var RedDarker:Color {
+      return Color("Theme RedDarker")
+    }
+    public static var RedLight:Color {
+      return Color("Theme RedLight")
+    }
+    public static var redLighter:Color {
+      return Color("Theme RedLighter")
+    }
+    
+    public static var Green:Color {
+      return Color("Theme Green")
+    }
+    public static var GreenDark:Color {
+      return Color("Theme GreenDark")
+    }
+    public static var GreenDarker:Color {
+      return Color("Theme GreenDarker")
+    }
+    public static var GreenLight:Color {
+      return Color("Theme GreenLight")
+    }
+    public static var GreenLighter:Color {
+      return Color("Theme GreenLighter")
+    }
+    
+    public static var Orange:Color {
+      return Color("Theme Orange")
+    }
+    public static var OrangeDark:Color {
+      return Color("Theme OrangeDark")
+    }
+    public static var OrangeDarker:Color {
+      return Color("Theme OrangeDarker")
+    }
+    public static var OrangeLight:Color {
+      return Color("Theme OrangeLight")
+    }
+    public static var OrangeLighter:Color {
+      return Color("Theme OrangeLighter")
+    }
+
+  }
+  
 }

@@ -20,10 +20,10 @@ protocol edelkroneNetwork{
   func getURL(_ type: edelkroneAPI.requestType ) -> URL?
 }
 
-// MARK: - edelkroneAPI
+// MARK: - edelkroneAPI -
 
 /**
- encapsulates the edelkrone API calls and is the single point of information for the application
+ encapsulates the edelkrone API calls and is the single point of information for the application.
  */
 class edelkroneAPI : ObservableObject{
   static let shared = edelkroneAPI()
@@ -127,14 +127,17 @@ class edelkroneAPI : ObservableObject{
   ///
   // MARK: Threads
   fileprivate var scanResultThread: Thread? = nil
+  @Published var scanResultThreadIsRunning:Bool = false
   
   /// and a thread for retrieving pairing status
   fileprivate var pairingStatusThread: Thread? = nil
+  @Published var pairingStatusThreadIsRunning:Bool = false
   
   /// and for periodic updates
   fileprivate var periodicStatusThread: Thread? = nil
+  @Published var periodicStatusThreadIsRunning:Bool = false
   
-  /// and the joystick update thread
+  /// and the joystick update thread is not existing but work is done by the periodic thread
   fileprivate var joystickThread: Thread? = nil
   
   
@@ -144,6 +147,7 @@ class edelkroneAPI : ObservableObject{
   
   //thread selectors
   @objc func requestScanResults(_ object:Any) -> Void {
+    
     while(Thread.current.isCancelled == false){
       //      for l in self.scannedMotionControlSystems{
       //        print(l.macAddress+" "+String(l.useInPairing))
@@ -152,6 +156,7 @@ class edelkroneAPI : ObservableObject{
       Thread.sleep(forTimeInterval: 0.10)
     }
     print("ScanThread cancel")
+    
     Thread.exit()
   }
   
@@ -161,10 +166,18 @@ class edelkroneAPI : ObservableObject{
     
   }
   
+  public func stopAllThreads() {
+    stopScanResultsThread()
+    stopPairingStatusThread()
+    stopPeriodicStatusThread()
+  }
   
 }
 
-// MARK: - edelkroneNetwork
+// MARK: - edelkroneNetwork -
+/**
+ This extension enriches the edelkrone API with a cople of network methods.
+ */
 extension edelkroneAPI:edelkroneNetwork{
   
   func executeSession<T:ApiResult>(request: URLRequest, uploadData: Data, with:@escaping (Bool, T?, Any?)->Void, context: Any?){
@@ -290,8 +303,7 @@ extension edelkroneAPI:edelkroneNetwork{
   
 }
 
-
-// MARK: - edelkrone Commands
+// MARK: - edelkrone Commands -
 extension edelkroneAPI {
   
   
@@ -307,14 +319,26 @@ extension edelkroneAPI {
     ungroupedMotionControlSystems = []
     motionControlGroups = []
     motionControlGroupDict = [:]
-    stopScanResultsThread()
-    stopPairingStatusThread()
-    stopPeriodicStatusThread()
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(200)), execute: scanLinkAdapters)
+    stopAllThreads()
+    self.disconnectNoResult()
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(200)), execute: {
+
+      self.scanLinkAdapters()
+      
+    })
     apiState = .presentLinkAdapters
   }
   
-  func disconnect() -> Void{
+  func disconnectNoResult() -> Void {
+    let requestDict = getCommand(commands.pairing.wireless.disconnect.rawValue)
+    if let requestURL = getURL(.link){
+      let request = getRequestFor(url: requestURL, command: requestDict)
+      executeSession(request: request, uploadData: request.httpBody!, with: { (success:Bool,result:DefaultReturns?,context:Any) in  }, context: nil)
+    }
+  }
+  
+  
+  func disconnect() -> Void {
     let requestDict = getCommand(commands.pairing.wireless.disconnect.rawValue)
     if let requestURL = getURL(.link){
       let request = getRequestFor(url: requestURL, command: requestDict)
@@ -324,18 +348,22 @@ extension edelkroneAPI {
   
   func disconnectResult(_ success:Bool, result:DefaultReturns?,context: Any) -> Void{
     if(success){
-      stopScanResultsThread()
-      stopPairingStatusThread()
+      //      scannedLinkAdapters = []
+      stopAllThreads()
       if(connectedAdapterID != ""){
         adaptertDict[connectedAdapterID]?.isConnected = false
-        connectedAdapterID = ""
+        //        connectedAdapterID = ""
       }
       isConnected = false
+      wirelessPairingScanStart(adapter: adaptertDict[connectedAdapterID]!)
+      apiState = .pairMotionControlSystems
+      //      startScanResultsThread()
+      
     }
   }
   
   
-  // MARK: LinkAdapters
+  // MARK: - LinkAdapters -
   /**
    find connected edelkrone link adapters
    */
@@ -374,7 +402,7 @@ extension edelkroneAPI {
     task.resume()
   }
   
-  // MARK:  wirelessPairingScanStart
+  // MARK: - wirelessPairingScanStart -
   
   func wirelessPairingScanStart( adapter:  LinkAdapter) -> Void{
     
@@ -393,6 +421,7 @@ extension edelkroneAPI {
     if((self.scanResultThread?.isExecuting) != nil){
       self.scanResultThread?.cancel()
       self.scanResultThread = nil
+      self.scanResultThreadIsRunning = false
     }
   }
   
@@ -400,6 +429,7 @@ extension edelkroneAPI {
     // now trigger the retrieving of the scan results
     self.scanResultThread = Thread(target: self, selector: #selector(requestScanResults), object: nil)
     self.scanResultThread?.start()
+    self.scanResultThreadIsRunning = true
   }
   
   func wirelessPairingScanStart_Result (_ success:Bool, result:DefaultReturns?, context: Any?)->Void{
@@ -423,7 +453,7 @@ extension edelkroneAPI {
     
   }
   
-  // MARK:  wirelessPairingScanResults
+  // MARK: - wirelessPairingScanResults -
   
   func wirelessPairingScanResults() -> Void {
     let requestStruct = getCommand(commands.pairing.wireless.scanResults.rawValue)
@@ -521,7 +551,7 @@ extension edelkroneAPI {
     }
   }
   
-  // MARK: - create Bundle
+  // MARK: - create Bundle -
   func wirelessPairingCreateBundle() -> Void{
     // first we collect the mac adresses of all the marked devices
     var pairingMacs:[String] = []
@@ -556,8 +586,29 @@ extension edelkroneAPI {
     }
   }
   
+  // MARK: - attach bundle -
+  func attachToBundle(_ bundle: PairingGroup) -> Void {
+    var requestDict = getCommand(commands.pairing.wireless.attachToBundle.rawValue)
+    requestDict["mac"] = bundle.groupMaster?.macAddress
+    if let requestURL = getURL(.link) {
+      let request = getRequestFor(url: requestURL, command: requestDict)
+      executeSession(request: request, uploadData: request.httpBody!, with: attachToBundle_Result, context: nil)
+    }
+  }
   
-  // MARK: - pairingStatus
+  func attachToBundle_Result(_ success: Bool, result: DefaultReturns?, context: Any?) -> Void{
+    if success {
+      self.apiState = .showMotionControlInterface
+      stopAllThreads()
+      self.motionControlStatus.axelStatus = [:]
+      //      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(1000))) {
+      print("Doing the twist")
+      self.startPeriodicStatusThread()
+      //      }
+    }
+  }
+  
+  // MARK: - pairingStatus -
   func wirelessPairingStatus() -> Void{
     let requestDict = getCommand(commands.pairing.wireless.status.rawValue)
     if let requestURL = getURL(.link){
@@ -611,6 +662,7 @@ extension edelkroneAPI {
     if((self.pairingStatusThread?.isExecuting) != nil){
       self.pairingStatusThread?.cancel()
       self.pairingStatusThread = nil
+      self.pairingStatusThreadIsRunning = false
     }
   }
   
@@ -618,6 +670,7 @@ extension edelkroneAPI {
     // now trigger the retrieving of the scan results
     self.pairingStatusThread = Thread(target: self, selector: #selector(requestPairingStatus), object: nil)
     self.pairingStatusThread?.start()
+    self.pairingStatusThreadIsRunning = true
   }
   
   // MARK: - Periodic Status
@@ -658,13 +711,16 @@ extension edelkroneAPI {
     if((self.periodicStatusThread?.isExecuting) != nil){
       self.periodicStatusThread?.cancel()
       self.periodicStatusThread = nil
+      self.periodicStatusThreadIsRunning = false
     }
   }
   
   fileprivate func startPeriodicStatusThread() {
     // now trigger the retrieving of the scan results
+    
     self.periodicStatusThread = Thread(target: self, selector: #selector(requestPeriodicStatus(_:)), object: nil)
     self.periodicStatusThread?.start()
+    self.periodicStatusThreadIsRunning = true
   }
   
   

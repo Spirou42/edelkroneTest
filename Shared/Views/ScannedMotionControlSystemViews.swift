@@ -24,7 +24,7 @@ struct ScannedMotionControlSystem_View: View, Identifiable {
   
   var body: some View {
     
-    HStack{
+    HStack(){
       HStack(alignment:.top){
         VStack(alignment: .center, spacing: 1){
           
@@ -48,21 +48,25 @@ struct ScannedMotionControlSystem_View: View, Identifiable {
       
       Toggle(isOn: $mcs.useInPairing){ }
         .toggleStyle(ColoredToggleSwitch(label: "",
-                                         onColor: Color("JoystickThumbDark"),
-                                         offColor: Color("ButtonRed"),
+                                         onColor: Color("Theme Orange"),
+                                         offColor: Color("Theme Red"),
                                          thumbColor: .white))
         .onChange(of: mcs.useInPairing, perform: { value in
           edelkroneAPI.shared.motionControlSystemsDict[mcs.macAddress]?.useInPairing = value
         })
       
       
-    }.padding()
-      .border(Color("Outline"), width: 2)
+    }
+    .padding()
+//    .border(Color("Outline"), width: 0.5)
   }
 }
 
 struct ScannedMotionControlSystem_List:View{
   var ungroupedMotionSystems: [MotionControlSystem]
+  
+  let buttonSize:CGFloat = Font.applicationFontSize(.title)
+  let buttonPadding:CGFloat = 5.0
   
   var body: some View {
     VStack(alignment: .leading, spacing: 8){
@@ -74,12 +78,16 @@ struct ScannedMotionControlSystem_List:View{
         List{
           ForEach(ungroupedMotionSystems){ mcs in
             ScannedMotionControlSystem_View(mcs: mcs)
+            Divider()
           }
           
-        }.background(Rectangle().fill(.red))
-          .border(Color("Outline"))
-          .listStyle(.plain)
-          .colorMultiply(.darkWhite)
+        }
+        .background(Rectangle().fill(.red))
+        .border(Color("Outline"), width:1)
+        .listStyle(.bordered)
+        .frame(minWidth: 600, idealWidth:780, maxWidth:800)
+        .fixedSize(horizontal: true, vertical: false)
+        .colorMultiply(.darkWhite)
         
         HStack{
           Spacer()
@@ -91,15 +99,26 @@ struct ScannedMotionControlSystem_List:View{
           }){
             Text("Pair")
               .font(.applicationFont(.title))
-          }.buttonStyle(ColoredButtonStyle(buttonColor: .blue))
-            .padding([.leading,.trailing],10)
-            .padding([.top,.bottom],8)
+              .frame(maxWidth:.infinity, alignment: .center)
+          }
+          .buttonStyle(GradientGlyphButtonStyle(buttonColor:  Color.Theme.Green,
+                                                cornerRadius: 7,
+                                                shadowRadius: 0,
+                                                glyph:Text("\u{22f4}")
+            .font(.custom("Symbols-Regular", size: buttonSize+6)),
+                                                glyphPadding: 10,
+                                                width: 130,
+                                                height: 40,
+                                                bevelSize: 5.0
+                                               ))
         }
       }
-    }.padding([.top,.bottom],12)
-      .padding([.trailing,.leading],8)
-      .border(Color("Outline"), width: 2)
       .background(Rectangle().fill(Color.lightWhite))
+    }
+    .padding([.top,.bottom],12)
+    .padding([.trailing,.leading],8)
+    .border(Color("Outline"), width: 2)
+    .background(Rectangle().fill(Color.lightWhite))
     
   }
   
@@ -116,4 +135,5 @@ struct MCSScanListView_Previews: PreviewProvider {
     ScannedMotionControlSystem_List(ungroupedMotionSystems:[MotionControlSystem()])
   }
 }
+
 

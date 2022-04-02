@@ -15,18 +15,19 @@ struct PairingGroupView: View {
   
   var body: some View {
     HStack(spacing:30){
-      VStack(alignment: .leading, spacing: 8){
+      VStack(alignment: .leading, spacing: 8){ // Motion Group Information
         Text("Group: " + String(pairingGroup.groupID) )
-          .font(.applicationFont(.title2))
+          .font(.applicationFont(.title2).weight(.semibold))
+          
         VStack(alignment: .leading, spacing: 8){
           ForEach(pairingGroup.groupedControlSystems){ mcs in
             VStack( alignment: .leading, spacing: 0){
               HStack{
                 Text(String(mcs.deviceType.toString()))
-                  .font(.applicationFont(.title))
+                  .font(.applicationFont(.title).weight(.bold))
                 if(mcs.deviceType == .headOne){
                   Text(mcs.isTilted ? "(Tilt)" : "(Pan)")
-                    .font(.applicationFont(.title))
+                    .font(.applicationFont(.title).weight(.light))
                     .padding([.trailing],20)
                 }
               }
@@ -43,40 +44,29 @@ struct PairingGroupView: View {
       }// VStack
       .frame(minWidth: 100, idealWidth:200, maxWidth:300)
       .fixedSize(horizontal: true, vertical: false)
-      Button( action: {}){
+      .padding([.top,.bottom],5)
+      Spacer()
+      Button( action: {edelkroneAPI.shared.attachToBundle(self.pairingGroup)}){
         Text("Connect")
           .font(.applicationFont(.title))
           .frame(maxWidth:.infinity, alignment: .center)
       }
-      .buttonStyle(GradientGlyphButtonStyle(buttonColor:   Color.green,
-                                            cornerRadius: 10,
+      .buttonStyle(GradientGlyphButtonStyle(buttonColor:   Color.Theme.Green,
+                                            cornerRadius: 7,
                                             shadowRadius: 0,
                                             glyph:Text("\u{22f2}")
         .font(.custom("Symbols-Regular", size: buttonSize+10)),
-                                            glyphPadding: 25,
-                                            width: 200,
-                                            height: 60,
-                                            borderSize: 8.0
+                                            glyphPadding: 20,
+                                            width: 160,
+                                            height: 50	,
+                                            bevelSize: 4.0
                                            ))
-      Button( action: {edelkroneAPI.shared.disconnect()}){
-        Text("Unpair")
-          .font(.applicationFont(.title))
-          .frame(maxWidth:.infinity, alignment: .center)
-      }
-      .buttonStyle(GradientGlyphButtonStyle(buttonColor:   Color("ButtonRed"),
-                                            cornerRadius: 10,
-                                            shadowRadius: 0,
-                                            glyph:Text("\u{22f4}")
-        .font(.custom("Symbols-Regular", size: buttonSize+10)),
-                                            glyphPadding: 25,
-                                            width: 200,
-                                            height: 60,
-                                            borderSize: 8.0
-                                           ))
-      
-      
     }// HStack
+    .fixedSize(horizontal: false, vertical: true)
+    //    .frame(minWidth: 200, idealWidth: 200, maxWidth:500)
+    .padding([.trailing],20)
     .background(Rectangle().fill(Color.lightWhite))
+    //.border(Color("Outline"), width: 0.5)
   }
 }
 
@@ -98,13 +88,20 @@ struct PairingGroupList:View{
             PairingGroupView(pairingGroup: group)
             Divider()
           }
-        }.listStyle(.bordered)
-          .frame(minWidth: 600, idealWidth:680, maxWidth:700)
-          .fixedSize(horizontal: true, vertical: false)
-          .colorMultiply(.darkWhite)
+        }
+        .background(Rectangle().fill(.red))
+        .border(Color("Outline"))
+        .listStyle(.bordered)
+        .frame(minWidth: 600, idealWidth:780, maxWidth:800)
+        .fixedSize(horizontal: true, vertical: false)
+        .colorMultiply(.darkWhite)
         
       }
-    }.background(Rectangle().fill(Color.lightWhite))
+    }
+    .padding([.top,.bottom],12)
+    .padding([.trailing,.leading],8)
+    .border(Color("Outline"), width: 2)
+    .background(Rectangle().fill(Color.lightWhite))
   }
 }
 

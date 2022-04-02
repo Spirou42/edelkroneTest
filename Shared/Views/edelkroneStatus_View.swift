@@ -12,7 +12,7 @@ struct edelkroneStatus_View: View {
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""
   @AppStorage(Preferences.Port.rawValue) private var port = 8080
   
-  @StateObject var edelkrone: edelkroneAPI
+  @ObservedObject var edelkrone: edelkroneAPI
   
   var body: some View {
     
@@ -42,7 +42,8 @@ struct edelkroneStatus_View: View {
           .inset()
         //.background(.white)
       }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-      
+
+      // Link
       HStack(alignment: .firstTextBaseline, spacing: 3){
         Text("Link:")
           .font(.applicationFont(.body))
@@ -52,12 +53,24 @@ struct edelkroneStatus_View: View {
           .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
           .inset()
       }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+
+      // ThreadIndicators
+      HStack(spacing:1){
+        Text("Threads:  ")
+          .font(.applicationFont(.body))
+          .fixedSize(horizontal: true, vertical: true)
+      	
+        Text("\u{26AB}").font(.custom("Symbols-Regular", size: 10)).foregroundColor(edelkrone.scanResultThreadIsRunning ? .green : .red)
+        Text("\u{26AB}").font(.custom("Symbols-Regular", size: 10)).foregroundColor(edelkrone.pairingStatusThreadIsRunning ? .green : .red)
+        Text("\u{26AB}").font(.custom("Symbols-Regular", size: 10)).foregroundColor(edelkrone.periodicStatusThreadIsRunning ? .green : .red)
+      }
       
       //Spacer()
       Button(action:edelkrone.reset){
         Text("Reset").font(.applicationFont(.body))
       }.padding([.leading],50)
-    }
+      Spacer()
+    }.frame(minWidth:800)
     
     
     

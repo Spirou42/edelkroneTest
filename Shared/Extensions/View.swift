@@ -34,4 +34,30 @@ extension View {
       self
     }
   }
+  
+  func invertedMask<Content : View>(_ content: Content) -> some View {
+     self
+      .mask(
+        ZStack {
+          self
+            .brightness(1)
+          content
+            .brightness(-1)
+        }.compositingGroup()
+          .luminanceToAlpha()
+      )
+  }
+  
+  @ViewBuilder
+  func viewBorder(color: Color = .black, radius: CGFloat = 0.4, outline: Bool = false) -> some View {
+    self
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+      .shadow(color: color, radius: radius)
+  }
 }

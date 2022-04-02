@@ -418,8 +418,28 @@ class PairingGroup: Identifiable,ObservableObject, Hashable{
 
 // MARK: - Paired Motion Control System Descriptions
 
-enum AxelID:String, Decodable{
+enum AxelID:String, Decodable, Comparable{
+
   case headPan, headTilt, slide, focus, jibPlusPan, jibPlusTilt
+  
+  static func < (lhs: AxelID, rhs: AxelID) -> Bool {
+    return lhs.value() < rhs.value()
+  }
+  
+  func value() -> Int{
+    switch self {
+    case .headPan: fallthrough
+    case .jibPlusPan:
+      return 0
+    case .headTilt: fallthrough
+    case .jibPlusTilt:
+      return 1
+    case .slide:
+      return 2
+    case .focus:
+      return 3
+    }
+  }
   
   func toString() -> String{
     switch self {
@@ -490,6 +510,7 @@ class AxelStatus : AxelDescription, Hashable, Equatable, Identifiable, Observabl
     batteryLevel = from.batteryLevelFor(name: axelName)
   }
 }
+
 // MARK: - MotionControlStatus
 class MotionControlStatus: ObservableObject {
   @Published var axelStatus:[AxelID : AxelStatus] = [:]
@@ -499,8 +520,13 @@ class MotionControlStatus: ObservableObject {
   @Published var keyposeStartIndex: Int = -1
   @Published var keyposeMotionProgress: Double = 1.0
   @Published var keyposeMotionDuration: Double = 0.0
-  
+  @Published var state:MotionState = .idle
+
   static func &= (lhs:MotionControlStatus, rhs:PeriodicStatus){
+    if rhs.deviceInfoReady == false{
+      return
+    }
+        
     lhs.objectWillChange.send()
     if lhs.keyposeLoopActive != rhs.keyposeLoopActive{
       lhs.keyposeLoopActive = rhs.keyposeLoopActive
@@ -517,11 +543,16 @@ class MotionControlStatus: ObservableObject {
     if lhs.keyposeMotionDuration != rhs.plannedMotionDuration{
       lhs.keyposeMotionDuration = rhs.plannedMotionDuration
     }
+    if lhs.state != rhs.state{
+      lhs.state = rhs.state
+    }
     
     // now update or create entries into axelStatus
+    var supportedNames:[AxelID] = []
     for index in 0..<rhs.supportedAxes.count {
       let axel = rhs.supportedAxes[index]
       let name = axel.axelName
+      supportedNames.append(name)
       var q:AxelStatus
       if lhs.axelStatus.keys.contains(name) {
         q = lhs.axelStatus[name]!
@@ -530,6 +561,11 @@ class MotionControlStatus: ObservableObject {
       }else{
         q = AxelStatus(from: rhs, forName: name)
         lhs.axelStatus[name]  = q
+      }
+    }
+    for key in lhs.axelStatus.keys {
+      if !supportedNames.contains(key){
+        lhs.axelStatus.removeValue(forKey: key)
       }
     }
   }
@@ -684,6 +720,18 @@ struct BundledDeviceInfo:Decodable, Equatable{
 
 enum MotionState:String, Decodable{
   case idle, keyposeMove, realTimeMove, focusCalibration, sliderCalibration, joystickMove, unsupportedActivity
+  
+  func toString() -> String {
+    switch self {
+    case .idle: return "Idle"
+    case .keyposeMove: return "move to Keypose"
+    case .realTimeMove: return "realtime move"
+    case .focusCalibration: return "calibrate Focus"
+    case .sliderCalibration: return "calibrate Slider"
+    case .joystickMove: return "Joystick move"
+    case .unsupportedActivity: return "unsupported"
+    }
+  }
 }
 // MARK: - Periodic Status
 

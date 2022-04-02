@@ -19,14 +19,14 @@ struct LinkAdapterStatusView: View{
         Text("Firmware: ").font(.body)
         Text("\u{26AB}")
           .font(.custom("Symbols-Regular", size:labelSize))
-          .foregroundColor( adapter.updateRequired ? .red : .green)
+          .foregroundColor( adapter.updateRequired ? Color.Theme.Red : Color.Theme.Green)
       }
       
       HStack(alignment: .bottom, spacing: 1){
         Text("Radio: ").font(.body)
         Text("\u{26AB}")
           .font(.custom("Symbols-Regular", size:labelSize))
-          .foregroundColor( adapter.radioUpdateRequired ? .red : .green)
+          .foregroundColor( adapter.radioUpdateRequired ? Color.Theme.Red : Color.Theme.Green)
       }
     }.frame(maxHeight:18)
   }
@@ -65,7 +65,7 @@ struct LinkAdapterView: View{
       .padding([.leading, .trailing],20)
       .border(Color("Seperator"), width: 1, edges:[.trailing])
       .fixedSize(horizontal: true, vertical: true)
-      
+      Spacer()
       HStack(alignment: .center, spacing: 8){
         Button( action: adapter.isConnected ? {edelkroneAPI.shared.disconnect()} : {
           if adapter.isPaired {
@@ -80,7 +80,7 @@ struct LinkAdapterView: View{
             .font(.applicationFont(.title2))
             .frame(maxWidth:.infinity, alignment: .center)
         }
-        .buttonStyle(GradientGlyphButtonStyle(buttonColor:  adapter.isConnected ? Color.green : Color.red,
+        .buttonStyle(GradientGlyphButtonStyle(buttonColor:  adapter.isConnected ? Color.Theme.Green : Color.Theme.Red,
                                               shadowRadius: 0,
                                               glyph:Text(adapter.isConnected ? "\u{22f3}":"\u{22f2}")
           .font(.custom("Symbols-Regular", size: buttonSize+10))
@@ -92,17 +92,16 @@ struct LinkAdapterView: View{
             .font(.applicationFont(.title2))
             .frame(maxWidth:.infinity, alignment: .center)
           
-        }.buttonStyle(GradientGlyphButtonStyle(buttonColor: .mint,
+        }.buttonStyle(GradientGlyphButtonStyle(buttonColor: Color.Theme.BlueLighter,
                                                shadowRadius: 0,
                                                glyph:Text("\u{22f4}")
           .font(.custom("Symbols-Regular", size: buttonSize+10))
                                               ))
       }
       .padding([.leading, .trailing],10)
-      
     }
     .border(Color("Outline"), width: 3)
-    //.frame(maxWidth: .infinity)
+    .frame(maxWidth: .infinity)
     
     //.border(Color("Seperator"), width: 2, edges: [.top])
   }
@@ -137,7 +136,7 @@ struct LinkAdapterList: View {
     }.padding([.top,.bottom],12)
       .padding([.trailing,.leading],8)
       .border(Color("Outline"), width: 2)
-      .frame(minWidth: 680, idealWidth: 700, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
+      .frame(minWidth: 780, idealWidth: 800, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
       .background(Rectangle().fill(Color.lightWhite))
   }
 }

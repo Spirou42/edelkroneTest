@@ -79,7 +79,7 @@ struct GradientGlyphButtonStyle: ButtonStyle {
   var glyphPadding:Double = 8
   var width:Double = 140
   var height:Double = 41
-  var borderSize:Double = 5
+  var bevelSize:Double = 5
   var useFaceGradient:Bool = false
   
   public func makeBody(configuration: ColoredGlyphButtonStyle.Configuration) -> some View {
@@ -109,16 +109,16 @@ struct GradientGlyphButtonStyle: ButtonStyle {
       ZStack{
         RoundedRectangle(cornerRadius: cornerRadius).fill(LinearGradient(gradient: Gradient(withMid: buttonColor), startPoint: UnitPoint(x: 0.0, y: 1.0), endPoint: UnitPoint(x: 0.0, y: 0.0)))
         if useFaceGradient {
-          RoundedRectangle(cornerRadius: cornerRadius-borderSize/2.0).fill(LinearGradient(gradient: Gradient(withMid: buttonColor,offset: 0.10), startPoint: UnitPoint(x: 0.0, y: -0.20), endPoint: UnitPoint(x: 0.0, y: 1.0)))
-            .frame(width: width-borderSize, height: height-borderSize)
+          RoundedRectangle(cornerRadius: cornerRadius-bevelSize/2.0).fill(LinearGradient(gradient: Gradient(withMid: buttonColor,offset: 0.10), startPoint: UnitPoint(x: 0.0, y: -0.20), endPoint: UnitPoint(x: 0.0, y: 1.0)))
+            .frame(width: width-bevelSize, height: height-bevelSize)
         }else{
-          RoundedRectangle(cornerRadius: cornerRadius-borderSize/2.0).fill(buttonColor)
-            .frame(width: width-borderSize, height: height-borderSize)
+          RoundedRectangle(cornerRadius: cornerRadius-bevelSize/2.0).fill(buttonColor)
+            .frame(width: width-bevelSize, height: height-bevelSize)
           
         }
       }
     }
-    .scaleEffect(configuration.isPressed ? 0.8 : 1.0)
+    .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     
     
   }
