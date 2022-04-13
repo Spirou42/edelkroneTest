@@ -7,6 +7,7 @@
  */
 
 import Foundation
+import edelkroneAPI
 
 extension String{
   init(_ device:EdelkroneDevice){

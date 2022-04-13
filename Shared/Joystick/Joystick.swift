@@ -7,14 +7,11 @@
  */
 
 import SwiftUI
+import edelkroneAPI
+import Extensions
 
 /// Simple protocol to connect a Joystick to an external object. A Single Object can be attached to each axis of a JoyStick
 
-public protocol JoystickControlledAxel {
-  var shouldMove:Bool { get set }
-  var moveValue:Double { get set}
-  var isLastMove:Bool {get set}
-}
 
 /**
  The JoystickThumb is the smal circle moved by the user
@@ -215,29 +212,6 @@ struct AxisArrows : View {
 }
 
 
-public struct DegreeOfFreedom:OptionSet, Hashable {
-  public let rawValue: Int
-  public static let none:DegreeOfFreedom = []
-  public static let horizontal = DegreeOfFreedom(rawValue: 1)
-  public static let vertical = DegreeOfFreedom(rawValue: 2)
-  public static let all:DegreeOfFreedom = [.horizontal, .vertical]
-  public init(rawValue:Int){
-    self.rawValue = rawValue
-  }
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(self.rawValue)
-  }
-  public func numberOfFreedoms() -> Int{
-    var result:Int = 0
-    if self.contains(.horizontal) {
-      result+=1
-    }
-    if self.contains(.vertical) {
-      result+=1
-    }
-    return result
-  }
-}
 
 /**
  The joystick view together with a simple gesture handler for drag gestures.

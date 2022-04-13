@@ -7,6 +7,9 @@
  */
 
 import SwiftUI
+import edelkroneAPI
+import Extensions
+
 
 struct PairingGroupView: View {
   @ObservedObject var pairingGroup: PairingGroup

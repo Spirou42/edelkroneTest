@@ -11,6 +11,8 @@
 		9302807427EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302807227EBC4F6001439E8 /* MotionControlIInterface.swift */; };
 		93045C0527F10BB400846817 /* ToggleStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93045C0427F10BB400846817 /* ToggleStyles.swift */; };
 		93045C0627F10BB400846817 /* ToggleStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93045C0427F10BB400846817 /* ToggleStyles.swift */; };
+		93215DAB28071432007C5A50 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 93215DAA28071432007C5A50 /* Extensions */; };
+		93215DB428071F64007C5A50 /* edelkroneAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 93215DB328071F64007C5A50 /* edelkroneAPI */; };
 		932CF2E227E5377100A4F92F /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E027E5377100A4F92F /* CGPoint.swift */; };
 		932CF2E327E5377100A4F92F /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E027E5377100A4F92F /* CGPoint.swift */; };
 		932CF2E427E5377100A4F92F /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E127E5377100A4F92F /* Joystick.swift */; };
@@ -19,14 +21,8 @@
 		932F718A27DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */; };
 		932F718D27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
 		932F718E27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
-		9339685F27DCC5500076EBAE /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9339685E27DCC5500076EBAE /* ButtonStyles.swift */; };
-		9339686027DCC5500076EBAE /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9339685E27DCC5500076EBAE /* ButtonStyles.swift */; };
 		934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
 		934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
-		934143F127D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */; };
-		934143F227D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */; };
-		934143F427D7ABB000CDC4D3 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F327D7ABB000CDC4D3 /* View.swift */; };
-		934143F527D7ABB000CDC4D3 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143F327D7ABB000CDC4D3 /* View.swift */; };
 		9345BAAE27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */; };
 		9345BAAF27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */; };
 		9345BAB127D8FD940099FC90 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93628F4127D3BCE700F93F02 /* Fonts.swift */; };
@@ -34,8 +30,6 @@
 		9346526027F4E415002765E2 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346525F27F4E415002765E2 /* Popup.swift */; };
 		9346526127F4E415002765E2 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346525F27F4E415002765E2 /* Popup.swift */; };
 		934AD1CB27D5F67100E995E9 /* edelkroneTest.docc in Sources */ = {isa = PBXBuildFile; fileRef = 934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */; };
-		9353109B27E37E0400DEA236 /* edelkroneAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701827D2461C000F8F63 /* edelkroneAPI.swift */; };
-		9354591A27D62E32001D67FF /* edelkroneModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354591827D62E32001D67FF /* edelkroneModels.swift */; };
 		9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A327D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
@@ -48,16 +42,10 @@
 		938946C327E607250029A120 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C127E607250029A120 /* CGFloat.swift */; };
 		938946C527E639C60029A120 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C427E639C60029A120 /* Color.swift */; };
 		938946C627E639C60029A120 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C427E639C60029A120 /* Color.swift */; };
-		9395AF9527E8EA6B00DA7E27 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9395AF9427E8EA6B00DA7E27 /* Gradient.swift */; };
-		9395AF9627E8EA6B00DA7E27 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9395AF9427E8EA6B00DA7E27 /* Gradient.swift */; };
 		93CF78B027D4DC7B000335A7 /* Symbols-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */; };
 		93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701227D235D4000F8F63 /* SettingsView.swift */; };
 		93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */; };
 		93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */; };
-		93D1701927D2461C000F8F63 /* edelkroneAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701827D2461C000F8F63 /* edelkroneAPI.swift */; };
-		93D1701B27D250B2000F8F63 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701A27D250B2000F8F63 /* DataTypes.swift */; };
-		93D7ED1D27E0C854002C8E4A /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1C27E0C854002C8E4A /* Int.swift */; };
-		93D7ED1E27E0C854002C8E4A /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1C27E0C854002C8E4A /* Int.swift */; };
 		93D7ED2027E10245002C8E4A /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */; };
 		93D7ED2127E10245002C8E4A /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */; };
 /* End PBXBuildFile section */
@@ -69,14 +57,10 @@
 		932CF2E127E5377100A4F92F /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedMotionControlSystemViews.swift; sourceTree = "<group>"; };
 		932F718C27DBA6F100A91E40 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		9339685E27DCC5500076EBAE /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAdapterView.swift; sourceTree = "<group>"; };
-		934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeShape.swift; sourceTree = "<group>"; };
-		934143F327D7ABB000CDC4D3 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneStatus_View.swift; sourceTree = "<group>"; };
 		9346525F27F4E415002765E2 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = edelkroneTest.docc; sourceTree = "<group>"; };
-		9354591827D62E32001D67FF /* edelkroneModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneModels.swift; sourceTree = "<group>"; };
 		9359C29127D0014500743008 /* edelkroneTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneTestApp.swift; sourceTree = "<group>"; };
 		9359C29227D0014500743008 /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9359C29327D0014700743008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,17 +69,15 @@
 		9359C2A027D0014700743008 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		93628F4127D3BCE700F93F02 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "edelkroneTest--macOS--Info.plist"; sourceTree = "<group>"; };
+		936FE4C02807207700ABDF02 /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = edelkroneAPI; path = ../../edelkroneAPI; sourceTree = "<group>"; };
+		936FE4C12807207A00ABDF02 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 		9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlStatus.swift; sourceTree = "<group>"; };
 		938946C127E607250029A120 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		938946C427E639C60029A120 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		9395AF9427E8EA6B00DA7E27 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Symbols-Regular.otf"; path = "Assets/Production/Symbols-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		93D1701227D235D4000F8F63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
-		93D1701827D2461C000F8F63 /* edelkroneAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneAPI.swift; sourceTree = "<group>"; };
-		93D1701A27D250B2000F8F63 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
-		93D7ED1C27E0C854002C8E4A /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingGroupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93215DAB28071432007C5A50 /* Extensions in Frameworks */,
+				93215DB428071F64007C5A50 /* edelkroneAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,26 +109,14 @@
 			path = Joystick;
 			sourceTree = "<group>";
 		};
-		932F718727DB59E400A91E40 /* Edelkrone */ = {
-			isa = PBXGroup;
-			children = (
-				9354591827D62E32001D67FF /* edelkroneModels.swift */,
-				93D1701827D2461C000F8F63 /* edelkroneAPI.swift */,
-			);
-			path = Edelkrone;
-			sourceTree = "<group>";
-		};
 		932F718B27DBA6D100A91E40 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				934143F327D7ABB000CDC4D3 /* View.swift */,
+				938946C127E607250029A120 /* CGFloat.swift */,
 				932CF2E027E5377100A4F92F /* CGPoint.swift */,
+				938946C427E639C60029A120 /* Color.swift */,
 				93628F4127D3BCE700F93F02 /* Fonts.swift */,
 				932F718C27DBA6F100A91E40 /* String.swift */,
-				93D7ED1C27E0C854002C8E4A /* Int.swift */,
-				938946C127E607250029A120 /* CGFloat.swift */,
-				938946C427E639C60029A120 /* Color.swift */,
-				9395AF9427E8EA6B00DA7E27 /* Gradient.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -166,8 +138,6 @@
 		934143EF27D7AB1500CDC4D3 /* Shape'n'Styles */ = {
 			isa = PBXGroup;
 			children = (
-				934143F027D7AB2C00CDC4D3 /* EdgeShape.swift */,
-				9339685E27DCC5500076EBAE /* ButtonStyles.swift */,
 				93045C0427F10BB400846817 /* ToggleStyles.swift */,
 				9346525F27F4E415002765E2 /* Popup.swift */,
 			);
@@ -177,8 +147,6 @@
 		9345BAB027D8B1750099FC90 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				932F718727DB59E400A91E40 /* Edelkrone */,
-				93D1701A27D250B2000F8F63 /* DataTypes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +154,7 @@
 		9359C28B27D0014500743008 = {
 			isa = PBXGroup;
 			children = (
+				936FE4BD2807205600ABDF02 /* Packages */,
 				934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */,
 				93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */,
 				9359C29027D0014500743008 /* Shared */,
@@ -237,6 +206,15 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		936FE4BD2807205600ABDF02 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				936FE4C12807207A00ABDF02 /* Extensions */,
+				936FE4C02807207700ABDF02 /* edelkroneAPI */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -273,6 +251,8 @@
 			);
 			name = "edelkroneTest (macOS)";
 			packageProductDependencies = (
+				93215DAA28071432007C5A50 /* Extensions */,
+				93215DB328071F64007C5A50 /* edelkroneAPI */,
 			);
 			productName = "edelkroneTest (macOS)";
 			productReference = 9359C29E27D0014700743008 /* edelkroneTest.app */;
@@ -306,6 +286,8 @@
 			);
 			mainGroup = 9359C28B27D0014500743008;
 			packageReferences = (
+				93215DA928071432007C5A50 /* XCRemoteSwiftPackageReference "Extensions" */,
+				93215DB228071F64007C5A50 /* XCRemoteSwiftPackageReference "edelkroneAPI" */,
 			);
 			productRefGroup = 9359C29927D0014700743008 /* Products */;
 			projectDirPath = "";
@@ -348,21 +330,15 @@
 				9359C2A327D0014700743008 /* ContentView.swift in Sources */,
 				93045C0527F10BB400846817 /* ToggleStyles.swift in Sources */,
 				9302807327EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */,
-				9395AF9527E8EA6B00DA7E27 /* Gradient.swift in Sources */,
-				9353109B27E37E0400DEA236 /* edelkroneAPI.swift in Sources */,
 				9372B6FF27F73BEA0025CFFD /* MotionControlStatus.swift in Sources */,
-				93D7ED1D27E0C854002C8E4A /* Int.swift in Sources */,
 				932CF2E427E5377100A4F92F /* Joystick.swift in Sources */,
 				9345BAAE27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */,
-				9339685F27DCC5500076EBAE /* ButtonStyles.swift in Sources */,
 				932F718D27DBA6F100A91E40 /* String.swift in Sources */,
 				938946C227E607250029A120 /* CGFloat.swift in Sources */,
 				932F718927DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */,
 				9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */,
-				934143F127D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */,
 				9346526027F4E415002765E2 /* Popup.swift in Sources */,
 				934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
-				934143F427D7ABB000CDC4D3 /* View.swift in Sources */,
 				938946C527E639C60029A120 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,8 +349,6 @@
 			files = (
 				9345BAB127D8FD940099FC90 /* Fonts.swift in Sources */,
 				93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */,
-				93D7ED1E27E0C854002C8E4A /* Int.swift in Sources */,
-				93D1701927D2461C000F8F63 /* edelkroneAPI.swift in Sources */,
 				932F718A27DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */,
 				938946C627E639C60029A120 /* Color.swift in Sources */,
 				9359C2A427D0014700743008 /* ContentView.swift in Sources */,
@@ -382,23 +356,17 @@
 				93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */,
 				9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */,
 				9372B70027F73BEA0025CFFD /* MotionControlStatus.swift in Sources */,
-				93D1701B27D250B2000F8F63 /* DataTypes.swift in Sources */,
 				932CF2E527E5377100A4F92F /* Joystick.swift in Sources */,
 				932CF2E327E5377100A4F92F /* CGPoint.swift in Sources */,
 				938946C327E607250029A120 /* CGFloat.swift in Sources */,
-				9395AF9627E8EA6B00DA7E27 /* Gradient.swift in Sources */,
 				93045C0627F10BB400846817 /* ToggleStyles.swift in Sources */,
 				9302807427EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */,
-				9339686027DCC5500076EBAE /* ButtonStyles.swift in Sources */,
 				93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */,
 				9346526127F4E415002765E2 /* Popup.swift in Sources */,
 				9345BAAF27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */,
 				93D7ED2127E10245002C8E4A /* PairingGroupView.swift in Sources */,
 				934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
-				9354591A27D62E32001D67FF /* edelkroneModels.swift in Sources */,
-				934143F527D7ABB000CDC4D3 /* View.swift in Sources */,
 				932F718E27DBA6F100A91E40 /* String.swift in Sources */,
-				934143F227D7AB2C00CDC4D3 /* EdgeShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +501,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -563,7 +531,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -672,6 +640,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		93215DA928071432007C5A50 /* XCRemoteSwiftPackageReference "Extensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Spirou42/Extensions.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		93215DB228071F64007C5A50 /* XCRemoteSwiftPackageReference "edelkroneAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Spirou42/edelkroneAPI.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		93215DAA28071432007C5A50 /* Extensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93215DA928071432007C5A50 /* XCRemoteSwiftPackageReference "Extensions" */;
+			productName = Extensions;
+		};
+		93215DB328071F64007C5A50 /* edelkroneAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93215DB228071F64007C5A50 /* XCRemoteSwiftPackageReference "edelkroneAPI" */;
+			productName = edelkroneAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9359C28C27D0014500743008 /* Project object */;
 }

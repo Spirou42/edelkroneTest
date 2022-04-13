@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import edelkroneAPI
 
 struct GeneralSettingsView: View {
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""

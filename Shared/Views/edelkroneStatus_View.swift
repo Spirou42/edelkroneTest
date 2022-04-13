@@ -7,6 +7,7 @@
  */
 
 import SwiftUI
+import edelkroneAPI
 
 struct edelkroneStatus_View: View {
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""

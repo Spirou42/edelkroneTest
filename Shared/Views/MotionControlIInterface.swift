@@ -7,7 +7,8 @@
  */
 
 import SwiftUI
-
+import edelkroneAPI
+import Extensions
 
 // MARK: - MotionControlInterface -
 

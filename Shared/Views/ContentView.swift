@@ -6,6 +6,7 @@
  Copyright © 2022 Carsten Müller. All rights reserved.
  */
 import SwiftUI
+import edelkroneAPI
 
 struct ContentView: View {
   @AppStorage(Preferences.Hostname.rawValue) private  var hostname = ""

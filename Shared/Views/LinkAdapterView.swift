@@ -9,6 +9,8 @@
  */
 
 import SwiftUI
+import edelkroneAPI
+import Extensions
 
 struct LinkAdapterStatusView: View{
   var adapter: LinkAdapter

@@ -5,7 +5,10 @@
 //  Created by Carsten Müller on 01.04.22.
 //
 
+
 import SwiftUI
+import edelkroneAPI
+import Extensions
 
 // MARK: - BatteryView -
 
@@ -31,10 +34,13 @@ struct BatteryView: View{
       // Color(white: 1.0, opacity: 0.8)
       batteryImage.resizable().aspectRatio(CGSize(width: 364, height: 205), contentMode: .fit)
       ZStack{
-        Text(String(format:"%3d%%",Int(level*100)))
+        //String(format: "%3d %%",arguments: Int(level*100) )
+//        Text("")
+//          .font(.applicationFont(.caption).weight(.bold)).monospacedDigit().foregroundColor(.black)
+//          .viewBorder(color: .darkWhite, radius: 0.2, outline: false)
+        Text( String(format: "%3d%%", Int(level*100) ) )
           .font(.applicationFont(.caption).weight(.bold)).monospacedDigit().foregroundColor(.black)
           .viewBorder(color: .darkWhite, radius: 0.2, outline: false)
-        
       }
       .padding([.leading],-4)
       .padding([.top],1)
