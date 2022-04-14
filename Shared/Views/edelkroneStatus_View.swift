@@ -71,7 +71,7 @@ struct edelkroneStatus_View: View {
         Text("Reset").font(.applicationFont(.body))
       }.padding([.leading],50)
       Spacer()
-    }.frame(minWidth:800)
+    }.frame(minWidth:680)
     
     
     

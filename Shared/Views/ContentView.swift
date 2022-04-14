@@ -25,9 +25,9 @@ struct ContentView: View {
       case .showMotionControlInterface:
         MotionControlInterface()
       }
-      Spacer()
+//      Spacer()
       edelkroneStatus_View(edelkrone: edelkrone)
-    }.frame(minWidth: 680,idealWidth: 900 ,maxWidth: .infinity, minHeight:150,maxHeight:.infinity)
+    }.frame(minWidth: 750,idealWidth: 900 ,maxWidth: .infinity, minHeight:150,maxHeight:.infinity)
       .background(Rectangle().fill(Color.lightWhite))
   }
   

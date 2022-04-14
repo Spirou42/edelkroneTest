@@ -53,6 +53,7 @@
 /* Begin PBXFileReference section */
 		9302807227EBC4F6001439E8 /* MotionControlIInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlIInterface.swift; sourceTree = "<group>"; };
 		93045C0427F10BB400846817 /* ToggleStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStyles.swift; sourceTree = "<group>"; };
+		9327724728087BB900277B9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		932CF2E027E5377100A4F92F /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		932CF2E127E5377100A4F92F /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedMotionControlSystemViews.swift; sourceTree = "<group>"; };
@@ -144,16 +145,10 @@
 			path = "Shape'n'Styles";
 			sourceTree = "<group>";
 		};
-		9345BAB027D8B1750099FC90 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		9359C28B27D0014500743008 = {
 			isa = PBXGroup;
 			children = (
+				9327724728087BB900277B9A /* README.md */,
 				936FE4BD2807205600ABDF02 /* Packages */,
 				934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */,
 				93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */,
@@ -168,7 +163,6 @@
 			children = (
 				932CF2DF27E5375900A4F92F /* Joystick */,
 				932F718B27DBA6D100A91E40 /* Extensions */,
-				9345BAB027D8B1750099FC90 /* Models */,
 				934143EF27D7AB1500CDC4D3 /* Shape'n'Styles */,
 				93628F4427D3BFB400F93F02 /* Assets */,
 				934143EE27D7964C00CDC4D3 /* Views */,

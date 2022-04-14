@@ -31,8 +31,6 @@ class edelkroneTestApp: App {
     WindowGroup {
       ContentView()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-          
-      
     }
     
     

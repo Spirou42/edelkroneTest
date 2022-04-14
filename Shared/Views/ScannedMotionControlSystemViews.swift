@@ -86,8 +86,8 @@ struct ScannedMotionControlSystem_List:View{
         .background(Rectangle().fill(.red))
         .border(Color("Outline"), width:1)
         .listStyle(.bordered)
-        .frame(minWidth: 600, idealWidth:780, maxWidth:800)
-        .fixedSize(horizontal: true, vertical: false)
+//        .frame(minWidth: 600, idealWidth:650, maxWidth:800)
+//        .fixedSize(horizontal: true, vertical: false)
         .colorMultiply(.darkWhite)
         
         HStack{
@@ -118,6 +118,7 @@ struct ScannedMotionControlSystem_List:View{
     }
     .padding([.top,.bottom],12)
     .padding([.trailing,.leading],8)
+    .frame(width: 750.0)
     .border(Color("Outline"), width: 2)
     .background(Rectangle().fill(Color.lightWhite))
     

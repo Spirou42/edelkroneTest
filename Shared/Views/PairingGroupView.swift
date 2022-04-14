@@ -116,7 +116,7 @@ struct PairingGroupView_Previews: PreviewProvider {
 
 struct PairingGroupList_Previews: PreviewProvider{
   static var previews: some View {
-    PairingGroupList(pairedGroups:[PairingGroup(),PairingGroup()])
+    PairingGroupList(pairedGroups:[])
   }
   
 }

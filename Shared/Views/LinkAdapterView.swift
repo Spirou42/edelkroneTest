@@ -84,8 +84,8 @@ struct LinkAdapterView: View{
         }
         .buttonStyle(GradientGlyphButtonStyle(buttonColor:  adapter.isConnected ? Color.Theme.Green : Color.Theme.Red,
                                               shadowRadius: 0,
-                                              glyph:Text(adapter.isConnected ? "\u{22f3}":"\u{22f2}")
-          .font(.custom("Symbols-Regular", size: buttonSize+10))
+                                              glyph:Text(adapter.isConnected ? "\u{22f3}":"\u{22f2}").font(.custom("Symbols-Regular", size: buttonSize+10)),
+                                              glyphPadding: 10
                                              ))
         
         
@@ -96,9 +96,11 @@ struct LinkAdapterView: View{
           
         }.buttonStyle(GradientGlyphButtonStyle(buttonColor: Color.Theme.BlueLighter,
                                                shadowRadius: 0,
-                                               glyph:Text("\u{22f4}")
-          .font(.custom("Symbols-Regular", size: buttonSize+10))
+                                               glyph:Text("\u{22f4}").font(.custom("Symbols-Regular", size: buttonSize+10)),
+                                               glyphPadding: 10
                                               ))
+          
+                                            
       }
       .padding([.leading, .trailing],10)
     }
@@ -138,7 +140,7 @@ struct LinkAdapterList: View {
     }.padding([.top,.bottom],12)
       .padding([.trailing,.leading],8)
       .border(Color("Outline"), width: 2)
-      .frame(minWidth: 780, idealWidth: 800, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
+      .frame(minWidth: 700, idealWidth: 720, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
       .background(Rectangle().fill(Color.lightWhite))
   }
 }
