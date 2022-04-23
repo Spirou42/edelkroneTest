@@ -83,8 +83,9 @@ struct PairingGroupList:View{
       if(pairedGroups.isEmpty){
         VStack{
           Text("No Groups found")
-            .font(.applicationFont(.largeTitle)).foregroundColor(Color("TextColor"))
-        }
+            .font(.applicationFont(.largeTitle))
+            .foregroundColor(Color("TextColor"))
+        }.frame(minWidth: 600, idealWidth:780, maxWidth:800,alignment: .leading)
       }else{
         List{
           ForEach(pairedGroups) { group in

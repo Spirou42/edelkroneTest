@@ -21,6 +21,8 @@
 		932F718A27DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */; };
 		932F718D27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
 		932F718E27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
+		933E702B2809B84000B96A21 /* KeyposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E702A2809B84000B96A21 /* KeyposeView.swift */; };
+		933E702C2809B84000B96A21 /* KeyposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E702A2809B84000B96A21 /* KeyposeView.swift */; };
 		934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
 		934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
 		9345BAAE27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */; };
@@ -58,6 +60,7 @@
 		932CF2E127E5377100A4F92F /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedMotionControlSystemViews.swift; sourceTree = "<group>"; };
 		932F718C27DBA6F100A91E40 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		933E702A2809B84000B96A21 /* KeyposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyposeView.swift; sourceTree = "<group>"; };
 		934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAdapterView.swift; sourceTree = "<group>"; };
 		9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneStatus_View.swift; sourceTree = "<group>"; };
 		9346525F27F4E415002765E2 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
@@ -132,6 +135,7 @@
 				93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */,
 				9302807227EBC4F6001439E8 /* MotionControlIInterface.swift */,
 				9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */,
+				933E702A2809B84000B96A21 /* KeyposeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,10 +152,10 @@
 		9359C28B27D0014500743008 = {
 			isa = PBXGroup;
 			children = (
-				9327724728087BB900277B9A /* README.md */,
-				936FE4BD2807205600ABDF02 /* Packages */,
 				934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */,
 				93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */,
+				9327724728087BB900277B9A /* README.md */,
+				936FE4BD2807205600ABDF02 /* Packages */,
 				9359C29027D0014500743008 /* Shared */,
 				9359C29F27D0014700743008 /* macOS */,
 				9359C29927D0014700743008 /* Products */,
@@ -161,10 +165,10 @@
 		9359C29027D0014500743008 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				93628F4427D3BFB400F93F02 /* Assets */,
 				932CF2DF27E5375900A4F92F /* Joystick */,
 				932F718B27DBA6D100A91E40 /* Extensions */,
 				934143EF27D7AB1500CDC4D3 /* Shape'n'Styles */,
-				93628F4427D3BFB400F93F02 /* Assets */,
 				934143EE27D7964C00CDC4D3 /* Views */,
 				9359C29127D0014500743008 /* edelkroneTestApp.swift */,
 			);
@@ -330,6 +334,7 @@
 				932F718D27DBA6F100A91E40 /* String.swift in Sources */,
 				938946C227E607250029A120 /* CGFloat.swift in Sources */,
 				932F718927DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */,
+				933E702B2809B84000B96A21 /* KeyposeView.swift in Sources */,
 				9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */,
 				9346526027F4E415002765E2 /* Popup.swift in Sources */,
 				934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
@@ -355,6 +360,7 @@
 				938946C327E607250029A120 /* CGFloat.swift in Sources */,
 				93045C0627F10BB400846817 /* ToggleStyles.swift in Sources */,
 				9302807427EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */,
+				933E702C2809B84000B96A21 /* KeyposeView.swift in Sources */,
 				93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */,
 				9346526127F4E415002765E2 /* Popup.swift in Sources */,
 				9345BAAF27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */,
