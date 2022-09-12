@@ -32,6 +32,6 @@ struct KeyposeView: View {
 
 struct KeyposeView_Previews: PreviewProvider {
   static var previews: some View {
-    KeyposeView(slot: KeyposeSlot(1 , status: MotionControlStatus() ) )
+    KeyposeView(slot: KeyposeSlot(0 , status: MotionControlStatus() ) )
   }
 }

@@ -50,6 +50,8 @@
 		93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */; };
 		93D7ED2027E10245002C8E4A /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */; };
 		93D7ED2127E10245002C8E4A /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */; };
+		93E31C882815730400576289 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E31C872815730400576289 /* TestView.swift */; };
+		93E31C892815730400576289 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E31C872815730400576289 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,16 +75,17 @@
 		9359C2A027D0014700743008 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		93628F4127D3BCE700F93F02 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "edelkroneTest--macOS--Info.plist"; sourceTree = "<group>"; };
-		936FE4C02807207700ABDF02 /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = edelkroneAPI; path = ../../edelkroneAPI; sourceTree = "<group>"; };
 		936FE4C12807207A00ABDF02 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 		9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlStatus.swift; sourceTree = "<group>"; };
 		938946C127E607250029A120 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		938946C427E639C60029A120 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		93C05AFE28148F18008D8CB9 /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = edelkroneAPI; path = ../../edelkroneAPI; sourceTree = "<group>"; };
 		93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Symbols-Regular.otf"; path = "Assets/Production/Symbols-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		93D1701227D235D4000F8F63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
 		93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingGroupView.swift; sourceTree = "<group>"; };
+		93E31C872815730400576289 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +139,7 @@
 				9302807227EBC4F6001439E8 /* MotionControlIInterface.swift */,
 				9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */,
 				933E702A2809B84000B96A21 /* KeyposeView.swift */,
+				93E31C872815730400576289 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,8 +211,8 @@
 		936FE4BD2807205600ABDF02 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				93C05AFE28148F18008D8CB9 /* edelkroneAPI */,
 				936FE4C12807207A00ABDF02 /* Extensions */,
-				936FE4C02807207700ABDF02 /* edelkroneAPI */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -328,6 +332,7 @@
 				9359C2A327D0014700743008 /* ContentView.swift in Sources */,
 				93045C0527F10BB400846817 /* ToggleStyles.swift in Sources */,
 				9302807327EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */,
+				93E31C882815730400576289 /* TestView.swift in Sources */,
 				9372B6FF27F73BEA0025CFFD /* MotionControlStatus.swift in Sources */,
 				932CF2E427E5377100A4F92F /* Joystick.swift in Sources */,
 				9345BAAE27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */,
@@ -348,6 +353,7 @@
 			files = (
 				9345BAB127D8FD940099FC90 /* Fonts.swift in Sources */,
 				93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */,
+				93E31C892815730400576289 /* TestView.swift in Sources */,
 				932F718A27DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */,
 				938946C627E639C60029A120 /* Color.swift in Sources */,
 				9359C2A427D0014700743008 /* ContentView.swift in Sources */,
