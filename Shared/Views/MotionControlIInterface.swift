@@ -14,8 +14,8 @@ import Extensions
 
 struct MotionControlInterface: View {
   @ObservedObject var motionControlStatus = edelkroneAPI.shared.motionControlStatus
-  var colorized = ColorStyle(thumbGradient: Gradient(whithDark: Color.Theme.GreenDarker),
-                             backgroundGradient: Gradient(whithDark: Color("JoystickBackgroundDark")),
+  var colorized = ColorStyle(thumbGradient: Gradient(withDark: Color.Theme.GreenDarker),
+                             backgroundGradient: Gradient(withDark: Color("JoystickBackgroundDark")),
                              strokeColor: Color.Theme.Orange,
                              labelColor: .white)
   

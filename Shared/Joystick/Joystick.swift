@@ -446,8 +446,8 @@ public struct Joystick<Label>: View where Label : View {
 
 
 struct Joystick_Previews: PreviewProvider {
-  static var colorized = ColorStyle(thumbGradient: Gradient(whithDark: Color("JoystickThumbDark")),
-                                    backgroundGradient: Gradient(whithDark: Color("JoystickBackgroundDark")),
+  static var colorized = ColorStyle(thumbGradient: Gradient(withDark: Color("JoystickThumbDark")),
+                                    backgroundGradient: Gradient(withDark: Color("JoystickBackgroundDark")),
                                     strokeColor: Color("JoystickRing"),
                                     labelColor: .white
   )
