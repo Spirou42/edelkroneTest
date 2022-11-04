@@ -76,6 +76,10 @@ extension Color {
     public static var OrangeLighter:Color {
       return Color("Theme OrangeLighter")
     }
+    
+    public static var TransparentGray: Color {
+      return Color("Theme TransGray")
+    }
 
   }
   
