@@ -7,50 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9302807327EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302807227EBC4F6001439E8 /* MotionControlIInterface.swift */; };
 		9302807427EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302807227EBC4F6001439E8 /* MotionControlIInterface.swift */; };
-		93045C0527F10BB400846817 /* ToggleStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93045C0427F10BB400846817 /* ToggleStyles.swift */; };
 		93045C0627F10BB400846817 /* ToggleStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93045C0427F10BB400846817 /* ToggleStyles.swift */; };
-		93215DAB28071432007C5A50 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 93215DAA28071432007C5A50 /* Extensions */; };
-		93215DB428071F64007C5A50 /* edelkroneAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 93215DB328071F64007C5A50 /* edelkroneAPI */; };
-		932CF2E227E5377100A4F92F /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E027E5377100A4F92F /* CGPoint.swift */; };
 		932CF2E327E5377100A4F92F /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E027E5377100A4F92F /* CGPoint.swift */; };
-		932CF2E427E5377100A4F92F /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E127E5377100A4F92F /* Joystick.swift */; };
 		932CF2E527E5377100A4F92F /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E127E5377100A4F92F /* Joystick.swift */; };
-		932F718927DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */; };
 		932F718A27DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718827DB66F700A91E40 /* ScannedMotionControlSystemViews.swift */; };
-		932F718D27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
 		932F718E27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
-		933E702B2809B84000B96A21 /* KeyposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E702A2809B84000B96A21 /* KeyposeView.swift */; };
 		933E702C2809B84000B96A21 /* KeyposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E702A2809B84000B96A21 /* KeyposeView.swift */; };
-		934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
 		934143ED27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934143EB27D77DE400CDC4D3 /* LinkAdapterView.swift */; };
-		9345BAAE27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */; };
 		9345BAAF27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345BAAD27D89C540099FC90 /* edelkroneStatus_View.swift */; };
 		9345BAB127D8FD940099FC90 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93628F4127D3BCE700F93F02 /* Fonts.swift */; };
-		9345BAB227D8FD940099FC90 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93628F4127D3BCE700F93F02 /* Fonts.swift */; };
-		9346526027F4E415002765E2 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346525F27F4E415002765E2 /* Popup.swift */; };
 		9346526127F4E415002765E2 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9346525F27F4E415002765E2 /* Popup.swift */; };
 		934AD1CB27D5F67100E995E9 /* edelkroneTest.docc in Sources */ = {isa = PBXBuildFile; fileRef = 934AD1CA27D5F67100E995E9 /* edelkroneTest.docc */; };
-		9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
 		9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29127D0014500743008 /* edelkroneTestApp.swift */; };
-		9359C2A327D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
 		9359C2A427D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
-		9359C2A527D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
 		9359C2A627D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
-		9372B6FF27F73BEA0025CFFD /* MotionControlStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */; };
 		9372B70027F73BEA0025CFFD /* MotionControlStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */; };
-		938946C227E607250029A120 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C127E607250029A120 /* CGFloat.swift */; };
+		938922E6291673380036060A /* edelkroneAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 938922E5291673380036060A /* edelkroneAPI */; };
+		938922E9291673420036060A /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 938922E8291673420036060A /* Extensions */; };
 		938946C327E607250029A120 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C127E607250029A120 /* CGFloat.swift */; };
-		938946C527E639C60029A120 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C427E639C60029A120 /* Color.swift */; };
 		938946C627E639C60029A120 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C427E639C60029A120 /* Color.swift */; };
 		93CF78B027D4DC7B000335A7 /* Symbols-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */; };
 		93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701227D235D4000F8F63 /* SettingsView.swift */; };
 		93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */; };
 		93D1701727D23639000F8F63 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */; };
-		93D7ED2027E10245002C8E4A /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */; };
 		93D7ED2127E10245002C8E4A /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */; };
-		93E31C882815730400576289 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E31C872815730400576289 /* TestView.swift */; };
 		93E31C892815730400576289 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E31C872815730400576289 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,16 +51,15 @@
 		9359C29127D0014500743008 /* edelkroneTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edelkroneTestApp.swift; sourceTree = "<group>"; };
 		9359C29227D0014500743008 /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9359C29327D0014700743008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9359C29827D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C29E27D0014700743008 /* edelkroneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edelkroneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9359C2A027D0014700743008 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		93628F4127D3BCE700F93F02 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "edelkroneTest--macOS--Info.plist"; sourceTree = "<group>"; };
-		936FE4C12807207A00ABDF02 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 		9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlStatus.swift; sourceTree = "<group>"; };
+		938922E2291673030036060A /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = edelkroneAPI; sourceTree = "<group>"; };
+		938922E3291673150036060A /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 		938946C127E607250029A120 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		938946C427E639C60029A120 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		93C05AFE28148F18008D8CB9 /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = edelkroneAPI; path = ../../edelkroneAPI; sourceTree = "<group>"; };
 		93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Symbols-Regular.otf"; path = "Assets/Production/Symbols-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		93D1701227D235D4000F8F63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -89,19 +69,12 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9359C29527D0014700743008 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9359C29B27D0014700743008 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93215DAB28071432007C5A50 /* Extensions in Frameworks */,
-				93215DB428071F64007C5A50 /* edelkroneAPI in Frameworks */,
+				938922E9291673420036060A /* Extensions in Frameworks */,
+				938922E6291673380036060A /* edelkroneAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +136,7 @@
 				9359C29027D0014500743008 /* Shared */,
 				9359C29F27D0014700743008 /* macOS */,
 				9359C29927D0014700743008 /* Products */,
+				93D570AF291540B300020B2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,7 +156,6 @@
 		9359C29927D0014700743008 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9359C29827D0014700743008 /* edelkroneTest.app */,
 				9359C29E27D0014700743008 /* edelkroneTest.app */,
 			);
 			name = Products;
@@ -211,34 +184,22 @@
 		936FE4BD2807205600ABDF02 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				93C05AFE28148F18008D8CB9 /* edelkroneAPI */,
-				936FE4C12807207A00ABDF02 /* Extensions */,
+				938922E2291673030036060A /* edelkroneAPI */,
+				938922E3291673150036060A /* Extensions */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		93D570AF291540B300020B2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9359C29727D0014700743008 /* edelkroneTest (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9359C2A927D0014700743008 /* Build configuration list for PBXNativeTarget "edelkroneTest (iOS)" */;
-			buildPhases = (
-				9359C29427D0014700743008 /* Sources */,
-				9359C29527D0014700743008 /* Frameworks */,
-				9359C29627D0014700743008 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "edelkroneTest (iOS)";
-			packageProductDependencies = (
-			);
-			productName = "edelkroneTest (iOS)";
-			productReference = 9359C29827D0014700743008 /* edelkroneTest.app */;
-			productType = "com.apple.product-type.application";
-		};
 		9359C29D27D0014700743008 /* edelkroneTest (macOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9359C2AC27D0014700743008 /* Build configuration list for PBXNativeTarget "edelkroneTest (macOS)" */;
@@ -253,8 +214,8 @@
 			);
 			name = "edelkroneTest (macOS)";
 			packageProductDependencies = (
-				93215DAA28071432007C5A50 /* Extensions */,
-				93215DB328071F64007C5A50 /* edelkroneAPI */,
+				938922E5291673380036060A /* edelkroneAPI */,
+				938922E8291673420036060A /* Extensions */,
 			);
 			productName = "edelkroneTest (macOS)";
 			productReference = 9359C29E27D0014700743008 /* edelkroneTest.app */;
@@ -270,9 +231,6 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
-					9359C29727D0014700743008 = {
-						CreatedOnToolsVersion = 13.2.1;
-					};
 					9359C29D27D0014700743008 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -288,28 +246,19 @@
 			);
 			mainGroup = 9359C28B27D0014500743008;
 			packageReferences = (
-				93215DA928071432007C5A50 /* XCRemoteSwiftPackageReference "Extensions" */,
-				93215DB228071F64007C5A50 /* XCRemoteSwiftPackageReference "edelkroneAPI" */,
+				938922E4291673380036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */,
+				938922E7291673420036060A /* XCRemoteSwiftPackageReference "Extensions" */,
 			);
 			productRefGroup = 9359C29927D0014700743008 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9359C29727D0014700743008 /* edelkroneTest (iOS) */,
 				9359C29D27D0014700743008 /* edelkroneTest (macOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9359C29627D0014700743008 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9359C2A527D0014700743008 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9359C29C27D0014700743008 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,31 +271,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9359C29427D0014700743008 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				93D7ED2027E10245002C8E4A /* PairingGroupView.swift in Sources */,
-				9345BAB227D8FD940099FC90 /* Fonts.swift in Sources */,
-				932CF2E227E5377100A4F92F /* CGPoint.swift in Sources */,
-				9359C2A327D0014700743008 /* ContentView.swift in Sources */,
-				93045C0527F10BB400846817 /* ToggleStyles.swift in Sources */,
-				9302807327EBC4F6001439E8 /* MotionControlIInterface.swift in Sources */,
-				93E31C882815730400576289 /* TestView.swift in Sources */,
-				9372B6FF27F73BEA0025CFFD /* MotionControlStatus.swift in Sources */,
-				932CF2E427E5377100A4F92F /* Joystick.swift in Sources */,
-				9345BAAE27D89C540099FC90 /* edelkroneStatus_View.swift in Sources */,
-				932F718D27DBA6F100A91E40 /* String.swift in Sources */,
-				938946C227E607250029A120 /* CGFloat.swift in Sources */,
-				932F718927DB66F700A91E40 /* ScannedMotionControlSystemViews.swift in Sources */,
-				933E702B2809B84000B96A21 /* KeyposeView.swift in Sources */,
-				9359C2A127D0014700743008 /* edelkroneTestApp.swift in Sources */,
-				9346526027F4E415002765E2 /* Popup.swift in Sources */,
-				934143EC27D77DE400CDC4D3 /* LinkAdapterView.swift in Sources */,
-				938946C527E639C60029A120 /* Color.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9359C29A27D0014700743008 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -413,7 +337,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -434,7 +358,10 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = NO;
 				RUN_DOCUMENTATION_COMPILER = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -474,7 +401,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -488,76 +415,19 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = NO;
 				RUN_DOCUMENTATION_COMPILER = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-			};
-			name = Release;
-		};
-		9359C2AA27D0014700743008 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 95VARN682M;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.camue.edelkroneTest;
-				PRODUCT_NAME = edelkroneTest;
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9359C2AB27D0014700743008 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 95VARN682M;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.camue.edelkroneTest;
-				PRODUCT_NAME = edelkroneTest;
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		9359C2AD27D0014700743008 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
@@ -568,21 +438,28 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 95VARN682M;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_MASTER_OBJECT_FILE = YES;
 				INFOPLIST_FILE = "edelkroneTest--macOS--Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-v";
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.camue.edelkroneTest;
 				PRODUCT_NAME = edelkroneTest;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -591,6 +468,7 @@
 		9359C2AE27D0014700743008 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
@@ -601,21 +479,27 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 95VARN682M;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_MASTER_OBJECT_FILE = YES;
 				INFOPLIST_FILE = "edelkroneTest--macOS--Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.camue.edelkroneTest;
 				PRODUCT_NAME = edelkroneTest;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -633,15 +517,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9359C2A927D0014700743008 /* Build configuration list for PBXNativeTarget "edelkroneTest (iOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9359C2AA27D0014700743008 /* Debug */,
-				9359C2AB27D0014700743008 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9359C2AC27D0014700743008 /* Build configuration list for PBXNativeTarget "edelkroneTest (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -654,17 +529,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		93215DA928071432007C5A50 /* XCRemoteSwiftPackageReference "Extensions" */ = {
+		938922E4291673380036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Spirou42/Extensions.git";
+			repositoryURL = "https://github.com/Spirou42/edelkroneAPI.git";
 			requirement = {
 				branch = main;
 				kind = branch;
 			};
 		};
-		93215DB228071F64007C5A50 /* XCRemoteSwiftPackageReference "edelkroneAPI" */ = {
+		938922E7291673420036060A /* XCRemoteSwiftPackageReference "Extensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Spirou42/edelkroneAPI.git";
+			repositoryURL = "https://github.com/Spirou42/Extensions.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -673,15 +548,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		93215DAA28071432007C5A50 /* Extensions */ = {
+		938922E5291673380036060A /* edelkroneAPI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 93215DA928071432007C5A50 /* XCRemoteSwiftPackageReference "Extensions" */;
-			productName = Extensions;
-		};
-		93215DB328071F64007C5A50 /* edelkroneAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93215DB228071F64007C5A50 /* XCRemoteSwiftPackageReference "edelkroneAPI" */;
+			package = 938922E4291673380036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */;
 			productName = edelkroneAPI;
+		};
+		938922E8291673420036060A /* Extensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 938922E7291673420036060A /* XCRemoteSwiftPackageReference "Extensions" */;
+			productName = Extensions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
