@@ -14,24 +14,41 @@ struct ColoredToggleSwitch: ToggleStyle {
   var onColor = Color(.green)
   var offColor = Color(.orange)
   var thumbColor = Color.white
-  
+  let width = 55.0
+  let height = 30.0
+
+
   func makeBody(configuration: Self.Configuration) -> some View {
+    let offset = (width - height) / 2.0
     HStack {
       Text(label)
       Button(action: { configuration.isOn.toggle() } )
       {
-        RoundedRectangle(cornerRadius: 16, style: .circular)
+        RoundedRectangle(cornerRadius: height / 2, style: .circular)
           .fill(configuration.isOn ? onColor : offColor)
-          .frame(width: 50, height: 29)
+          .frame(width: width, height: height)
+          .shadow(color: .darkGray  , radius: 0.8, x: -0.5, y: -0.5)
+          .shadow(color: .lightWhite, radius: 0.8, x:  0.5, y:  0.5)
           .overlay(
             Circle()
               .fill(thumbColor)
-              .shadow(radius: 1, x: 0, y: 1)
-              .padding(1.5)
-              .offset(x: configuration.isOn ? 10 : -10))
+              .shadow(color: .darkGray  , radius: 0.8, x:  0.5, y:  0.5)
+              .shadow(color: .lightWhite, radius: 0.8, x: -0.5, y: -0.5)
+              .padding(2.5)
+              .offset(x: configuration.isOn ? offset : -offset, y: 0.0)
+              
+          )
           .animation(Animation.easeInOut(duration: 0.1),value: 2)
-      }.buttonStyle(.borderless)
+          .padding(10)
+          //.background(Rectangle().fill(.black))
+          
+      }
+      
+      .buttonStyle(.borderless)
+        //.padding(20)
+        
     }
+    //.frame(width: width+20, height: height+20)
     .font(.title)
     //    .padding([.leading,.trailing],5)
   }

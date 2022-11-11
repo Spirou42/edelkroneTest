@@ -19,16 +19,28 @@ struct LinkAdapterStatusView: View{
     HStack(alignment: .bottom, spacing: 10){
       HStack(alignment: .bottom, spacing: 1){
         Text("Firmware: ").font(.body)
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+
         Text("\u{26AB}")
           .font(.custom("Symbols-Regular", size:labelSize))
           .foregroundColor( adapter.updateRequired ? Color.Theme.Red : Color.Theme.Green)
+          .shadow(color:.white, radius: 0.2, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.2, x:-0.7, y:-0.7)
+
       }
       
       HStack(alignment: .bottom, spacing: 1){
         Text("Radio: ").font(.body)
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+
         Text("\u{26AB}")
           .font(.custom("Symbols-Regular", size:labelSize))
           .foregroundColor( adapter.radioUpdateRequired ? Color.Theme.Red : Color.Theme.Green)
+          .shadow(color:.white, radius: 0.2, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.2, x:-0.7, y:-0.7)
+
       }
     }.frame(maxHeight:18)
   }
@@ -43,6 +55,7 @@ struct LinkAdapterView: View{
   
   var body: some View {
     
+    
     HStack(alignment: .center,spacing: 0){
       VStack(alignment: .center,spacing: 1){
         HStack(spacing: 20) {
@@ -53,8 +66,14 @@ struct LinkAdapterView: View{
             .font(.applicationFont(.title))
           
         }
+        .shadow(color:.white, radius: 0.3, x:1.5, y:1.5)
+        .shadow(color:.lightGray, radius: 0.3, x:-1.5, y:-1.5)
+
         Text((!adapter.isPaired ? "not-":"")+"paired")
           .font(.applicationFont(.title2))
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+
           .padding([.bottom],3)
         
         
@@ -95,19 +114,25 @@ struct LinkAdapterView: View{
             .frame(maxWidth:.infinity, alignment: .center)
           
         }.buttonStyle(GradientGlyphButtonStyle(buttonColor: Color.Theme.BlueLighter,
-                                               shadowRadius: 0,
+                                               shadowRadius: 3,
                                                glyph:Text("\u{22f4}").font(.custom("Symbols-Regular", size: buttonSize+10)),
                                                glyphPadding: 10
                                               ))
-          
-                                            
       }
       .padding([.leading, .trailing],10)
+      
     }
-    .border(Color("Outline"), width: 3)
-    .frame(maxWidth: .infinity)
+    //.border(Color("Outline"), width: 3)
+    .fixedSize(horizontal: false, vertical: false)
     
-    //.border(Color("Seperator"), width: 2, edges: [.top])
+    .frame(maxWidth: .infinity)
+    .background(
+      RoundedRectangle(cornerRadius: 10)
+        .fill(Color.lightWhite)
+        .shadow(color:.lightGray, radius:4,x:6,y:6)
+        .shadow(color:.white, radius: 4,x: -6, y:-6)
+    )
+    
   }
 }
 
@@ -117,30 +142,37 @@ struct LinkAdapterList: View {
     VStack(alignment: .leading, spacing: 8){
       Text("Detected Adapters:")
         .font(.applicationFont(.title2))
+        .shadow(color:.white, radius: 0.2, x:-1, y:-1)
+        .shadow(color:.lightGray, radius: 0.2, x:1, y:1)
+      
       //.padding([.bottom],8)
-      if(linkAdapters.isEmpty){
-        VStack{
-          Text("None")
-            .font(.applicationFont(.largeTitle)).foregroundColor(.red)
-          Text("check Connection, Hostname and Port")
-            .font(.applicationFont(.title2))
-        }
-      }else{
-        List{
+      List{
+        if(linkAdapters.isEmpty){
+          Spacer()
+          VStack(){
+            Text("No Adapter found")
+              .font(.applicationFont(.largeTitle)).foregroundColor(.red)
+            Spacer()
+            Text("check Connection, Hostname and Port")
+              .font(.applicationFont(.title2))
+          }.frame(maxWidth:.infinity, maxHeight: .infinity)
+          
+        }else{
           ForEach(linkAdapters) { linkAdapter in
             LinkAdapterView(adapter: linkAdapter)
+              .padding([.top, .bottom],10)
+              .padding([.leading, .trailing],10)
+
           }
-          
-        }.frame(maxWidth:.infinity, maxHeight: .infinity)
-          .listRowInsets(EdgeInsets())
-          .listStyle(.bordered)
-          .colorMultiply(.darkWhite)
-        
-      }
+        }
+      }.frame(maxWidth:.infinity, maxHeight: .infinity)
+        .listRowInsets(EdgeInsets())
+        .listStyle(.bordered)
+        .colorMultiply(.darkWhite)
     }.padding([.top,.bottom],12)
       .padding([.trailing,.leading],8)
-      .border(Color("Outline"), width: 2)
-      .frame(minWidth: 700, idealWidth: 720, maxWidth: .infinity, minHeight: 200, idealHeight: 400, maxHeight: .infinity, alignment: .trailing)
+    //.border(Color("Outline"), width: 2)
+      .frame(minWidth: 796, idealWidth: 1194, maxWidth: .infinity, minHeight: 300, idealHeight:1000, maxHeight: .infinity, alignment: .leading)
       .background(Rectangle().fill(Color.lightWhite))
   }
 }

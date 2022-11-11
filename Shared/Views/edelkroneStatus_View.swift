@@ -23,56 +23,82 @@ struct edelkroneStatus_View: View {
         Text("Host:")
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
         Text(hostname+":"+String(port))
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
-          .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
+          .padding(EdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3))
           .inset()
           .background(.white)
-      }.padding( EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 10))
+      }.padding( EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
+        
       
       // Status
       HStack(alignment: .firstTextBaseline, spacing:3 ){
         Text("Status:")
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+        
         Text( edelkrone.hasAdapters ? "online" : "offline")
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
-          .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
+          .padding(EdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3))
           .inset()
-        //.background(.white)
+        .background(.white)
       }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+
 
       // Link
       HStack(alignment: .firstTextBaseline, spacing: 3){
         Text("Link:")
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+        
         Text(edelkrone.connectedAdapterID).monospacedDigit().frame(width:100.0)
           .font(.applicationFont(.body))
-          .padding(EdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3))
+          .padding(EdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3))
           .inset()
-      }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-
+          .background(.white)
+      }
+      .padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+        
+      
       // ThreadIndicators
-      HStack(spacing:1){
+      HStack(spacing:3){
         Text("Threads:  ")
           .font(.applicationFont(.body))
           .fixedSize(horizontal: true, vertical: true)
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
       	
         Text("\u{26AB}").font(.custom("Symbols-Regular", size: 10)).foregroundColor(edelkrone.scanResultThreadIsRunning ? .green : .red)
+          .shadow(color:.white, radius: 0.2, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.2, x:-0.7, y:-0.7)
         Text("\u{26AB}").font(.custom("Symbols-Regular", size: 10)).foregroundColor(edelkrone.pairingStatusThreadIsRunning ? .green : .red)
+          .shadow(color:.white, radius: 0.2, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.2, x:-0.7, y:-0.7)
+
         Text("\u{26AB}").font(.custom("Symbols-Regular", size: 10)).foregroundColor(edelkrone.periodicStatusThreadIsRunning ? .green : .red)
-      }
+          .shadow(color:.white, radius: 0.2, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.2, x:-0.7, y:-0.7)
+      }.padding( EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
       
-      //Spacer()
+      
+      Spacer()
       Button(action:edelkrone.reset){
         Text("Reset").font(.applicationFont(.body))
-      }.padding([.leading],50)
-      Spacer()
-    }.frame(minWidth:680)
-    
+          .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+          .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+
+      }.padding(EdgeInsets(top: 5, leading: 50, bottom: 5, trailing: 10))
+        
+    }.frame(minWidth:796, idealWidth: 1194)
+      .background(Rectangle().fill(Color.lightLightGray))
     
     
   }

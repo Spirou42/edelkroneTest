@@ -52,13 +52,22 @@ struct ScannedMotionControlSystem_View: View, Identifiable {
                                          onColor: Color("Theme Orange"),
                                          offColor: Color("Theme Red"),
                                          thumbColor: .white))
+
         .onChange(of: mcs.useInPairing, perform: { value in
           edelkroneAPI.shared.motionControlSystemsDict[mcs.macAddress]?.useInPairing = value
         })
+        
       
       
     }
     .padding()
+    .background(
+      RoundedRectangle(cornerRadius: 10)
+        .fill(Color.lightWhite)
+        .shadow(color:.lightGray, radius:4,x:6,y:6)
+        .shadow(color:.white, radius: 4,x: -6, y:-6)
+    )
+
 //    .border(Color("Outline"), width: 0.5)
   }
 }
@@ -73,13 +82,19 @@ struct ScannedMotionControlSystem_List:View{
     VStack(alignment: .leading, spacing: 8){
       Text("Unpaired Motion Control Systems:")
         .font(.applicationFont(.title2))
+        .shadow(color:.white, radius: 0.2, x:-1, y:-1)
+        .shadow(color:.lightGray, radius: 0.2, x:1, y:1)
+
       //.padding([.bottom],8)
       
       VStack(alignment: .leading, spacing: 3){
         List{
           ForEach(ungroupedMotionSystems){ mcs in
             ScannedMotionControlSystem_View(mcs: mcs)
-            Divider()
+              .padding([.top, .bottom],10)
+              .padding([.leading, .trailing],10)
+
+//            Divider()
           }
           
         }
@@ -118,7 +133,7 @@ struct ScannedMotionControlSystem_List:View{
     }
     .padding([.top,.bottom],12)
     .padding([.trailing,.leading],8)
-    .frame(width: 750.0)
+    .frame(maxWidth: .infinity, alignment: .leading)
     .border(Color("Outline"), width: 2)
     .background(Rectangle().fill(Color.lightWhite))
     

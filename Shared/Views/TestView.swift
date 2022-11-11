@@ -12,7 +12,7 @@ enum MyFruit {
 
 struct TestView: View {
   @State var favoriteFruit: MyFruit = .apple
-  
+  @State var bubu: Bool = false
   var fruitName: String {
     switch favoriteFruit {
     case .banana:
@@ -37,6 +37,16 @@ struct TestView: View {
           .tag(MyFruit.peach)
       }
       .pickerStyle(SegmentedPickerStyle())
+      Spacer()
+      Toggle(isOn: $bubu){
+
+      }
+      .toggleStyle(ColoredToggleSwitch(label: "Some Text",
+                                       onColor: Color("Theme Orange"),
+                                       offColor: Color("Theme Red"),
+                                       thumbColor: .white))
+      //.background(Rectangle().fill(.red))
+      Spacer()
     }
   }
 }

@@ -23,8 +23,8 @@
 		9359C2A427D0014700743008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9359C29227D0014500743008 /* ContentView.swift */; };
 		9359C2A627D0014700743008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9359C29327D0014700743008 /* Assets.xcassets */; };
 		9372B70027F73BEA0025CFFD /* MotionControlStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */; };
-		938922E6291673380036060A /* edelkroneAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 938922E5291673380036060A /* edelkroneAPI */; };
-		938922E9291673420036060A /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 938922E8291673420036060A /* Extensions */; };
+		938922EC29167C400036060A /* edelkroneAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 938922EB29167C400036060A /* edelkroneAPI */; };
+		938922EF29167C470036060A /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 938922EE29167C470036060A /* Extensions */; };
 		938946C327E607250029A120 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C127E607250029A120 /* CGFloat.swift */; };
 		938946C627E639C60029A120 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938946C427E639C60029A120 /* Color.swift */; };
 		93CF78B027D4DC7B000335A7 /* Symbols-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */; };
@@ -73,8 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				938922E9291673420036060A /* Extensions in Frameworks */,
-				938922E6291673380036060A /* edelkroneAPI in Frameworks */,
+				938922EF29167C470036060A /* Extensions in Frameworks */,
+				938922EC29167C400036060A /* edelkroneAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,8 +214,8 @@
 			);
 			name = "edelkroneTest (macOS)";
 			packageProductDependencies = (
-				938922E5291673380036060A /* edelkroneAPI */,
-				938922E8291673420036060A /* Extensions */,
+				938922EB29167C400036060A /* edelkroneAPI */,
+				938922EE29167C470036060A /* Extensions */,
 			);
 			productName = "edelkroneTest (macOS)";
 			productReference = 9359C29E27D0014700743008 /* edelkroneTest.app */;
@@ -246,8 +246,8 @@
 			);
 			mainGroup = 9359C28B27D0014500743008;
 			packageReferences = (
-				938922E4291673380036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */,
-				938922E7291673420036060A /* XCRemoteSwiftPackageReference "Extensions" */,
+				938922EA29167C400036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */,
+				938922ED29167C470036060A /* XCRemoteSwiftPackageReference "Extensions" */,
 			);
 			productRefGroup = 9359C29927D0014700743008 /* Products */;
 			projectDirPath = "";
@@ -529,7 +529,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		938922E4291673380036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */ = {
+		938922EA29167C400036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Spirou42/edelkroneAPI.git";
 			requirement = {
@@ -537,7 +537,7 @@
 				kind = branch;
 			};
 		};
-		938922E7291673420036060A /* XCRemoteSwiftPackageReference "Extensions" */ = {
+		938922ED29167C470036060A /* XCRemoteSwiftPackageReference "Extensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Spirou42/Extensions.git";
 			requirement = {
@@ -548,14 +548,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		938922E5291673380036060A /* edelkroneAPI */ = {
+		938922EB29167C400036060A /* edelkroneAPI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 938922E4291673380036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */;
+			package = 938922EA29167C400036060A /* XCRemoteSwiftPackageReference "edelkroneAPI" */;
 			productName = edelkroneAPI;
 		};
-		938922E8291673420036060A /* Extensions */ = {
+		938922EE29167C470036060A /* Extensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 938922E7291673420036060A /* XCRemoteSwiftPackageReference "Extensions" */;
+			package = 938922ED29167C470036060A /* XCRemoteSwiftPackageReference "Extensions" */;
 			productName = Extensions;
 		};
 /* End XCSwiftPackageProductDependency section */
