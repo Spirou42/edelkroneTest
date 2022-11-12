@@ -27,24 +27,39 @@ struct ScannedMotionControlSystem_View: View, Identifiable {
     
     HStack(){
       HStack(alignment:.top){
-        VStack(alignment: .center, spacing: 1){
+        // Motion controll description
+        VStack(alignment: .leading, spacing: 1){
+
+          // Group
+          HStack(){
+            Text("Group:")
+              .font(.applicationFont(.title2))
+            Text((mcs.setup == "none"  ? "none" : String(mcs.groupID) ) )
+              .font(.applicationFont((.title2)))
+          }// Group
           
-          Text(String(mcs.deviceType))
-            .font(.applicationFont(.largeTitle))
+          // Device
+          HStack(alignment: .top, spacing: 1){
+            
+            Text(String(mcs.deviceType))
+              .font(.applicationFont(.title))
+            
+            if(mcs.deviceType == .headOne){
+              Text(mcs.isTilted ? "(Tilt)" : "(Pan)")
+                .font(.applicationFont(.title))
+                .padding([.leading],20)
+            }
+          } // Device
           
-          Text(mcs.macAddress)
-            .font(.applicationFont(.body))
-            .textSelection(.enabled)
-          
-          Text("Group:" +  (mcs.setup == "none"  ? "none" : String(mcs.groupID) ) )
-          
-        }
-        if(mcs.deviceType == .headOne){
-          Text(mcs.isTilted ? "(Tilt)" : "(Pan)")
-            .font(.applicationFont(.largeTitle))
-            .padding([.trailing],20)
-        }
-        
+          // MAC adress
+          HStack(){
+            Text("MAC address:")
+              .font(.applicationFont(.caption))
+            Text(mcs.macAddress)
+              .font(.applicationFont(.caption))
+              .textSelection(.enabled)
+          } // MAC adress
+        }// Motion controll description
       }.frame(maxWidth: .infinity, alignment: .leading)
       
       Toggle(isOn: $mcs.useInPairing){ }
@@ -52,23 +67,18 @@ struct ScannedMotionControlSystem_View: View, Identifiable {
                                          onColor: Color("Theme Orange"),
                                          offColor: Color("Theme Red"),
                                          thumbColor: .white))
-
+      
         .onChange(of: mcs.useInPairing, perform: { value in
           edelkroneAPI.shared.motionControlSystemsDict[mcs.macAddress]?.useInPairing = value
         })
-        
-      
-      
     }
-    .padding()
+    .padding(5)
     .background(
       RoundedRectangle(cornerRadius: 10)
         .fill(Color.lightWhite)
         .shadow(color:.lightGray, radius:4,x:6,y:6)
         .shadow(color:.white, radius: 4,x: -6, y:-6)
     )
-
-//    .border(Color("Outline"), width: 0.5)
   }
 }
 
@@ -84,7 +94,7 @@ struct ScannedMotionControlSystem_List:View{
         .font(.applicationFont(.title2))
         .shadow(color:.white, radius: 0.2, x:-1, y:-1)
         .shadow(color:.lightGray, radius: 0.2, x:1, y:1)
-
+      
       //.padding([.bottom],8)
       
       VStack(alignment: .leading, spacing: 3){
@@ -93,16 +103,16 @@ struct ScannedMotionControlSystem_List:View{
             ScannedMotionControlSystem_View(mcs: mcs)
               .padding([.top, .bottom],10)
               .padding([.leading, .trailing],10)
-
-//            Divider()
+            
+            //            Divider()
           }
           
         }
         .background(Rectangle().fill(.red))
         .border(Color("Outline"), width:1)
         .listStyle(.bordered)
-//        .frame(minWidth: 600, idealWidth:650, maxWidth:800)
-//        .fixedSize(horizontal: true, vertical: false)
+        //        .frame(minWidth: 600, idealWidth:650, maxWidth:800)
+        //        .fixedSize(horizontal: true, vertical: false)
         .colorMultiply(.darkWhite)
         
         HStack{
@@ -123,18 +133,20 @@ struct ScannedMotionControlSystem_List:View{
                                                 glyph:Text("\u{22f4}")
             .font(.custom("Symbols-Regular", size: buttonSize+6)),
                                                 glyphPadding: 10,
-                                                width: 130,
+                                                width: 150,
                                                 height: 40,
                                                 bevelSize: 5.0
                                                ))
+          .padding([.trailing],38)
         }
       }
       .background(Rectangle().fill(Color.lightWhite))
     }
+    .frame(minWidth: 796, idealWidth: 1194, maxWidth: .infinity, minHeight: 250, idealHeight:300, maxHeight: .infinity, alignment: .leading)
     .padding([.top,.bottom],12)
     .padding([.trailing,.leading],8)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .border(Color("Outline"), width: 2)
+//    .border(Color("Outline"), width: 2)
     .background(Rectangle().fill(Color.lightWhite))
     
   }

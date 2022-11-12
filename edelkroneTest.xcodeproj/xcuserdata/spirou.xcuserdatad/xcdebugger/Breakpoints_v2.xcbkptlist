@@ -14,8 +14,8 @@
             filePath = "../edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "executeSessionGet(request:with:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -51,21 +51,6 @@
             landmarkName = "init(_:)"
             landmarkType = "7">
             <Locations>
-               <Location
-                  uuid = "729DFCAE-6E25-4367-8E3B-BDB5FDAA4692 - 32defd9aba6fe0c2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "default argument 0 of edelkroneAPI.KeyposeContainer.init(Swift.Int) -&gt; edelkroneAPI.KeyposeContainer"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "9">
-               </Location>
                <Location
                   uuid = "729DFCAE-6E25-4367-8E3B-BDB5FDAA4692 - 8f286026694738d1"
                   shouldBeEnabled = "Yes"
