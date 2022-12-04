@@ -14,22 +14,22 @@ struct KeyposeView: View {
   @ObservedObject var slot:KeyposeSlot
   var body: some View {
     ZStack(){
-      Button( action: {}){
-        Text("XXX")
-          .font(.applicationFont(.title))
-          .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .center)
-      }
-      .buttonStyle(ColoredButtonStyle(buttonColor:  Color.Theme.TransparentGray,
-                                      labelColor: Color.orange,
-                                      cornerRadius: 7,
-                                      shadowRadius: 0
-                                            ))
+//      Button( action: {}){
+//        Text("XXX")
+//          .font(.applicationFont(.title))
+//          .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .center)
+//      }
+//      .buttonStyle(ColoredButtonStyle(buttonColor:  Color.Theme.TransparentGray,
+//                                      labelColor: Color.orange,
+//                                      cornerRadius: 7,
+//                                      shadowRadius: 0
+//                                            ))
       
 
       VStack(alignment: .leading, spacing: 0){
 
         HStack(){
-          Text("Index:").frame(width:80,alignment: .trailing)
+          Text("Keypose:").frame(width:80,alignment: .trailing)
           Text(String(slot.index))
         }
         
@@ -51,7 +51,10 @@ struct KeyposeList: View {
   @ObservedObject var container:KeyposeContainer
   var body: some View {
     ZStack(){
-
+      HStack(alignment: .top, spacing: 1.0){}
+      ForEach(Array(container.slots.keys)){ index in
+        
+      }
     }
   }
 }

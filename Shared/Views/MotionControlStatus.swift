@@ -65,7 +65,8 @@ struct MCSStatus:View{
   @ObservedObject var mcsState:MotionControlStatus
   var columns: [GridItem] = [.init(.flexible(minimum: 20, maximum: 70),spacing:0.5,alignment:.trailing ),
                              .init(.flexible(minimum: 20, maximum: 80),spacing:0.5,alignment:.leading ),
-                             .init(.flexible(minimum: 20, maximum: 100),spacing:0.5,alignment:.leading )
+                             .init(.flexible(minimum: 20, maximum: 100),spacing:0.5,alignment:.leading ),
+                             .init(.flexible(minimum: 20, maximum: 80), spacing:0.5, alignment: .trailing)
   ]
   
   var body: some View {
@@ -93,6 +94,10 @@ struct MCSStatus:View{
             Rectangle().fill(Color.lightGray)
             Text("Position").font(.applicationFont(.title2).weight(.semibold)).padding(2)
           }
+          ZStack{
+            Rectangle().fill(Color.lightGray)
+            Text("Cal.").font(.applicationFont(.title2).weight(.semibold)).padding(2)
+          }
           
           ForEach( Array(mcsState.axelStatus.keys).sorted(by: {(lhs:AxelID, rhs:AxelID) in return lhs<rhs }) ,id:\.self){ c in
             ZStack(alignment: .center){
@@ -107,8 +112,24 @@ struct MCSStatus:View{
               Rectangle().fill(Color.lightLightGray)
               Text(String(format:"%03.03f",mcsState.axelStatus[c]!.position)).font(.applicationFont(.title3).weight(.regular)).monospacedDigit()
             }.frame(height:26.52)
+            ZStack(alignment: .center){
+              Rectangle().fill(Color.lightLightGray)
+              if(mcsState.axelStatus[c]!.canCalibrate){
+                Button(action:{edelkroneAPI.shared.calibrate(mcsState.axelStatus[c]!)}){
+                  Text("Calibrate")
+                    .font(.applicationFont(.caption))
+                }.buttonStyle(GradientGlyphButtonStyle(buttonColor: mcsState.axelStatus[c]!.needsCalibration ? Color.Theme.RedLighter : Color.Theme.GreenLighter,
+                                                       cornerRadius: 3.0,
+                                                       shadowRadius:0.0,
+                                                       width: 40.0,
+                                                       height: 19.0,
+                                                       bevelSize: 4.0
+                                                      ))
+              }
+              
+            }.frame(height:26.52)
           }
-        }.frame(minWidth:200,idealWidth:250, maxWidth:400, maxHeight:.infinity)
+        }.frame(minWidth:220,idealWidth:280, maxWidth:400, maxHeight:.infinity)
           .fixedSize(horizontal: true, vertical: true)
           //.border(.orange, width: 1.0, edges: Edge.allCases)
           .background(.gray)

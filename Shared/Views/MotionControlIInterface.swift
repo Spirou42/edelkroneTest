@@ -23,43 +23,46 @@ struct MotionControlInterface: View {
   
   
   var body: some View {
-    HStack(alignment:.top){
-      HStack(alignment: .top){
-        if motionControlStatus.hasPan || motionControlStatus.hasTilt{
-          Joystick(axelObjects: motionControlStatus.panTiltObjects(),
-                   freedoms:[ motionControlStatus.hasPan ? .horizontal : .none , motionControlStatus.hasTilt ? .vertical : .none,],
-                   colorStyle:colorized,
-                   thumbRadius:  42,
-                   padRadius: 100,
-                   action: nil){
-            VStack{
-              if motionControlStatus.hasPan{
-                Text("Pan").font(.applicationFont(.title2)).foregroundColor(.white)
-              }
-              if motionControlStatus.hasTilt{
-                Text("Tilt").font(.applicationFont(.title2)).foregroundColor(.white)
+    VStack(alignment: .trailing, spacing: 1.0){
+      HStack(alignment:.top){
+        HStack(alignment: .top){
+          if motionControlStatus.hasPan || motionControlStatus.hasTilt{
+            Joystick(axelObjects: motionControlStatus.panTiltObjects(),
+                     freedoms:[ motionControlStatus.hasPan ? .horizontal : .none , motionControlStatus.hasTilt ? .vertical : .none,],
+                     colorStyle:colorized,
+                     thumbRadius:  42,
+                     padRadius: 100,
+                     action: nil){
+              VStack{
+                if motionControlStatus.hasPan{
+                  Text("Pan").font(.applicationFont(.title2)).foregroundColor(.white)
+                }
+                if motionControlStatus.hasTilt{
+                  Text("Tilt").font(.applicationFont(.title2)).foregroundColor(.white)
+                }
               }
             }
           }
-        }
-        if motionControlStatus.hasSlide {
-          Joystick(axelObjects: motionControlStatus.slideObjects(),
-                   freedoms:[.horizontal],
-                   colorStyle:colorized,
-                   thumbRadius:42,
-                   padRadius: 100,
-                   action: nil){
-            Text("Slide").font(.applicationFont(.title2)).foregroundColor(.white)
+          if motionControlStatus.hasSlide {
+            Joystick(axelObjects: motionControlStatus.slideObjects(),
+                     freedoms:[.horizontal],
+                     colorStyle:colorized,
+                     thumbRadius:42,
+                     padRadius: 100,
+                     action: nil){
+              Text("Slide").font(.applicationFont(.title2)).foregroundColor(.white)
+            }
           }
+          
+          
         }
-        
-        
-      }
-      Spacer()
-      MCSStatus(mcsState:motionControlStatus)
-    }.frame(maxWidth: .infinity, maxHeight: .infinity)
-    .fixedSize(horizontal: false, vertical: true)
-    .background(Rectangle().fill(Color.lightLightGray))
+        Spacer()
+        MCSStatus(mcsState:motionControlStatus)
+      }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        .fixedSize(horizontal: false, vertical: true)
+        .background(Rectangle().fill(Color.lightLightGray))
+      KeyposeList(container: KeyposeContainer(edelkroneAPI.shared.motionControlStatus))
+    }
   }
 }
 

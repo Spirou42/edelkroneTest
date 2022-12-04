@@ -41,7 +41,7 @@ extension Color {
     public static var RedLight:Color {
       return Color("Theme RedLight")
     }
-    public static var redLighter:Color {
+    public static var RedLighter:Color {
       return Color("Theme RedLighter")
     }
     
@@ -80,7 +80,23 @@ extension Color {
     public static var TransparentGray: Color {
       return Color("Theme TransGray")
     }
-
+    public static var Gray:Color{
+      return Color.gray
+    }
+    
+    public static var GrayDark:Color{
+      return Color.darkGray
+    }
+    public static var GrayDarker:Color{
+      return Color.lightBlack
+    }
+    public static var GrayLight:Color{
+      return Color.lightGray
+    }
+    public static var GrayLighter:Color{
+      return Color.lightLightGray
+    }
+    
   }
   
 }
