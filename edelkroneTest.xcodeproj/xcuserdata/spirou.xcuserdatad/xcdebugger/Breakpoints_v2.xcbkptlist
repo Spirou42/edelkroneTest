@@ -84,5 +84,69 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "912AE4BB-FDB3-486B-A8A1-CD35CB63CE68"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Views/KeyposeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "912AE4BB-FDB3-486B-A8A1-CD35CB63CE68 - c5990fdd394315dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "edelkroneTest.KeyposeList.body.getter : some"
+                  moduleName = "edelkroneTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Shared/Views/KeyposeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "220">
+               </Location>
+               <Location
+                  uuid = "912AE4BB-FDB3-486B-A8A1-CD35CB63CE68 - 3e006c6450dd28fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.EmptyView&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;edelkroneAPI.KeyposeIndex&gt;, Swift.Int, SwiftUI.EmptyView&gt;)&gt; in edelkroneTest.KeyposeList.body.getter : some"
+                  moduleName = "edelkroneTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Shared/Views/KeyposeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "278">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8871E227-BAF8-4CAA-99E9-F5FF73ECF8BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "778"
+            endingLineNumber = "778"
+            landmarkName = "calibrate(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
