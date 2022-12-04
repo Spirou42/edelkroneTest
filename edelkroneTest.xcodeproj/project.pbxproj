@@ -56,8 +56,8 @@
 		93628F4127D3BCE700F93F02 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		93628F4327D3BDB400F93F02 /* edelkroneTest--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "edelkroneTest--macOS--Info.plist"; sourceTree = "<group>"; };
 		9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlStatus.swift; sourceTree = "<group>"; };
-		938922E2291673030036060A /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = edelkroneAPI; path = ../../edelkroneAPI; sourceTree = "<group>"; };
-		938922E3291673150036060A /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Extensions; path = ../../Extensions; sourceTree = "<group>"; };
+		938922E2291673030036060A /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = edelkroneAPI; sourceTree = "<group>"; };
+		938922E3291673150036060A /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 		938946C127E607250029A120 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		938946C427E639C60029A120 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Symbols-Regular.otf"; path = "Assets/Production/Symbols-Regular.otf"; sourceTree = SOURCE_ROOT; };
