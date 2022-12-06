@@ -61,15 +61,18 @@ struct BatteryView_Previews: PreviewProvider {
 struct MCSStatus:View{
   let buttonSize:CGFloat = Font.applicationFontSize(.title2)
   let buttonPadding:CGFloat = 5.0
+  let cellPadding = 1.0
   
-  @ObservedObject var mcsState:MotionControlStatus
-  var columns: [GridItem] = [.init(.flexible(minimum: 20, maximum: 70),spacing:0.5,alignment:.trailing ),
-                             .init(.flexible(minimum: 20, maximum: 80),spacing:0.5,alignment:.leading ),
-                             .init(.flexible(minimum: 20, maximum: 100),spacing:0.5,alignment:.leading ),
-                             .init(.flexible(minimum: 20, maximum: 80), spacing:0.5, alignment: .trailing)
+  var columns: [GridItem] = [.init(.flexible(minimum: 20, maximum: 70) , spacing: 1.0, alignment: .trailing ),
+                             .init(.flexible(minimum: 20, maximum: 80) , spacing: 1.0, alignment: .leading ),
+                             .init(.flexible(minimum: 20, maximum: 100), spacing: 1.0, alignment: .leading ),
+                             .init(.flexible(minimum: 20, maximum: 80) , spacing: 1.0, alignment: .trailing)
   ]
+  @ObservedObject var mcsState:MotionControlStatus
   
   var body: some View {
+    
+
     ZStack{
       Rectangle().fill(Color.lightGray)
       VStack(alignment: .leading, spacing: 4){
@@ -77,43 +80,51 @@ struct MCSStatus:View{
           VStack(alignment: .leading, spacing: 3){
             Text("Status: ").font(.applicationFont(.title2).weight(.semibold))
             Text(mcsState.state.toString()).font(.applicationFont(.title2))
-          }.padding([.top],4)
+          }.padding([.leading, .top],4)
             .padding([.bottom],8)
         }.fixedSize(horizontal: false, vertical: true)
         Divider()
-        LazyVGrid(columns: columns, alignment:.trailing, spacing:0.5) {
+        LazyVGrid(columns: columns, alignment:.trailing, spacing: 0.0) {
           ZStack(alignment: .center){
             Rectangle().fill(Color.lightGray)
+              .padding([.leading, .top, .bottom], cellPadding)
             Text("Axel").font(.applicationFont(.title2).weight(.semibold)).padding(2)
           }
           ZStack{
             Rectangle().fill(Color.lightGray)
+              .padding([.top, .bottom], cellPadding)
             Text("Battery").font(.applicationFont(.title2).weight(.semibold)).padding(2)
           }
           ZStack{
             Rectangle().fill(Color.lightGray)
+              .padding([.top, .bottom], cellPadding)
             Text("Position").font(.applicationFont(.title2).weight(.semibold)).padding(2)
           }
           ZStack{
             Rectangle().fill(Color.lightGray)
+              .padding([.trailing, .top, .bottom], cellPadding)
             Text("Cal.").font(.applicationFont(.title2).weight(.semibold)).padding(2)
           }
           
           ForEach( Array(mcsState.axelStatus.keys).sorted(by: {(lhs:AxelID, rhs:AxelID) in return lhs<rhs }) ,id:\.self){ c in
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
+                .padding([.leading,.bottom], cellPadding)
               Text( c.toString()).font(.applicationFont(.title3)).padding(2)
-            }.frame(height:26.52)
+            }.frame(height:27)
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
+                .padding([.bottom], cellPadding)
               BatteryView(level: mcsState.axelStatus[c]!.batteryLevel).padding(2)
-            }.frame(height:26.52)
+            }.frame(height:27)
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
+                .padding([.bottom], cellPadding)
               Text(String(format:"%03.03f",mcsState.axelStatus[c]!.position)).font(.applicationFont(.title3).weight(.regular)).monospacedDigit()
-            }.frame(height:26.52)
+            }.frame(height:27)
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
+                .padding([.trailing,.bottom], cellPadding)
               if(mcsState.axelStatus[c]!.canCalibrate){
                 Button(action:{edelkroneAPI.shared.calibrate(mcsState.axelStatus[c]!)}){
                   Text("Calibrate")
@@ -121,18 +132,21 @@ struct MCSStatus:View{
                 }.buttonStyle(GradientGlyphButtonStyle(buttonColor: mcsState.axelStatus[c]!.needsCalibration ? Color.Theme.RedLighter : Color.Theme.GreenLighter,
                                                        cornerRadius: 3.0,
                                                        shadowRadius:0.0,
-                                                       width: 40.0,
+                                                       width: 60.0,
                                                        height: 19.0,
                                                        bevelSize: 4.0
                                                       ))
               }
               
-            }.frame(height:26.52)
+            }.frame(height:27)
           }
-        }.frame(minWidth:220,idealWidth:280, maxWidth:400, maxHeight:.infinity)
+        }
+        .frame(minWidth:220,idealWidth:300, maxWidth:400, maxHeight:.infinity)
           .fixedSize(horizontal: true, vertical: true)
           //.border(.orange, width: 1.0, edges: Edge.allCases)
           .background(.gray)
+          .padding([.trailing], 5.0)
+          .padding([.leading] , 5.0)
         
         Divider()
         Spacer()
@@ -177,9 +191,10 @@ struct MCSStatus:View{
           .padding([.trailing],5).padding([.bottom],5)
         }
         
-      }.padding([.leading],5)
-    }.frame(minWidth: 200, idealWidth:250, maxHeight:.infinity)
-      .fixedSize(horizontal: true, vertical: true)
+      }
+    }
+    //.frame(minWidth: 200, maxWidth:500, maxHeight:.infinity)
+      .fixedSize(horizontal: true, vertical: false)
   }
   
   var otherBody: some View {
@@ -262,6 +277,14 @@ struct MCSStatus:View{
 struct MCSStatus_Previews: PreviewProvider {
   static var motionControlStatus = edelkroneAPI.shared.motionControlStatus
   static var previews: some View {
-    MCSStatus(mcsState:motionControlStatus).frame(width:800)
+    MCSStatus(mcsState:motionControlStatus)
+      //.frame(width:800)
   }
 }
+
+struct Previews_MotionControlStatus_Previews: PreviewProvider {
+  static var previews: some View {
+    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+  }
+}
+

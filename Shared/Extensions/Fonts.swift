@@ -95,7 +95,7 @@ extension Font {
     let decoder = PropertyListDecoder()
     let wrapper = try? decoder.decode(FontContainer.self, from: dataAsset!.data)
     if(wrapper != nil){
-      print("got a decode")
+//      print("got a decode")
       definitions = wrapper!.fonts
     }
   }

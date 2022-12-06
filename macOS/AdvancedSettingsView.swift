@@ -13,7 +13,7 @@ struct AdvancedSettingsView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct AdvancedSettingsView_Previews: PreviewProvider {
     static var previews: some View {
 			AdvancedSettingsView()
     }

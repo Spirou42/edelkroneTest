@@ -10,6 +10,8 @@ import SwiftUI
 import edelkroneAPI
 import Extensions
 
+
+
 // MARK: - MotionControlInterface -
 
 struct MotionControlInterface: View {
@@ -21,10 +23,77 @@ struct MotionControlInterface: View {
   
   
   
-  
+#if true
   var body: some View {
-    VStack(alignment: .trailing, spacing: 1.0){
-      HStack(alignment:.top){
+    HStack(alignment: .top, spacing: 1.0){
+      
+      VStack(alignment:.center){
+        
+        // Joysticks
+        ZStack(){
+//          RoundedRectangle(cornerRadius: 3.0, style: .circular)
+          Rectangle()
+            .fill(Color.lightLightGray)
+            .padding([.top,.bottom,.leading,.trailing],2)
+            .shadow(color: .lightGray, radius: 2.0, x: -2.0, y: -2.0)
+            .shadow(color: .lightWhite, radius: 2.0, x: 2.0, y: 2.0)
+          HStack(alignment: .top){
+            if motionControlStatus.hasPan || motionControlStatus.hasTilt{
+              Joystick(axelObjects: motionControlStatus.panTiltObjects(),
+                       freedoms:[ motionControlStatus.hasPan ? .horizontal : .none , motionControlStatus.hasTilt ? .vertical : .none,],
+                       colorStyle:colorized,
+                       thumbRadius:  42,
+                       padRadius: 100,
+                       action: nil){
+                VStack{
+                  if motionControlStatus.hasPan{
+                    Text("Pan").font(.applicationFont(.title2)).foregroundColor(.white)
+                  }
+                  if motionControlStatus.hasTilt{
+                    Text("Tilt").font(.applicationFont(.title2)).foregroundColor(.white)
+                  }
+                }
+              }
+            }
+            if motionControlStatus.hasSlide {
+              Joystick(axelObjects: motionControlStatus.slideObjects(),
+                       freedoms:[.horizontal],
+                       colorStyle:colorized,
+                       thumbRadius:42,
+                       padRadius: 100,
+                       action: nil){
+                Text("Slide").font(.applicationFont(.title2)).foregroundColor(.white)
+              }
+            }
+          }
+          .frame(minWidth: 0, idealWidth: 200, maxWidth: .infinity, minHeight: 0, idealHeight: 250, maxHeight: .infinity)
+          .fixedSize(horizontal: false, vertical: true)
+          
+
+        }
+        //.frame(width:650.0)
+        //Spacer()
+        //Divider()
+        KeyposeList(container: KeyposeContainer(edelkroneAPI.shared.motionControlStatus))
+        
+      }
+      .background(
+        Rectangle()
+          .fill(Color.lightLightGray)
+
+      )
+      //
+      MCSStatus(mcsState:motionControlStatus)
+      
+    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+      .fixedSize(horizontal: false, vertical: true)
+    
+  }
+  
+#else
+  var body: some View {
+    VStack(alignment: .leading, spacing: 1.0){
+      HStack(alignment:.center){
         HStack(alignment: .top){
           if motionControlStatus.hasPan || motionControlStatus.hasTilt{
             Joystick(axelObjects: motionControlStatus.panTiltObjects(),
@@ -53,22 +122,25 @@ struct MotionControlInterface: View {
               Text("Slide").font(.applicationFont(.title2)).foregroundColor(.white)
             }
           }
-          
-          
         }
-        Spacer()
+        .frame(width:650.0)
+        //Spacer()
         MCSStatus(mcsState:motionControlStatus)
-      }.frame(maxWidth: .infinity, maxHeight: .infinity)
-        .fixedSize(horizontal: false, vertical: true)
-        .background(Rectangle().fill(Color.lightLightGray))
+        
+      }
+      .background(Rectangle().fill(Color.lightLightGray))
+      //
       KeyposeList(container: KeyposeContainer(edelkroneAPI.shared.motionControlStatus))
-    }
+    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+      .fixedSize(horizontal: false, vertical: true)
   }
+#endif
+  
 }
 
 struct MotionControlInterface_Previews: PreviewProvider {
   static var previews: some View {
-    MotionControlInterface().frame(width:800)
+    MotionControlInterface()
   }
 }
 
