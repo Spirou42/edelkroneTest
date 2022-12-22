@@ -58,14 +58,14 @@
 		9372B6FE27F73BEA0025CFFD /* MotionControlStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionControlStatus.swift; sourceTree = "<group>"; };
 		938946C127E607250029A120 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		938946C427E639C60029A120 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		93C6AA6C2943CF690017C0DB /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = edelkroneAPI; sourceTree = "<group>"; };
+		93C6AA6D2943CF750017C0DB /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 		93CF78AF27D4DC7B000335A7 /* Symbols-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Symbols-Regular.otf"; path = "Assets/Production/Symbols-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		93D1701227D235D4000F8F63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		93D1701427D235F7000F8F63 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		93D1701627D23639000F8F63 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
 		93D7ED1F27E10245002C8E4A /* PairingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingGroupView.swift; sourceTree = "<group>"; };
 		93E31C872815730400576289 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		93F08ECD293E5836009EADC4 /* edelkroneAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = edelkroneAPI; sourceTree = "<group>"; };
-		93F08ECE293E5844009EADC4 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Extensions; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,8 +184,8 @@
 		936FE4BD2807205600ABDF02 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				93F08ECD293E5836009EADC4 /* edelkroneAPI */,
-				93F08ECE293E5844009EADC4 /* Extensions */,
+				93C6AA6C2943CF690017C0DB /* edelkroneAPI */,
+				93C6AA6D2943CF750017C0DB /* Extensions */,
 			);
 			path = Packages;
 			sourceTree = "<group>";

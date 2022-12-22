@@ -44,7 +44,6 @@ extension View {
 }
 
 
-
 struct FontDefinition : Decodable {
   let face: String
   let size: Double
@@ -85,6 +84,19 @@ extension String {
     }
     self.init(result)
   }
+  
+  init(_ style: Font.applicationTextStyle){
+    var result = ""
+    switch(style){
+    case .poseTitle:
+      result="poseTitle"
+    case .poseTitle2:
+      result = "poseTitle2"
+ 
+    }
+    self.init(result)
+  }
+  
 }
 
 extension Font {
@@ -99,49 +111,64 @@ extension Font {
       definitions = wrapper!.fonts
     }
   }
+  fileprivate static func fontForName(_ styleKey: String) -> Font {
+    let fontName = definitions![styleKey]!.face
+    let fontSize = definitions![styleKey]!.size
+    if fontName.starts(with: "System"){
+      // extract
+      guard var  index = fontName.firstIndex(of: " ") else { return Font.system(size: fontSize) }
+      index = fontName.index(after:index)
+      let weigthName = fontName[index...fontName.index(before: fontName.endIndex)]
+      let lowerWeightName = weigthName.lowercased()
+      var resultFontWeight:Font.Weight = .regular
+      switch lowerWeightName{
+      case "regular":
+        resultFontWeight = .regular
+      case "black":
+        resultFontWeight = .black
+      case "bold":
+        resultFontWeight = .bold
+      case "heavy":
+        resultFontWeight = .heavy
+      case "light":
+        resultFontWeight = .light
+      case "medium":
+        resultFontWeight = .medium
+      case "semibold":
+        resultFontWeight = .semibold
+      case "thin":
+        resultFontWeight = .thin
+      case "ultraLight":
+        resultFontWeight = .ultraLight
+      default:
+        resultFontWeight = .regular
+      }
+      var returnFont = Font.system(size: fontSize)
+      returnFont = returnFont.weight(resultFontWeight)
+      return returnFont
+    }else{
+      return Font.custom(fontName, size: fontSize)
+    }
+  }
+  
   static func applicationFont(_ style: Font.TextStyle)->Font{
     if(definitions == nil){
       loadDefinitions()
     }
     let styleKey = String(style)
     if(definitions!.keys.contains(styleKey)){
-      let fontName = definitions![styleKey]!.face
-      let fontSize = definitions![styleKey]!.size
-      if fontName.starts(with: "System"){
-        // extract
-        guard var  index = fontName.firstIndex(of: " ") else { return Font.system(size: fontSize) }
-        index = fontName.index(after:index)
-        let weigthName = fontName[index...fontName.index(before: fontName.endIndex)]
-        let lowerWeightName = weigthName.lowercased()
-        var resultFontWeight:Font.Weight = .regular
-        switch lowerWeightName{
-        case "regular":
-          resultFontWeight = .regular
-        case "black":
-          resultFontWeight = .black
-        case "bold":
-          resultFontWeight = .bold
-        case "heavy":
-          resultFontWeight = .heavy
-        case "light":
-          resultFontWeight = .light
-        case "medium":
-          resultFontWeight = .medium
-        case "semibold":
-          resultFontWeight = .semibold
-        case "thin":
-          resultFontWeight = .thin
-        case "ultraLight":
-          resultFontWeight = .ultraLight
-        default:
-          resultFontWeight = .regular
-        }
-        var returnFont = Font.system(size: fontSize)
-        returnFont = returnFont.weight(resultFontWeight)
-        return returnFont
-      }else{
-        return Font.custom(fontName, size: fontSize)
-      }
+      return fontForName(styleKey)
+    }
+    return self.body
+  }
+  
+  static func applicationFont(_ applicationStyle: Font.applicationTextStyle)->Font{
+    if(definitions == nil){
+      loadDefinitions()
+    }
+    let styleKey = String(applicationStyle)
+    if(definitions!.keys.contains(styleKey)){
+      return fontForName(styleKey)
     }
     return self.body
   }
@@ -170,6 +197,10 @@ extension Font {
     return Double(13.0)
   }
   
+  public enum applicationTextStyle : String, Decodable{
+    case poseTitle = "poseTitle"
+    case poseTitle2 = "poseTitle2"
+  }
   
   
   

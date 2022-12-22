@@ -74,7 +74,7 @@ struct MotionControlInterface: View {
         //.frame(width:650.0)
         //Spacer()
         //Divider()
-        KeyposeList(container: KeyposeContainer(edelkroneAPI.shared.motionControlStatus))
+        KeyposeList(container: edelkroneAPI.shared.keyposes)
         
       }
       .background(
@@ -130,7 +130,7 @@ struct MotionControlInterface: View {
       }
       .background(Rectangle().fill(Color.lightLightGray))
       //
-      KeyposeList(container: KeyposeContainer(edelkroneAPI.shared.motionControlStatus))
+      KeyposeList(container: edelkroneAPI.shared.keyposes)
     }.frame(maxWidth: .infinity, maxHeight: .infinity)
       .fixedSize(horizontal: false, vertical: true)
   }

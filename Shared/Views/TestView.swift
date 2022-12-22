@@ -47,6 +47,19 @@ struct TestView: View {
                                        thumbColor: .white))
       //.background(Rectangle().fill(.red))
       Spacer()
+      Image(systemName: "square.and.arrow.up").frame(width: 50, height: 50)
+      Spacer()
+      HStack(){
+        Text("\u{22f2}").font(.custom("Symbols-Regular", size: 60))
+        Text("\u{22f3}").font(.custom("Symbols-Regular", size: 60))
+      }
+      HStack(){
+        Text("\u{10020D}").font(.custom("Symbols-Regular", size: 60))
+        Text("\u{10020E}").font(.custom("Symbols-Regular", size: 60))
+        Text("\u{10020F}").font(.custom("Symbols-Regular", size: 60))
+      }
+
+      
     }
   }
 }

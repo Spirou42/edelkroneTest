@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!-- PEALISTv1: TextSize:0| -->
 <plist version="1.0">
 <dict>
 	<key>fonts</key>
 	<dict>
+		<key>poseTitle</key>
+		<dict>
+			<key>face</key>
+			<string>System medium</string>
+			<key>size</key>
+			<integer>17</integer>
+		</dict>
+		<key>poseTitle2</key>
+		<dict>
+			<key>face</key>
+			<string>System</string>
+			<key>size</key>
+			<integer>14</integer>
+		</dict>
 		<key>largeTitle</key>
 		<dict>
 			<key>face</key>

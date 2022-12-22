@@ -7,145 +7,82 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1089D562-3D16-491D-8128-2071FC1429B0"
+            uuid = "D246622B-4798-4E0A-BA3C-9C4CD07F5B27"
             shouldBeEnabled = "No"
             ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
+            continueAfterRunningActions = "Yes"
+            filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
-            landmarkName = "executeSessionGet(request:with:context:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "&amp;=(lhs:rhs:)"
             landmarkType = "7">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "@lhs@"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "print lhs.isFilled">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "45829367-819C-428C-8DEF-DD99F4058AA2"
+            uuid = "CC6B5077-9F45-4313-9C68-B23841F96C31"
             shouldBeEnabled = "No"
             ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../edelkroneAPI/Sources/edelkroneAPI/Models/ReturnValues.swift"
+            continueAfterRunningActions = "Yes"
+            filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "init(from:)"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "&amp;=(lhs:rhs:)"
             landmarkType = "7">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "Slot: @k@  (@lhs.slots[KeyposeIndex(id: k)]@)"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "729DFCAE-6E25-4367-8E3B-BDB5FDAA4692"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "init(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "729DFCAE-6E25-4367-8E3B-BDB5FDAA4692 - 8f286026694738d1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "edelkroneAPI.KeyposeContainer.__allocating_init(Swift.Int) -&gt; edelkroneAPI.KeyposeContainer"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "25">
-               </Location>
-               <Location
-                  uuid = "729DFCAE-6E25-4367-8E3B-BDB5FDAA4692 - 64e5bb425cb2dec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "edelkroneAPI.KeyposeContainer.init(Swift.Int) -&gt; edelkroneAPI.KeyposeContainer"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "91"
-                  endingLineNumber = "91"
-                  offsetFromSymbolStart = "109">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8871E227-BAF8-4CAA-99E9-F5FF73ECF8BD"
+            uuid = "97AA7E6A-1F20-4B0B-9160-E928943CEB6C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
+            filePath = "Shared/Views/KeyposeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "778"
-            endingLineNumber = "778"
-            landmarkName = "calibrate(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "38C14AB9-1E9F-4F83-B10D-79B47BF2ECCF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "executeSession(request:uploadData:with:context:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "38C14AB9-1E9F-4F83-B10D-79B47BF2ECCF - 2ada0dd7b9bdae96"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in edelkroneAPI.edelkroneAPI.executeSession&lt;&#x3c4;_0_0 where &#x3c4;_0_0: edelkroneAPI.ApiResult&gt;(request: Foundation.URLRequest, uploadData: Foundation.Data, with: (Swift.Bool, Swift.Optional&lt;&#x3c4;_0_0&gt;, Swift.Optional&lt;Any&gt;) -&gt; (), context: Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "631">
-               </Location>
-               <Location
-                  uuid = "38C14AB9-1E9F-4F83-B10D-79B47BF2ECCF - 2ada0dd7b9bdae96"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in edelkroneAPI.edelkroneAPI.executeSession&lt;&#x3c4;_0_0 where &#x3c4;_0_0: edelkroneAPI.ApiResult&gt;(request: Foundation.URLRequest, uploadData: Foundation.Data, with: (Swift.Bool, Swift.Optional&lt;&#x3c4;_0_0&gt;, Swift.Optional&lt;Any&gt;) -&gt; (), context: Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "665">
-               </Location>
-            </Locations>
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "%H List: @container.slots[index]@"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

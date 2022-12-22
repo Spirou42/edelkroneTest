@@ -90,6 +90,13 @@ struct edelkroneStatus_View: View {
       
       
       Spacer()
+//      Button(action:{
+//        let firstURL = URL(string: "edelkroneTest://DUDU")
+//        NSWorkspace.shared.open(firstURL!)
+//        
+//      }){
+//        Text("DuDu")
+//      }
       Button(action:edelkrone.reset){
         Text("Reset").font(.applicationFont(.body))
           .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)

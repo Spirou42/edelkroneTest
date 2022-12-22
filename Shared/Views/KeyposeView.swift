@@ -14,49 +14,69 @@ struct KeyposeView: View {
   @ObservedObject var slot:KeyposeSlot
   var body: some View {
     ZStack(){
-      //Rectangle().fill(Color.lightLightGray)
-      //      Button( action: {}){
-      //        Text("XXX")
-      //          .font(.applicationFont(.title))
-      //          .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .center)
-      //      }
-      //      .buttonStyle(ColoredButtonStyle(buttonColor:  Color.Theme.TransparentGray,
-      //                                      labelColor: Color.orange,
-      //                                      cornerRadius: 7,
-      //                                      shadowRadius: 0
-      //                                            ))
       
-      
-      VStack(alignment: .leading, spacing: 0){
+      Rectangle().fill( slot.isFilled ? Color.green : Color.orange).padding()
+      VStack(alignment: .leading, spacing: 1){
         
         HStack(spacing: 6.0){
-          Text("Pose ").frame(width:50,alignment: .trailing)
+          Text("Pose ").frame(width:50,alignment: .leading)
             .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
             .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+            .font(.applicationFont(.poseTitle))
           Text(String(slot.index))
             .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
             .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+            .font(.applicationFont(.poseTitle))
         }
-        
+        Spacer().frame(height: 1)
         ForEach(Array(slot.axels.keys).sorted(by: {return $0 < $1})){ t in
-          HStack(spacing: 6){
-            Text("Axel:").frame(width:50,alignment: .trailing)
-              .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
-              .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+          HStack(spacing: 0){
+//            Text("Axel:").frame(width:50,alignment: .trailing)
+//              .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+//              .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+//            .font(.applicationFont(.poseTitle2))
             Text(slot.axels[t]!?.axelName.toString() ?? "").frame(width:40,alignment:.leading)
               .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
               .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
-            Text(String(format:"%0.03f",slot.axels[t]!?.axelPosition ?? 0.0)).monospacedDigit().frame(width:60,alignment: .leading)
+              .padding([.leading], 0)
+              .font(.applicationFont(.poseTitle2))
+            Text(" : ").fixedSize(horizontal: true, vertical: false)
+              .padding([.leading] ,2)
+              .padding([.trailing],2)
               .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
               .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+              .font(.applicationFont(.poseTitle2))
+
+            Text(String(format:"%03.02f",slot.axels[t]!?.axelPosition ?? 0.0)).monospacedDigit().frame(width:60,alignment: .leading)
+              .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
+              .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+              .font(.applicationFont(.poseTitle2))
+            
             Text((slot.axels[t]!?.calibrated ?? false) ? "X" : "O")
               .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
               .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
+              .font(.applicationFont(.poseTitle2))
           }
         }
       }
+      //.frame(minHeight: 44)
       
-    }.frame(width: 200, height: 70, alignment: .leading)
+      //Rectangle().fill(Color.lightLightGray)
+      Button( action: {NSLog("Action for %d",slot.index)}){
+//        Text("Label")
+//          .font(.applicationFont(.title))
+//          .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .center)
+      }
+      .buttonStyle(ColoredButtonStyle(buttonColor:  Color.clear,
+                                      labelColor: Color.orange,
+                                      cornerRadius: 7,
+                                      shadowRadius: 0
+                                     ))
+      //.frame(width: 130, height: 41)
+      
+      
+      
+    }.frame(width: 180, height: 90, alignment: .center)
       .background(
         RoundedRectangle(cornerRadius: 10)
           .fill(Color.lightWhite)
@@ -87,7 +107,7 @@ struct KeyposeList: View {
         }
         .padding([.top,.bottom],1)
         .padding([.trailing,.leading],1)
-      
+        
       }
     }
     .frame(width: 638,height:170)

@@ -32,7 +32,14 @@ class edelkroneTestApp: App {
       ContentView()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
+  
+//    WindowGroup("TestView", id:"DUDU"){
+//      TestView()
+//    }.handlesExternalEvents(matching: Set(arrayLiteral: "DUDU"))
+//    WindowGroup("Dummy Window", id: "DummyWindow"){
+//      TestView()
+//    }
+//
     
 #if os(macOS)
     Settings {
