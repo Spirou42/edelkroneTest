@@ -33,6 +33,7 @@
 		93D2EAFE295B19C90026ED9C /* PairingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D2EAF7295B19C90026ED9C /* PairingGroupView.swift */; };
 		93D2EAFF295B19C90026ED9C /* LinkAdapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D2EAF8295B19C90026ED9C /* LinkAdapterView.swift */; };
 		93E31C892815730400576289 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E31C872815730400576289 /* TestView.swift */; };
+		93EEF84E2B757D97009E528F /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEF84D2B757D97009E528F /* CustomSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		93D2EAF7295B19C90026ED9C /* PairingGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingGroupView.swift; sourceTree = "<group>"; };
 		93D2EAF8295B19C90026ED9C /* LinkAdapterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkAdapterView.swift; sourceTree = "<group>"; };
 		93E31C872815730400576289 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		93EEF84D2B757D97009E528F /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		934143EE27D7964C00CDC4D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				93EEF84D2B757D97009E528F /* CustomSlider.swift */,
 				9359C29227D0014500743008 /* ContentView.swift */,
 				93D2EAF6295B19C90026ED9C /* edelkroneStatus_View.swift */,
 				93D2EAF3295B19C80026ED9C /* KeyposeView.swift */,
@@ -275,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93EEF84E2B757D97009E528F /* CustomSlider.swift in Sources */,
 				9345BAB127D8FD940099FC90 /* Fonts.swift in Sources */,
 				93D1701327D235D4000F8F63 /* SettingsView.swift in Sources */,
 				93D2EAF9295B19C90026ED9C /* ScannedMotionControlSystemViews.swift in Sources */,

@@ -13,6 +13,8 @@ enum MyFruit {
 struct TestView: View {
   @State var favoriteFruit: MyFruit = .apple
   @State var bubu: Bool = false
+  @State var sliderValue: Double = 0.0
+  @State private var isEditing = false
   var fruitName: String {
     switch favoriteFruit {
     case .banana:
@@ -57,6 +59,23 @@ struct TestView: View {
         Text("\u{10020D}").font(.custom("Symbols-Regular", size: 60))
         Text("\u{10020E}").font(.custom("Symbols-Regular", size: 60))
         Text("\u{10020F}").font(.custom("Symbols-Regular", size: 60))
+      }
+      VStack{
+        Slider(value: $sliderValue, in: 0...100){
+          Text("Speed")
+      } minimumValueLabel: {
+          Text("0")
+      } maximumValueLabel: {
+          Text("100")
+      } onEditingChanged: { editing in
+          isEditing = editing
+      }.tint(.orange)
+        Text("\(sliderValue)")
+          .foregroundColor( isEditing ? .red : .green)
+        
+        CustomSlider(value:$sliderValue).frame(width: 200, height: 15, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+          .padding([.top],3).padding([.bottom],20)
+        Spacer()
       }
 
       
