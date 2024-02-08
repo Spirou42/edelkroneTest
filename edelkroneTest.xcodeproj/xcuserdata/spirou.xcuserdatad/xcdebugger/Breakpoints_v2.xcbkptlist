@@ -14,8 +14,8 @@
             filePath = "Shared/Views/KeyposeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "body"
             landmarkType = "24">
             <Actions>
@@ -32,54 +32,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D87E075E-EB20-4113-B745-084550D86982"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "executeSession(request:uploadData:with:context:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D87E075E-EB20-4113-B745-084550D86982 - 1597b0558eb80260"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "edelkroneAPI.edelkroneAPI.executeSession&lt;&#x3c4;_0_0 where &#x3c4;_0_0: edelkroneAPI.ApiResult&gt;(request: Foundation.URLRequest, uploadData: Foundation.Data, with: (Swift.Bool, Swift.Optional&lt;&#x3c4;_0_0&gt;, Swift.Optional&lt;Any&gt;) -&gt; (), context: Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "193"
-                  endingLineNumber = "193"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  uuid = "D87E075E-EB20-4113-B745-084550D86982 - 2ada0dd7b9bdaed0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in edelkroneAPI.edelkroneAPI.executeSession&lt;&#x3c4;_0_0 where &#x3c4;_0_0: edelkroneAPI.ApiResult&gt;(request: Foundation.URLRequest, uploadData: Foundation.Data, with: (Swift.Bool, Swift.Optional&lt;&#x3c4;_0_0&gt;, Swift.Optional&lt;Any&gt;) -&gt; (), context: Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "edelkroneTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "700">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4F7A8689-D56F-4A55-B49C-5B3109101000"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -87,8 +39,8 @@
             filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "executeSessionGet(request:with:context:)"
             landmarkType = "7">
             <Locations>
@@ -135,8 +87,8 @@
             filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "710"
-            endingLineNumber = "710"
+            startingLineNumber = "712"
+            endingLineNumber = "712"
             landmarkName = "getPeriodicStatus_Result(_:result:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -193,7 +145,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0FDA4B66-9A05-42C7-8932-B6A7631F848F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
@@ -209,7 +161,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "75FE1F50-51EB-499F-B9E1-12A1E3A63614"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/Models/Keypose.swift"
@@ -288,14 +240,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "33079C47-E5B5-4A4D-BFF0-AEEB64E89E44"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "783"
-            endingLineNumber = "783"
+            startingLineNumber = "785"
+            endingLineNumber = "785"
             landmarkName = "keyposeReadNumericValues_Result(_:result:context:)"
             landmarkType = "7">
             <Locations>
@@ -327,6 +279,36 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "783"
                   endingLineNumber = "783"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "33079C47-E5B5-4A4D-BFF0-AEEB64E89E44 - e268d928972264ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "edelkroneAPI.edelkroneAPI.keyposeReadNumericValues_Result(_: Swift.Bool, result: Swift.Optional&lt;edelkroneAPI.ResultWrapper&lt;Swift.Dictionary&lt;Swift.String, Swift.Double&gt;&gt;&gt;, context: Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "edelkroneTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "784"
+                  endingLineNumber = "784"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "33079C47-E5B5-4A4D-BFF0-AEEB64E89E44 - e268d9289722644c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "edelkroneAPI.edelkroneAPI.keyposeReadNumericValues_Result(_: Swift.Bool, result: Swift.Optional&lt;edelkroneAPI.ResultWrapper&lt;Swift.Dictionary&lt;Swift.String, Swift.Double&gt;&gt;&gt;, context: Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "edelkroneTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/spirou/Documents/Projekte/Swift%20Projects/edelkroneTest/Packages/edelkroneAPI/Sources/edelkroneAPI/edelkroneAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "785"
+                  endingLineNumber = "785"
                   offsetFromSymbolStart = "168">
                </Location>
             </Locations>

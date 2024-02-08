@@ -15,13 +15,14 @@ struct KeyposeView: View {
   var body: some View {
     ZStack(){
 
-      Button( action: {print("Action for %d",slot.index)}){
-        Text("")
-          .font(.applicationFont(.title))
-          .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .center)
+      Button( action: {
+        print("Action for ",slot.index)
+        edelkroneAPI.shared.keyposeMoveFixedSpeed(slot.index)
+        }
+      ){
         
         VStack(alignment: .leading, spacing: 1){
-          
+          // Pose Title
           HStack(alignment: .center, spacing: 6.0 ){
             Text("Pose ").frame(width:50,alignment: .leading)
               .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
@@ -31,16 +32,28 @@ struct KeyposeView: View {
               .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
               .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
               .font(.applicationFont(.poseTitle))
+            Spacer()
+            Button(action: { print("Edit Action for ",slot.index)}){
+              
+            }.buttonStyle(ColoredGlyphButtonStyle(buttonColor: Color.clear,
+                                                  labelColor: Color.black,
+                                                  cornerRadius: 1,
+                                                  shadowRadius: 1,
+                                                  glyp: Text("\u{10020E}").font(.custom("Symbols-Regular", size: 22)),
+                                                  glyphPadding: 0,
+                                                  width: 22,
+                                                  height: 22)
+            
+            ).padding([.trailing],10)
           }.frame(maxWidth: .infinity, alignment: .topLeading)
-            .padding([.top],5).padding([.leading],10)
-          Spacer().frame(height: slot.isFilled ? 4 : 65)
+            .padding([.top],4).padding([.leading],10)
+
+          Spacer().frame(height: slot.isFilled ? 2 : 65)
+
+          // Axels
           if(slot.isFilled){
             ForEach(Array(slot.axels.keys).sorted(by: {return $0 < $1})){ t in
               HStack(spacing: 0){
-//                            Text("Axel:").frame(width:50,alignment: .trailing)
-//                              .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
-//                              .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
-//                            .font(.applicationFont(.poseTitle2))
                 Text(slot.axels[t]!?.axelName.toString() ?? "").frame(width:40,alignment:.leading)
                   .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
                   .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
@@ -72,15 +85,15 @@ struct KeyposeView: View {
       }
       .buttonStyle(ColoredButtonStyle(buttonColor:  slot.isFilled ? Color.green.withAlpha(0.1) : Color.blue.withAlpha(0.1),
                                       labelColor: Color.black,
-                                      cornerRadius: 3,
-                                      shadowRadius: 0
+                                      cornerRadius: 5,
+                                      shadowRadius: 10
                                      ))
 
 
       
     }.frame(width: 180, height: 90, alignment: .center)
       .background(
-        RoundedRectangle(cornerRadius: 10)
+        RoundedRectangle(cornerRadius: 5)
           .fill(Color.white)
           .shadow(color:.lightGray, radius:2,x:3,y:3)
           .shadow(color:.white, radius: 2,x: -3, y:-3)
@@ -93,16 +106,17 @@ struct KeyposeView: View {
 struct KeyposeList: View {
   @ObservedObject var container:KeyposeContainer
   
-  var columns: [GridItem] = [.init(.fixed(197), spacing: 10.0, alignment: .leading ),
-                             .init(.fixed(197), spacing: 10.0, alignment: .leading ),
-                             .init(.fixed(197), spacing: 10.0, alignment: .leading )
+  var columns: [GridItem] = [.init(.fixed(190), spacing: 0.0, alignment: .leading ),
+                             .init(.fixed(190), spacing: 0.0, alignment: .leading ),
+                             .init(.fixed(190), spacing: 0.0, alignment: .leading )
+                             //
   ]
   
   var body: some View {
     ZStack(){
       HStack(alignment: .top, spacing: 1.0){}
       ScrollView(.horizontal, showsIndicators: false){
-        LazyVGrid(columns: columns, alignment: .leading, spacing: 1.0){
+        LazyVGrid(columns: columns, alignment: .leading, spacing: 0.0){
           ForEach( Array(container.slots.keys).sorted(by: {return $0 < $1}) ){ index in
             KeyposeView(slot: container.slots[index]!!).padding([.leading], 10.0)
           }

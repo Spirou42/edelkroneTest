@@ -27,7 +27,7 @@ struct BatteryView: View{
   }
   
   var body: some View{
-    let wi = 40.0
+    let wi = 41.0
     ZStack{
       //.resizable(capInsets: EdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 8  ),resizingMode: .stretch)
       //.aspectRatio(CGSize(width: 364, height: 205), contentMode: .fill)
@@ -52,7 +52,7 @@ struct BatteryView: View{
 
 struct BatteryView_Previews: PreviewProvider {
   static var previews: some View {
-    BatteryView(level: 0.7)
+    BatteryView(level: 0.9)
   }
 }
 
@@ -62,7 +62,8 @@ struct MCSStatus:View{
   let buttonSize:CGFloat = Font.applicationFontSize(.title2)
   let buttonPadding:CGFloat = 5.0
   let cellPadding = 1.0
-  
+  let titleHeight = 35.0
+  let axelHeight = 33.0
   var columns: [GridItem] = [.init(.flexible(minimum: 20, maximum: 70) , spacing: 1.0, alignment: .trailing ),
                              .init(.flexible(minimum: 20, maximum: 80) , spacing: 1.0, alignment: .leading ),
                              .init(.flexible(minimum: 20, maximum: 100), spacing: 1.0, alignment: .leading ),
@@ -89,39 +90,39 @@ struct MCSStatus:View{
             Rectangle().fill(Color.lightGray)
               .padding([.leading, .top, .bottom], cellPadding)
             Text("Axel").font(.applicationFont(.title2).weight(.semibold)).padding(2)
-          }
+          }.frame(height:titleHeight)
           ZStack{
             Rectangle().fill(Color.lightGray)
               .padding([.top, .bottom], cellPadding)
             Text("Battery").font(.applicationFont(.title2).weight(.semibold)).padding(2)
-          }
+          }.frame(height:titleHeight)
           ZStack{
             Rectangle().fill(Color.lightGray)
               .padding([.top, .bottom], cellPadding)
             Text("Position").font(.applicationFont(.title2).weight(.semibold)).padding(2)
-          }
+          }.frame(height:titleHeight)
           ZStack{
             Rectangle().fill(Color.lightGray)
               .padding([.trailing, .top, .bottom], cellPadding)
             Text("Cal.").font(.applicationFont(.title2).weight(.semibold)).padding(2)
-          }
+          }.frame(height:titleHeight)
           
           ForEach( Array(mcsState.axelStatus.keys).sorted(by: {(lhs:AxelID, rhs:AxelID) in return lhs<rhs }) ,id:\.self){ c in
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
                 .padding([.leading,.bottom], cellPadding)
               Text( c.toString()).font(.applicationFont(.title3)).padding(2)
-            }.frame(height:27)
+            }.frame(height:axelHeight)
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
                 .padding([.bottom], cellPadding)
               BatteryView(level: mcsState.axelStatus[c]!.batteryLevel).padding(2)
-            }.frame(height:27)
+            }.frame(height:axelHeight)
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
                 .padding([.bottom], cellPadding)
               Text(String(format:"%03.03f",mcsState.axelStatus[c]!.position)).font(.applicationFont(.title3).weight(.regular)).monospacedDigit()
-            }.frame(height:27)
+            }.frame(height:axelHeight)
             ZStack(alignment: .center){
               Rectangle().fill(Color.lightLightGray)
                 .padding([.trailing,.bottom], cellPadding)
@@ -133,12 +134,12 @@ struct MCSStatus:View{
                                                        cornerRadius: 3.0,
                                                        shadowRadius:0.0,
                                                        width: 60.0,
-                                                       height: 19.0,
+                                                       height: 20.0,
                                                        bevelSize: 4.0
                                                       ))
               }
               
-            }.frame(height:27)
+            }.frame(height:axelHeight)
           }
         }
         .frame(minWidth:220,idealWidth:300, maxWidth:400, maxHeight:.infinity)
