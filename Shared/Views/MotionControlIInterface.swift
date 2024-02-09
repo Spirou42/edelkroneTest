@@ -21,17 +21,18 @@ struct MotionControlInterface: View {
                              strokeColor: Color.Theme.Orange,
                              labelColor: .white)
   
-  
+  @State var speed: Double = 0.0
+  @State var accel: Double = 0.0
   
 #if true
   var body: some View {
     HStack(alignment: .top, spacing: 1.0){
       
-      VStack(alignment:.center){
+      VStack(alignment:.center, spacing: 2.0){
         
         // Joysticks
         ZStack(){
-//          RoundedRectangle(cornerRadius: 3.0, style: .circular)
+          //          RoundedRectangle(cornerRadius: 3.0, style: .circular)
           Rectangle()
             .fill(Color.lightLightGray)
             .padding([.top,.bottom,.leading,.trailing],2)
@@ -69,13 +70,60 @@ struct MotionControlInterface: View {
           .frame(minWidth: 0, idealWidth: 200, maxWidth: .infinity, minHeight: 0, idealHeight: 250, maxHeight: .infinity)
           .fixedSize(horizontal: false, vertical: true)
           
-
+          
         }
         //.frame(width:650.0)
         //Spacer()
         //Divider()
-        KeyposeList(container: edelkroneAPI.shared.keyposes)
         
+        // Keypose List
+        ZStack(){
+          Rectangle()
+            .fill(Color.lightLightGray)
+            .padding([.top,.bottom,.leading,.trailing],2)
+            .shadow(color: .lightGray, radius: 2.0, x: -2.0, y: -2.0)
+            .shadow(color: .lightWhite, radius: 2.0, x: 2.0, y: 2.0)
+          
+          if ProcessInfo.processInfo.isSwiftUIPreview {
+            KeyposeList(container: KeyposeContainer(MotionControlStatus()))
+          }else{
+            KeyposeList(container: edelkroneAPI.shared.keyposes)
+          }
+        }
+
+        // Slider
+        ZStack(){
+          Rectangle()
+            .fill(Color.lightLightGray)
+            .padding([.top,.bottom,.leading,.trailing],2)
+            .shadow(color: .lightGray, radius: 2.0, x: -2.0, y: -2.0)
+            .shadow(color: .lightWhite, radius: 2.0, x: 2.0, y: 2.0)
+          VStack(){
+
+            Slider(value: $speed, in:0...1){
+              Text("Speed:").frame(width: 45, alignment: .trailing)
+            }
+            minimumValueLabel:{
+              Text("0")
+            }
+            maximumValueLabel:{
+              Text("100")
+            }
+
+            Slider(value: $accel, in:0...1){
+              Text("Accel:").frame(width: 45, alignment: .trailing)
+            }
+            minimumValueLabel:{
+              Text("0")
+            }
+            maximumValueLabel:{
+              Text("100")
+            }
+
+            
+          }.padding([.leading,.trailing],15)
+            .padding([.top,.bottom],10)
+        }
       }
       .background(
         Rectangle()

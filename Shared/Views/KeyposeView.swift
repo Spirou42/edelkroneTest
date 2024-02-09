@@ -115,18 +115,18 @@ struct KeyposeList: View {
   var body: some View {
     ZStack(){
       HStack(alignment: .top, spacing: 1.0){}
-      ScrollView(.horizontal, showsIndicators: false){
+//      ScrollView(.horizontal, showsIndicators: false){
         LazyVGrid(columns: columns, alignment: .leading, spacing: 0.0){
           ForEach( Array(container.slots.keys).sorted(by: {return $0 < $1}) ){ index in
             KeyposeView(slot: container.slots[index]!!).padding([.leading], 10.0)
           }
-        }
+//        }
         .padding([.top,.bottom],1)
         .padding([.trailing,.leading],1)
         
       }
     }
-    .frame(width: 638,height:210)
+    .frame(width: 590,height:210)
     .fixedSize(horizontal: false, vertical: true)
     
   }

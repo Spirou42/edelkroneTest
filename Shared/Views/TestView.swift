@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Extensions
 enum MyFruit {
   case banana, apple, peach
 }
@@ -73,8 +74,9 @@ struct TestView: View {
         Text("\(sliderValue)")
           .foregroundColor( isEditing ? .red : .green)
         
-        CustomSlider(value:$sliderValue).frame(width: 200, height: 15, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-          .padding([.top],3).padding([.bottom],20)
+//        CustomSlider(sliderValue: $sliderValue)
+//          .frame(width: 200, height: 15, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//          .padding([.top],3).padding([.bottom],20)
         Spacer()
       }
 

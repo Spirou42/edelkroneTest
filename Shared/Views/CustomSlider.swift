@@ -7,38 +7,57 @@
 
 import SwiftUI
 
-public struct CustomSlider: View {
+struct CustomSlider: View {
   @Binding var value: Double
   
   @State var lastCoordinateValue: CGFloat = 0.0
+  var sliderRange: ClosedRange<Double> = 1...100
+  var thumbColor: Color = .yellow
+  var minTrackColor: Color = .blue
+  var maxTrackColor: Color = .gray
   
-  public var body: some View {
+  var body: some View {
     GeometryReader { gr in
-      let thumbSize = gr.size.height * 0.8
-      let radius = gr.size.height * 0.5
-      let minValue = gr.size.width * 0.015
-      let maxValue = (gr.size.width * 0.98) - thumbSize
+      let thumbHeight = gr.size.height * 1.8
+      let thumbWidth = gr.size.width * 0.04
+      let radius = gr.size.height * 1.0
+      let minValue = gr.size.width * 0
+      let maxValue = (gr.size.width * 1.0) - thumbWidth
+      
+      let scaleFactor = (maxValue - minValue) / (sliderRange.upperBound - sliderRange.lowerBound)
+      let lower = sliderRange.lowerBound
+      let sliderVal = (self.value - lower) * scaleFactor + minValue
       
       ZStack {
-        RoundedRectangle(cornerRadius: radius)
-          .foregroundColor(.gray)
+        Rectangle()
+          .foregroundColor(maxTrackColor)
+          .frame(width: gr.size.width, height: gr.size.height * 0.95)
+          .clipShape(RoundedRectangle(cornerRadius: radius))
         HStack {
-          Circle()
-            .foregroundColor(Color.white)
-            .frame(width: thumbSize, height: thumbSize)
-            .offset(x: self.value)
+          Rectangle()
+            .foregroundColor(minTrackColor)
+            .frame(width: sliderVal, height: gr.size.height * 0.95)
+          Spacer()
+        }
+        .clipShape(RoundedRectangle(cornerRadius: radius))
+        HStack {
+          RoundedRectangle(cornerRadius: radius)
+            .foregroundColor(thumbColor)
+            .frame(width: thumbWidth, height: thumbHeight)
+            .offset(x: sliderVal)
             .gesture(
               DragGesture(minimumDistance: 0)
                 .onChanged { v in
                   if (abs(v.translation.width) < 0.1) {
-                    self.lastCoordinateValue = self.value
+                    self.lastCoordinateValue = sliderVal
                   }
                   if v.translation.width > 0 {
-                    self.value = min(maxValue, self.lastCoordinateValue + v.translation.width)
+                    let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + v.translation.width)
+                    self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
                   } else {
-                    self.value = max(minValue, self.lastCoordinateValue + v.translation.width)
+                    let nextCoordinateValue = max(minValue, self.lastCoordinateValue + v.translation.width)
+                    self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                   }
-                  
                 }
             )
           Spacer()
@@ -48,10 +67,12 @@ public struct CustomSlider: View {
   }
 }
 
+
 struct CustomSlider_Preview: PreviewProvider {
-  @State static var sliderValue:Double = 0.0
+  @State static var sliderValue:Double = 15.0
   static var previews: some View {
-    CustomSlider(value: $sliderValue).frame(width: 300, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+    CustomSlider(value: $sliderValue,sliderRange: 10...20).frame(width: 300, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+      .padding([.top,.bottom,.leading,.trailing],10)
   }
 }
 
