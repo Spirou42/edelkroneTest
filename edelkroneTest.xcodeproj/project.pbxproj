@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		93045C0627F10BB400846817 /* ToggleStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93045C0427F10BB400846817 /* ToggleStyles.swift */; };
+		931BD4752B7A5F3D003B1B3F /* KeyPoseEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BD4742B7A5F3D003B1B3F /* KeyPoseEditor.swift */; };
 		932CF2E327E5377100A4F92F /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E027E5377100A4F92F /* CGPoint.swift */; };
 		932CF2E527E5377100A4F92F /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CF2E127E5377100A4F92F /* Joystick.swift */; };
 		932F718E27DBA6F100A91E40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932F718C27DBA6F100A91E40 /* String.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		93045C0427F10BB400846817 /* ToggleStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStyles.swift; sourceTree = "<group>"; };
+		931BD4742B7A5F3D003B1B3F /* KeyPoseEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPoseEditor.swift; sourceTree = "<group>"; };
 		9327724728087BB900277B9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		932CF2E027E5377100A4F92F /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		932CF2E127E5377100A4F92F /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				93D2EAF7295B19C90026ED9C /* PairingGroupView.swift */,
 				93D2EAF2295B19C80026ED9C /* ScannedMotionControlSystemViews.swift */,
 				93E31C872815730400576289 /* TestView.swift */,
+				931BD4742B7A5F3D003B1B3F /* KeyPoseEditor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				9359C2A427D0014700743008 /* ContentView.swift in Sources */,
 				934AD1CB27D5F67100E995E9 /* edelkroneTest.docc in Sources */,
 				93D2EAFD295B19C90026ED9C /* edelkroneStatus_View.swift in Sources */,
+				931BD4752B7A5F3D003B1B3F /* KeyPoseEditor.swift in Sources */,
 				93D2EAFA295B19C90026ED9C /* KeyposeView.swift in Sources */,
 				93D1701527D235F7000F8F63 /* GeneralSettingsView.swift in Sources */,
 				9359C2A227D0014700743008 /* edelkroneTestApp.swift in Sources */,

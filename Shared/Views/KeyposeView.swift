@@ -33,13 +33,16 @@ struct KeyposeView: View {
               .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
               .font(.applicationFont(.poseTitle))
             Spacer()
+
+            // Edit button
             Button(action: { print("Edit Action for ",slot.index)}){
               
             }.buttonStyle(ColoredGlyphButtonStyle(buttonColor: Color.clear,
                                                   labelColor: Color.black,
                                                   cornerRadius: 1,
                                                   shadowRadius: 1,
-                                                  glyp: Text("\u{10020E}").font(.custom("Symbols-Regular", size: 22)),
+                                                  glyph: Text("\u{10020E}").font(.custom("Symbols-Regular", size: 22)),
+                                                    //Image(systemName: "square.and.pencil"),
                                                   glyphPadding: 0,
                                                   width: 22,
                                                   height: 22)
