@@ -85,9 +85,9 @@ struct MotionControlInterface: View {
             .shadow(color: .lightWhite, radius: 2.0, x: 2.0, y: 2.0)
           
           if ProcessInfo.processInfo.isSwiftUIPreview {
-            KeyposeList(container: KeyposeContainer(MotionControlStatus()))
+            KeyposeList(container: KeyposeContainer(MotionControlStatus()), speed: 4.7 , accel: 9.5)
           }else{
-            KeyposeList(container: edelkroneAPI.shared.keyposes)
+            KeyposeList(container: edelkroneAPI.shared.keyposes,speed:speed, accel: accel)
           }
         }
 

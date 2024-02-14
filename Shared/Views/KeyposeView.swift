@@ -12,18 +12,36 @@ import edelkroneAPI
 struct KeyposeView: View {
   
   @ObservedObject var slot:KeyposeSlot
+  public var speed:Double = 1.00
+  public var accel:Double = 0.0
+
   var body: some View {
     ZStack(){
 
       Button( action: {
-        print("Action for ",slot.index)
-        edelkroneAPI.shared.keyposeMoveFixedSpeed(slot.index)
+        print("Action for ",slot.index, speed,accel)
+        edelkroneAPI.shared.keyposeMoveFixedSpeed(slot.index, speed:speed, acceleration: accel)
         }
       ){
         
         VStack(alignment: .leading, spacing: 1){
           // Pose Title
           HStack(alignment: .center, spacing: 6.0 ){
+            Button(action: { print("Edit Action for ",slot.index)}){
+              
+            }.buttonStyle(ColoredGlyphButtonStyle(buttonColor: Color.clear,
+                                                  labelColor: Color.black,
+                                                  cornerRadius: 1,
+                                                  shadowRadius: 1,
+                                                  glyph: Text(
+                                                    Image(systemName: "square.and.pencil").symbolRenderingMode(.hierarchical)
+                                                  ).font(.applicationFont(.poseTitle)),
+                                                    //Image(systemName: "square.and.pencil"),
+                                                  glyphPadding: 0,
+                                                  width: 22,
+                                                  height: 22)
+                          )
+
             Text("Pose ").frame(width:50,alignment: .leading)
               .shadow(color:.white, radius: 0.15, x:0.7, y:0.7)
               .shadow(color:.lightGray, radius: 0.15, x:-0.7, y:-0.7)
@@ -35,13 +53,14 @@ struct KeyposeView: View {
             Spacer()
 
             // Edit button
-            Button(action: { print("Edit Action for ",slot.index)}){
+            
+            Button(action: { print("Clear Action for ",slot.index)}){
               
             }.buttonStyle(ColoredGlyphButtonStyle(buttonColor: Color.clear,
                                                   labelColor: Color.black,
                                                   cornerRadius: 1,
                                                   shadowRadius: 1,
-                                                  glyph: Text("\u{10020E}").font(.custom("Symbols-Regular", size: 22)),
+                                                  glyph: Text(Image(systemName: "xmark.circle").symbolRenderingMode(.hierarchical)).font(.applicationFont(.poseTitle)),
                                                     //Image(systemName: "square.and.pencil"),
                                                   glyphPadding: 0,
                                                   width: 22,
@@ -86,18 +105,25 @@ struct KeyposeView: View {
         }
 
       }
-      .buttonStyle(ColoredButtonStyle(buttonColor:  slot.isFilled ? Color.green.withAlpha(0.1) : Color.blue.withAlpha(0.1),
+      .frame(width: 180, height: 90, alignment: .center)
+      .buttonStyle(ColoredButtonStyle( 
+//        buttonColor: .white,
+        buttonColor:  slot.isFilled ? Color.Theme.GreenLighter.withAlpha(0.3) : Color.Theme.TransparentGray,
                                       labelColor: Color.black,
                                       cornerRadius: 5,
-                                      shadowRadius: 10
+                                      shadowRadius: 0,
+                                      width: 180,
+                                      height: 90
                                      ))
+      
 
 
       
     }.frame(width: 180, height: 90, alignment: .center)
       .background(
         RoundedRectangle(cornerRadius: 5)
-          .fill(Color.white)
+          .fill(.white)
+//          .fill(slot.isFilled ? Color.Theme.GreenLighter.withAlpha(0.3) : Color.Theme.TransparentGray )
           .shadow(color:.lightGray, radius:2,x:3,y:3)
           .shadow(color:.white, radius: 2,x: -3, y:-3)
       )
@@ -108,7 +134,8 @@ struct KeyposeView: View {
 
 struct KeyposeList: View {
   @ObservedObject var container:KeyposeContainer
-  
+  public var speed:Double = 0.5
+  public var accel:Double = 0.5
   var columns: [GridItem] = [.init(.fixed(190), spacing: 0.0, alignment: .leading ),
                              .init(.fixed(190), spacing: 0.0, alignment: .leading ),
                              .init(.fixed(190), spacing: 0.0, alignment: .leading )
@@ -121,7 +148,7 @@ struct KeyposeList: View {
 //      ScrollView(.horizontal, showsIndicators: false){
         LazyVGrid(columns: columns, alignment: .leading, spacing: 0.0){
           ForEach( Array(container.slots.keys).sorted(by: {return $0 < $1}) ){ index in
-            KeyposeView(slot: container.slots[index]!!).padding([.leading], 10.0)
+            KeyposeView(slot: container.slots[index]!!, speed: speed, accel:accel).padding([.leading], 10.0)
           }
 //        }
         .padding([.top,.bottom],1)
@@ -137,12 +164,12 @@ struct KeyposeList: View {
 
 struct KeyposeView_Previews: PreviewProvider {
   static var previews: some View {
-    KeyposeView(slot: KeyposeSlot(1  , status: MotionControlStatus() ) )
+    KeyposeView(slot: KeyposeSlot(1  , status: MotionControlStatus() ), speed: 1.5, accel: 3.0 )
   }
 }
 
 struct KeyposeList_Preview: PreviewProvider{
   static var previews: some View{
-    KeyposeList(container: KeyposeContainer(MotionControlStatus()))
+    KeyposeList(container: KeyposeContainer(MotionControlStatus()), speed: 1.3, accel: 4.5)
   }
 }
